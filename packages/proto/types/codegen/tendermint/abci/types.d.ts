@@ -1,9 +1,9 @@
-import { Header, HeaderSDKType } from '../types/types';
-import { ProofOps, ProofOpsSDKType } from '../crypto/proof';
-import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from '../types/params';
-import { PublicKey, PublicKeySDKType } from '../crypto/keys';
-import * as _m0 from 'protobufjs/minimal';
-import { DeepPartial, Long } from '@osmonauts/helpers';
+import { Header, HeaderSDKType } from "../types/types";
+import { ProofOps, ProofOpsSDKType } from "../crypto/proof";
+import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params";
+import { PublicKey, PublicKeySDKType } from "../crypto/keys";
+import * as _m0 from "protobufjs/minimal";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 export declare enum CheckTxType {
     NEW = 0,
     RECHECK = 1,

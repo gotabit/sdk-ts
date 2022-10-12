@@ -1,9 +1,9 @@
 import * as _87 from "./epochs/genesis";
 import * as _88 from "./epochs/query";
-import * as _89 from "./mint/v1beta1/genesis";
-import * as _90 from "./mint/v1beta1/mint";
-import * as _91 from "./mint/v1beta1/query";
-import * as _92 from "./msg/v1beta1/tx";
+import * as _89 from "./inbox/v1beta1/tx";
+import * as _90 from "./mint/v1beta1/genesis";
+import * as _91 from "./mint/v1beta1/mint";
+import * as _92 from "./mint/v1beta1/query";
 export declare namespace gotabit {
     namespace epochs {
         const v1beta1: {
@@ -80,16 +80,78 @@ export declare namespace gotabit {
             };
         };
     }
+    const inbox: {
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+        MessageComposer: {
+            encoded: {
+                send(value: _89.MsgSend): {
+                    typeUrl: string;
+                    value: Uint8Array;
+                };
+            };
+            withTypeUrl: {
+                send(value: _89.MsgSend): {
+                    typeUrl: string;
+                    value: _89.MsgSend;
+                };
+            };
+            fromPartial: {
+                send(value: _89.MsgSend): {
+                    typeUrl: string;
+                    value: _89.MsgSend;
+                };
+            };
+        };
+        AminoConverter: {
+            "/gotabit.inbox.MsgSend": {
+                aminoType: string;
+                toAmino: ({ sender, to, topics, message }: _89.MsgSend) => {
+                    sender: string;
+                    to: string;
+                    topics: string;
+                    message: string;
+                };
+                fromAmino: ({ sender, to, topics, message }: {
+                    sender: string;
+                    to: string;
+                    topics: string;
+                    message: string;
+                }) => _89.MsgSend;
+            };
+        };
+        MsgSend: {
+            encode(message: _89.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.MsgSend;
+            fromPartial(object: {
+                sender?: string;
+                to?: string;
+                topics?: string;
+                message?: string;
+            }): _89.MsgSend;
+        };
+        MsgSendResponse: {
+            encode(message: _89.MsgSendResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.MsgSendResponseSDKType;
+            fromPartial(object: {
+                id?: any;
+                sender?: string;
+                to?: string;
+                topics?: string;
+                message?: string;
+            }): _89.MsgSendResponse;
+        };
+    };
     namespace mint {
         const v1beta1: {
             QueryParamsRequest: {
-                encode(_: _91.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.QueryParamsRequest;
-                fromPartial(_: {}): _91.QueryParamsRequest;
+                encode(_: _92.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryParamsRequest;
+                fromPartial(_: {}): _92.QueryParamsRequest;
             };
             QueryParamsResponse: {
-                encode(message: _91.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.QueryParamsResponseSDKType;
+                encode(message: _92.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryParamsResponseSDKType;
                 fromPartial(object: {
                     params?: {
                         mintDenom?: string;
@@ -107,40 +169,40 @@ export declare namespace gotabit {
                         ecoFundPoolAddress?: string;
                         developerFundPoolAddress?: string;
                     };
-                }): _91.QueryParamsResponse;
+                }): _92.QueryParamsResponse;
             };
             QueryEpochProvisionsRequest: {
-                encode(_: _91.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.QueryEpochProvisionsRequest;
-                fromPartial(_: {}): _91.QueryEpochProvisionsRequest;
+                encode(_: _92.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryEpochProvisionsRequest;
+                fromPartial(_: {}): _92.QueryEpochProvisionsRequest;
             };
             QueryEpochProvisionsResponse: {
-                encode(message: _91.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.QueryEpochProvisionsResponseSDKType;
+                encode(message: _92.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryEpochProvisionsResponseSDKType;
                 fromPartial(object: {
                     epochProvisions?: Uint8Array;
-                }): _91.QueryEpochProvisionsResponse;
+                }): _92.QueryEpochProvisionsResponse;
             };
             Minter: {
-                encode(message: _90.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _90.Minter;
+                encode(message: _91.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.Minter;
                 fromPartial(object: {
                     epochProvisions?: string;
-                }): _90.Minter;
+                }): _91.Minter;
             };
             DistributionProportions: {
-                encode(message: _90.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _90.DistributionProportions;
+                encode(message: _91.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.DistributionProportions;
                 fromPartial(object: {
                     staking?: string;
                     ecoFundPool?: string;
                     developerFundPool?: string;
                     communityPool?: string;
-                }): _90.DistributionProportions;
+                }): _91.DistributionProportions;
             };
             Params: {
-                encode(message: _90.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _90.Params;
+                encode(message: _91.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.Params;
                 fromPartial(object: {
                     mintDenom?: string;
                     genesisEpochProvisions?: string;
@@ -156,11 +218,11 @@ export declare namespace gotabit {
                     mintingRewardsDistributionStartEpoch?: any;
                     ecoFundPoolAddress?: string;
                     developerFundPoolAddress?: string;
-                }): _90.Params;
+                }): _91.Params;
             };
             GenesisState: {
-                encode(message: _89.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.GenesisState;
+                encode(message: _90.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _90.GenesisState;
                 fromPartial(object: {
                     minter?: {
                         epochProvisions?: string;
@@ -182,69 +244,8 @@ export declare namespace gotabit {
                         developerFundPoolAddress?: string;
                     };
                     reductionStartedEpoch?: any;
-                }): _89.GenesisState;
+                }): _90.GenesisState;
             };
         };
     }
-    const msg: {
-        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
-        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
-        MessageComposer: {
-            encoded: {
-                msg(value: _92.MsgMsg): {
-                    typeUrl: string;
-                    value: Uint8Array;
-                };
-            };
-            withTypeUrl: {
-                msg(value: _92.MsgMsg): {
-                    typeUrl: string;
-                    value: _92.MsgMsg;
-                };
-            };
-            fromPartial: {
-                msg(value: _92.MsgMsg): {
-                    typeUrl: string;
-                    value: _92.MsgMsg;
-                };
-            };
-        };
-        AminoConverter: {
-            "/gotabit.msg.MsgMsg": {
-                aminoType: string;
-                toAmino: ({ sender, from, to, message }: _92.MsgMsg) => {
-                    sender: string;
-                    from: string;
-                    to: string;
-                    message: string;
-                };
-                fromAmino: ({ sender, from, to, message }: {
-                    sender: string;
-                    from: string;
-                    to: string;
-                    message: string;
-                }) => _92.MsgMsg;
-            };
-        };
-        MsgMsg: {
-            encode(message: _92.MsgMsg, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.MsgMsg;
-            fromPartial(object: {
-                sender?: string;
-                from?: string;
-                to?: string;
-                message?: string;
-            }): _92.MsgMsg;
-        };
-        MsgMsgResponse: {
-            encode(message: _92.MsgMsgResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.MsgMsgResponseSDKType;
-            fromPartial(object: {
-                id?: any;
-                from?: string;
-                to?: string;
-                message?: string;
-            }): _92.MsgMsgResponse;
-        };
-    };
 }

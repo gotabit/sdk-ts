@@ -1,7 +1,7 @@
 import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-import * as gotabitMsgV1beta1TxRegistry from "./msg/v1beta1/tx.registry";
-import * as gotabitMsgV1beta1TxAmino from "./msg/v1beta1/tx.amino";
+import * as gotabitInboxV1beta1TxRegistry from "./inbox/v1beta1/tx.registry";
+import * as gotabitInboxV1beta1TxAmino from "./inbox/v1beta1/tx.amino";
 export const getSigningGotabitClientOptions = ({
   defaultTypes = defaultRegistryTypes
 }: {
@@ -10,8 +10,8 @@ export const getSigningGotabitClientOptions = ({
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...defaultTypes, ...gotabitMsgV1beta1TxRegistry.registry]);
-  const aminoTypes = new AminoTypes({ ...gotabitMsgV1beta1TxAmino.AminoConverter
+  const registry = new Registry([...defaultTypes, ...gotabitInboxV1beta1TxRegistry.registry]);
+  const aminoTypes = new AminoTypes({ ...gotabitInboxV1beta1TxAmino.AminoConverter
   });
   return {
     registry,
