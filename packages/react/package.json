@@ -1,0 +1,50 @@
+{
+  "name": "@gotabit/react",
+  "description": "React provider and hooks for Gotabit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/gotabit/tree/main/packages/react",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotabit/sdk-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gotabit/sdk-ts/issues"
+  },
+  "_moduleAliases": {
+    "~react": "dist"
+  },
+  "scripts": {
+    "build": "yarn clean && tsc --build tsconfig.build.json && link-module-alias",
+    "build:watch": "tsc --build -w tsconfig.build.json && link-module-alias",
+    "clean": "rm -rf dist tsconfig.build.tsbuildinfo",
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/unit",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --ci --reporters='jest-junit'",
+    "coverage": "jest --coverage",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@gotabit/client": "^0.1.0",
+    "@gotabit/wallet-core": "^0.1.0",
+    "@types/node": "^17.0.21",
+    "link-module-alias": "^1.2.0",
+    "react": "^18.2.0",
+    "shx": "^0.3.4",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/react": "^18.0.21"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@gotabit/messages",
+  "description": "Messages generator for Gotabit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "unpkg": "dist/umd/index.min.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/gotabit/tree/main/packages/messages",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotabit/sdk-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gotabit/sdk-ts/issues"
+  },
+  "_moduleAliases": {
+    "~messages": "dist/cjs"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.build.json && link-module-alias",
+    "build:umd": "webpack",
+    "build": "yarn clean && yarn build:cjs && yarn build:umd",
+    "build:watch": "tsc --build -w tsconfig.build.json && link-module-alias",
+    "clean": "tsc --build tsconfig.build.json --clean  && shx rm -rf coverage *.log junit.xml dist && jest --clearCache",
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/unit",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --ci --reporters='jest-junit'",
+    "coverage": "jest --coverage",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@gotabit/proto": "^0.1.0",
+    "@types/node": "^17.0.21",
+    "link-module-alias": "^1.2.0",
+    "shx": "^0.3.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12"
+  }
+}

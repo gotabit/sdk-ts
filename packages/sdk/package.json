@@ -1,0 +1,46 @@
+{
+  "name": "@gotabit/sdk",
+  "description": "JS and TS libs for Gotabit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/gotabit/tree/main/packages/sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotabit/sdk-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gotabit/sdk-ts/issues"
+  },
+  "_moduleAliases": {
+    "~sdk": "dist"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.build.json && link-module-alias",
+    "build:umd": "webpack",
+    "build": "yarn clean && yarn build:cjs && yarn build:umd",
+    "build:watch": "tsc --build -w tsconfig.build.json && link-module-alias",
+    "clean": "tsc --build tsconfig.build.json --clean  && shx rm -rf coverage *.log junit.xml dist && jest --clearCache",
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/unit",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --ci --reporters='jest-junit'",
+    "coverage": "jest --coverage",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@gotabit/client": "^0.1.0",
+    "@gotabit/messages": "^0.1.0",
+    "@gotabit/proto": "0.1.0",
+    "@gotabit/wallet": "^0.1.0",
+    "@types/node": "^17.0.21",
+    "link-module-alias": "^1.2.0",
+    "shx": "^0.3.4"
+  }
+}

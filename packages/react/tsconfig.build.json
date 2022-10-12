@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "jsx": "react"
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "references": [
+    { "path": "../wallet-core/tsconfig.build.json" },
+    { "path": "../client/tsconfig.build.json" }
+  ]
+}

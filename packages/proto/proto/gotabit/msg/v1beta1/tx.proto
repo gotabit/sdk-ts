@@ -1,0 +1,39 @@
+syntax = "proto3";
+package gotabit.msg;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/gotabit/gotabit/x/msg/types";
+option (gogoproto.goproto_getters_all) = false;
+
+service Msg {
+  rpc Msg(MsgMsg) returns (MsgMsgResponse);
+}
+
+// MsgMsg defines a message for sending a message
+message MsgMsg {
+  string sender = 1;
+
+  string from = 2 [
+    (gogoproto.moretags) = "yaml:\"from_address\""
+  ];
+
+  string to = 3 [
+    (gogoproto.moretags) = "yaml:\"to_address\""
+  ];
+
+  string message = 4 [
+    (gogoproto.moretags) = "yaml:\"msg\""
+  ];
+}
+
+// MsgMsgResponse defines the MsgMsg response type
+message MsgMsgResponse {
+  uint64 id = 1;
+
+  string from = 2;
+
+  string to = 3;
+
+  string message = 4;
+}

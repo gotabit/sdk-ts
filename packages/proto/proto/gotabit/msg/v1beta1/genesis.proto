@@ -1,0 +1,10 @@
+syntax = "proto3";
+package gotabit.msg.v1beta1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/gotabit/gotabit/x/msg/types";
+option (gogoproto.goproto_getters_all) = false;
+
+// GenesisState defines the msg module's genesis state
+message GenesisState {}

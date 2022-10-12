@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist/cjs"
+  },
+  "include": ["./src/**/*.ts"],
+  "references": [
+    { "path": "../wallet-core/tsconfig.build.json" },
+    { "path": "../wallet-keplr/tsconfig.build.json" },
+    { "path": "../wallet-local/tsconfig.build.json" },
+    { "path": "../wallet-walletconnect/tsconfig.build.json" }
+  ]
+}
