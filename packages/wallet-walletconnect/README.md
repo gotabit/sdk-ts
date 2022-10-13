@@ -44,3 +44,10 @@ const wallet = await Walletconnect.init(
   }
 );
 ```
+
+## Credits
+
+Code built with the help of these related projects:
+
+- [@walletconnect/qrcode-modal](https://github.com/WalletConnect/walletconnect-monorepo/) QR Code Modal for WalletConnect
+- [@walletconnect/sign-client](https://github.com/WalletConnect/walletconnect-monorepo/) Sign Client for WalletConnect Protocol
