@@ -75,15 +75,7 @@ const {
 
 ## Credits
 
-🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.tech/validator)
-
 Code built with the help of these related projects:
 
 - [@osmonauts/telescope](https://github.com/osmosis-labs/telescope) a "babel for the Cosmos", Telescope is a TypeScript Transpiler for Cosmos Protobufs.
 - [osmojs](https://github.com/osmosis-labs/osmojs) makes it easy to compose and broadcast Osmosis and Cosmos messages, with all of the proto and amino encoding handled for you.
-
-## Disclaimer
-
-AS DESCRIBED IN THE `@gotabit/proto` LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
-
-No developer or entity involved in creating `@gotabit/proto` will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the `@gotabit/proto` code, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
