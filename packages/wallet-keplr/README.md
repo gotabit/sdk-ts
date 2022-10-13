@@ -42,3 +42,9 @@ const wallet = await KeplrWallet.init({
   gasAdjustment: 0,
 });
 ```
+
+## Credits
+
+Code built with the help of these related projects:
+
+- [keplr-extension](https://github.com/chainapsis/kepler-extension) Keplr is a browser extension wallet for the Inter blockchain ecosystem.
