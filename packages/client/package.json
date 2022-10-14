@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/client",
   "description": "The client for Gotabit",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -36,8 +36,8 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@gotabit/proto": "0.1.0",
-    "@gotabit/wallet-core": "^0.1.0",
+    "@gotabit/proto": "^1.1.0",
+    "@gotabit/wallet-core": "^1.1.0",
     "@types/node": "^17.0.21",
     "link-module-alias": "^1.2.0",
     "shx": "^0.3.4"
