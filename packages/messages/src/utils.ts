@@ -10,6 +10,6 @@ export function createAnyMessage(msg: MessageGenerated) {
 
 export function encodeBase64(str: string) {
   return typeof window === 'undefined'
-    ? Buffer.from(str, 'base64')
+    ? Buffer.from(str, 'utf8').toString('base64')
     : window.btoa(str)
 }
