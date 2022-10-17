@@ -1,6 +1,6 @@
 {
   "name": "@gotabit/proto",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "Typescript Protobuf Messages for GotaBit",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "homepage": "https://github.com/gotabit/sdk-ts",
@@ -84,8 +84,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
-    "@cosmjs/amino": "0.29.0",
-    "@cosmjs/proto-signing": "0.29.0",
     "@osmonauts/helpers": "^0.5.0",
     "eslint": "^8.25.0",
     "long": "^5.2.0",

@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet-local",
   "description": "Cosmos local Wallet with Direct and Amino signing",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [
@@ -61,7 +61,7 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@gotabit/wallet-core": "^0.1.0",
+    "@gotabit/wallet-core": "^1.1.0",
     "long": "5.2.0"
   }
 }
