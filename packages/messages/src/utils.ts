@@ -7,3 +7,9 @@ export function createAnyMessage(msg: MessageGenerated) {
     value: msg.message,
   })
 }
+
+export function encodeBase64(str: string) {
+  return typeof window === 'undefined'
+    ? Buffer.from(str, 'base64')
+    : window.btoa(str)
+}
