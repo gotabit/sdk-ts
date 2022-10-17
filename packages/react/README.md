@@ -109,3 +109,10 @@ function App() {
   )
 }
 ```
+
+## Credits
+
+Code built with the help of these related projects:
+
+- [react](https://github.com/facebook/react) React is a JavaScript library for building user interfaces.
+- [zustand](https://github.com/pmndrs/zustand) A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy api based on hooks, isn't boilerplatey or opinionated.

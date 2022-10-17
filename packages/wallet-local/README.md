@@ -37,3 +37,9 @@ const wallet = await LocalWallet.init({
   serialization: 'your encrypted serialization',
 });
 ```
+
+## Credits
+
+Code built with the help of these related projects:
+
+- [cosmos/cosmjs](https://github.com/cosmos/cosmjs) CosmJS is the Swiss Army knife to power JavaScript based client solutions ranging from Web apps/explorers over browser extensions to server-side clients like faucets/scrapers in the Cosmos ecosystem.

@@ -51,3 +51,13 @@ const localWallet = await LocalWallet.init({
   serialization: 'your encrypted serialization',
 });
 ```
+
+## Credits
+
+Code built with the help of these related projects:
+
+- [WalletConnect/cosmos-wallet](https://github.com/WalletConnect/cosmos-wallet) Cosmos Wallet with Direct and Amino signing.
+- [@walletconnect/qrcode-modal](https://github.com/WalletConnect/walletconnect-monorepo/) QR Code Modal for WalletConnect
+- [@walletconnect/sign-client](https://github.com/WalletConnect/walletconnect-monorepo/) Sign Client for WalletConnect Protocol
+- [keplr-extension](https://github.com/chainapsis/kepler-extension) Keplr is a browser extension wallet for the Inter blockchain ecosystem.
+- [cosmos/cosmjs](https://github.com/cosmos/cosmjs) CosmJS is the Swiss Army knife to power JavaScript based client solutions ranging from Web apps/explorers over browser extensions to server-side clients like faucets/scrapers in the Cosmos ecosystem.
