@@ -63,7 +63,7 @@ export function getStateHooks<T extends ICosmosWallet>(
   function useDisconnect() {
     const wallet = useGotabitStore(({ wallet }) => wallet)
     if (wallet?.type === 'walletconnect') {
-      ;(wallet as any).wallet.disconnect()
+      ;(wallet as any).disconnect()
     }
     gotabitStore.setState(DEFAULT_CONTEXT)
   }
