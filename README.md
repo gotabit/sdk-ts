@@ -1,8 +1,19 @@
-# SDK
+<div align="center">
 
-JS and TS libs for Gotabit
+<a href="https://github.com/gotabit/gotabitjs"><img alt="GotaBit" src="https://res.gotabit.io/svg/icon.svg" width="150"/></a>
 
-## Example
+## GotaBit SDK
+
+### Javascript and TypeScript SDK for GotaBit Chain
+
+[![npm version](https://img.shields.io/npm/v/@gotabit/sdk)](https://www.npmjs.com/package/@gotabit/sdk)
+[![npm downloads](https://img.shields.io/npm/dm/@gotabit/sdk)](https://www.npmjs.com/package/@gotabit/sdk)
+[![GitHub license](https://img.shields.io/github/license/gotabit/sdk-ts)](https://github.com/gotabit/sdk-ts/blob/master/LICENSE)
+
+</div>
+
+
+## ⚡ Get started
 
 ### Connect wallet
 
@@ -218,7 +229,7 @@ const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
 const result = await client.signAndBroadcast(account, [msgSendtoken], 'auto')
 ```
 
-## Credits
+## ⚡ Credits
 
 Code built with the help of these related projects:
 
