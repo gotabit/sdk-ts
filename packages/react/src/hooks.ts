@@ -1,7 +1,7 @@
 import type { StoreApi, UseBoundStore } from 'zustand'
 import { ICosmosWallet } from '@gotabit/wallet-core'
 
-import { GotabitState, DisconnectParams } from './store'
+import { GotabitState } from './store'
 import { DEFAULT_CONTEXT } from './context'
 
 const ACCOUNTS_EQUALITY_CHECKER = (
@@ -60,10 +60,10 @@ export function getStateHooks<T extends ICosmosWallet>(
     return useGotabitStore(({ error }) => error)
   }
 
-  function useDisconnect(params: DisconnectParams) {
+  function useDisconnect() {
     const wallet = useGotabitStore(({ wallet }) => wallet)
     if (wallet?.type === 'walletconnect') {
-      ;(wallet as any).client.disconnect(params)
+      ;(wallet as any).wallet.disconnect()
     }
     gotabitStore.setState(DEFAULT_CONTEXT)
   }

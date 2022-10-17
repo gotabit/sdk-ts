@@ -1,11 +1,7 @@
 import { ICosmosWallet } from '@gotabit/wallet-core'
 import { GotabitClient } from '@gotabit/client'
 
-import {
-  createGotabitStore,
-  selectedGotabitStore,
-  DisconnectParams,
-} from './store'
+import { createGotabitStore, selectedGotabitStore } from './store'
 import { getStateHooks } from './hooks'
 import { DEFAULT_CONTEXT } from './context'
 
@@ -35,9 +31,9 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
           accounts: mapAccounts(accounts),
           chainConfig,
           client,
-          disconnect: (params: DisconnectParams) => {
+          disconnect: () => {
             if (wallet.type === 'walletconnect') {
-              ;(wallet as any).client.disconnect(params)
+              ;(wallet as any).client.disconnect()
             }
             gotabitStore.setState(DEFAULT_CONTEXT)
           },
