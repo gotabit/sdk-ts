@@ -60,6 +60,13 @@
     "trailingComma": "es5"
   },
   "dependencies": {
+    "@cosmjs/amino": "0.29.2",
+    "@cosmjs/cosmwasm-stargate": "^0.29.2",
+    "@cosmjs/crypto": "^0.29.2",
+    "@cosmjs/encoding": "^0.29.2",
+    "@cosmjs/proto-signing": "^0.29.2",
+    "@cosmjs/stargate": "^0.29.2",
+    "cosmjs-types": "0.5.1",
     "long": "^5.2.0"
   }
 }

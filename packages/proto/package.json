@@ -20,8 +20,6 @@
     "build:proto": "npm run clean && npm run codegen",
     "codegen": "cross-env NODE_ENV=development babel-node scripts/codegen.js",
     "build:ts": "tsc --project ./tsconfig.json",
-    "lint": "eslint .",
-    "format": "eslint . --fix",
     "clean": "rimraf ./types && rimraf ./src/codegen",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -68,7 +66,6 @@
     "babel-watch": "^7.0.0",
     "case": "1.6.3",
     "cross-env": "^7.0.2",
-    "eslint": "8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "glob": "8.0.3",
@@ -84,8 +81,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
+    "@cosmjs/amino": "0.29.2",
+    "@cosmjs/proto-signing": "0.29.2",
+    "@cosmjs/stargate": "0.29.2",
+    "@cosmjs/tendermint-rpc": "^0.29.2",
     "@osmonauts/helpers": "^0.5.0",
-    "eslint": "^8.25.0",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"
   }

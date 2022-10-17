@@ -2,15 +2,6 @@ import { ICosmosWallet, ChainConfig } from '@gotabit/wallet-core'
 import create, { createStore, UseBoundStore, StoreApi } from 'zustand'
 import { GotabitClient } from '@gotabit/client'
 
-export interface DisconnectParams {
-  topic: string
-  reason: {
-    code: number
-    message: string
-    data?: string
-  }
-}
-
 export interface GotabitState {
   gotabitClient?: GotabitClient
   chainConfig?: ChainConfig
@@ -19,7 +10,7 @@ export interface GotabitState {
   accounts?: string[]
   wallet?: ICosmosWallet
   error?: Error
-  disconnect: (params: DisconnectParams) => void
+  disconnect: () => void
 }
 
 const DEFAULT_GOTABIT_STATE: GotabitState = {

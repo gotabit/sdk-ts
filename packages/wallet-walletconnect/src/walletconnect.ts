@@ -1,6 +1,7 @@
 import { fromBase64 } from '@cosmjs/encoding';
 import QRCodeModal from '@walletconnect/qrcode-modal';
 import Client from '@walletconnect/sign-client';
+import { getSdkError } from '@walletconnect/utils';
 import {
   ProposalTypes,
   SessionTypes,
@@ -184,5 +185,12 @@ export class Walletconnect implements ICosmosWallet {
     QRCodeModal.close();
 
     return new Walletconnect(chainConfig, client, session);
+  }
+
+  public async disconnect() {
+    await this.client.disconnect({
+      topic: this.session.topic,
+      reason: getSdkError('USER_DISCONNECTED'),
+    });
   }
 }
