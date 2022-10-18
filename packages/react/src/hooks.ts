@@ -1,7 +1,7 @@
 import type { StoreApi, UseBoundStore } from 'zustand'
 import { ICosmosWallet } from '@gotabit/wallet-core'
 
-import { GotabitState } from './store'
+import { GotabitState, selectedGotabitStore } from './store'
 import { DEFAULT_CONTEXT } from './context'
 
 const ACCOUNTS_EQUALITY_CHECKER = (
@@ -66,6 +66,7 @@ export function getStateHooks<T extends ICosmosWallet>(
       ;(wallet as any).disconnect()
     }
     gotabitStore.setState(DEFAULT_CONTEXT)
+    selectedGotabitStore.setState(DEFAULT_CONTEXT)
   }
 
   return {
