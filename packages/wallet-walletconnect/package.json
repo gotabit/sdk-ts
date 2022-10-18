@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet-walletconnect",
   "description": "Cosmos Walletconnect with Direct and Amino signing",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [
@@ -63,7 +63,7 @@
   "dependencies": {
     "@cosmjs/amino": "0.29.2",
     "@cosmjs/proto-signing": "^0.29.2",
-    "@gotabit/wallet-core": "^1.1.1",
+    "@gotabit/wallet-core": "^1.1.2",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/qrcode-modal": "^1.7.8",
     "@walletconnect/sign-client": "2.0.0-rc.2",
