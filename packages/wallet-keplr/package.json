@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet-keplr",
   "description": "Cosmos Keplr Wallet with Direct and Amino signing",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [
@@ -63,7 +63,7 @@
   "dependencies": {
     "@cosmjs/amino": "0.29.2",
     "@cosmjs/proto-signing": "^0.29.2",
-    "@gotabit/wallet-core": "^1.1.1",
+    "@gotabit/wallet-core": "^1.1.2",
     "@keplr-wallet/types": "^0.11.9",
     "cosmjs-types": "0.5.1",
     "long": "5.2.0"
