@@ -20,8 +20,9 @@ import {
   ChainConfig,
   getChainConfig,
   ConfigTypeEnum,
+  DEFAULT_ADDRESS_PREFIX,
+  DEFAULT_HD_PATH,
 } from '@gotabit/wallet-core';
-import { DEFAULT_ADDRESS_PREFIX, DEFAULT_HD_PATH } from '@gotabit/wallet-core';
 
 export type WalletGenerateLength = 12 | 15 | 18 | 21 | 24;
 
@@ -59,9 +60,9 @@ export class LocalWallet implements ICosmosWallet {
   public readonly chainConfig: ChainConfig;
   private mnemonic: MnemonicType;
 
-  private directSigner: DirectSigner;
+  public directSigner: DirectSigner;
 
-  private aminoSigner: AminoSigner;
+  public aminoSigner: AminoSigner;
 
   public type: WalletType;
 
