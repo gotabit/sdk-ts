@@ -15,7 +15,11 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
   return [
     async () => {
       try {
-        gotabitStore.setState({ activating: true })
+        const initialState = { activating: true }
+
+        gotabitStore.setState(initialState)
+        selectedGotabitStore.setState(initialState)
+
         const wallet = await f()
         const accounts = await wallet.getAccounts()
         const chainConfig = wallet.chainConfig
@@ -61,7 +65,9 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
 
         return state
       } catch (e) {
-        gotabitStore.setState({ error: e as Error })
+        const errorState = { error: e as Error }
+        gotabitStore.setState(errorState)
+        selectedGotabitStore.setState(errorState)
 
         throw e
       }
