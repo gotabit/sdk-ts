@@ -1,14 +1,9 @@
 import { GasPrice } from '@cosmjs/stargate';
+import * as secp from '@noble/secp256k1';
 import { pubkeyToAddress, serializeSignDoc, StdSignDoc } from '@cosmjs/amino';
 
-import {
-  stringToPath,
-  ExtendedSecp256k1Signature,
-  Secp256k1,
-  sha256,
-  Secp256k1Signature,
-} from '@cosmjs/crypto';
-import { fromHex, toBase64, toHex, fromBase64 } from '@cosmjs/encoding';
+import { stringToPath, sha256 } from '@cosmjs/crypto';
+import { fromHex, toBase64, toHex } from '@cosmjs/encoding';
 import { makeSignBytes } from '@cosmjs/proto-signing';
 import { fromBech32 } from '@cosmjs/encoding';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
@@ -112,28 +107,26 @@ export function parseSignDocValues(signDoc: any) {
   };
 }
 
-export async function recoverSigningAddress(
+export function recoverSigningAddress(
   signature: string,
   hash: Uint8Array,
   recoveryIndex: number,
   prefix: string
-): Promise<string | null> {
+): string | null {
   if (recoveryIndex > 3) {
     throw new Error('Invalid recovery index');
   }
-
-  const sig = Secp256k1Signature.fromFixedLength(fromBase64(signature));
-  const extendedSig = new ExtendedSecp256k1Signature(
-    sig.r(),
-    sig.s(),
-    recoveryIndex
-  );
   try {
-    const recoveredPubKey = await Secp256k1.recoverPubkey(extendedSig, hash);
+    const recoveredPubKey = secp.recoverPublicKey(
+      hash,
+      signature,
+      recoveryIndex,
+      true
+    );
     return pubkeyToAddress(
       {
         type: 'tendermint/PubKeySecp256k1',
-        value: toBase64(Secp256k1.compressPubkey(recoveredPubKey)),
+        value: toBase64(recoveredPubKey),
       },
       prefix
     );
@@ -142,20 +135,16 @@ export async function recoverSigningAddress(
   }
 }
 
-export async function verifySignature(
+export function verifySignature(
   address: string,
   signature: string,
   hash: Uint8Array
-): Promise<boolean> {
-  for (let i = 0; i < 4; i + 1) {
+): boolean {
+  for (let i = 0; i < 4; i++) {
     const { prefix } = fromBech32(address);
 
-    const recoveredAddress = await recoverSigningAddress(
-      signature,
-      hash,
-      i,
-      prefix
-    );
+    const recoveredAddress = recoverSigningAddress(signature, hash, i, prefix);
+
     if (recoveredAddress === address) {
       return true;
     }
