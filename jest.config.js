@@ -16,4 +16,7 @@ module.exports = {
   preset: 'ts-jest',
   // The test environment that will be used for testing
   testEnvironment: 'node',
+  transform: {
+    '\\.[jt]sx?$': 'ts-jest',
+  },
 }
