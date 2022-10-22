@@ -3,7 +3,7 @@ import * as secp from '@noble/secp256k1';
 import { pubkeyToAddress, serializeSignDoc, StdSignDoc } from '@cosmjs/amino';
 
 import { stringToPath, sha256 } from '@cosmjs/crypto';
-import { fromHex, toBase64, toHex } from '@cosmjs/encoding';
+import { fromBase64, fromHex, toBase64, toHex } from '@cosmjs/encoding';
 import { makeSignBytes } from '@cosmjs/proto-signing';
 import { fromBech32 } from '@cosmjs/encoding';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
@@ -108,8 +108,9 @@ export function parseSignDocValues(signDoc: any) {
 }
 
 export function recoverSigningAddress(
+  /** signature with base64 **/
   signature: string,
-  hash: Uint8Array,
+  hash: string | Uint8Array,
   recoveryIndex: number,
   prefix: string
 ): string | null {
@@ -119,7 +120,7 @@ export function recoverSigningAddress(
   try {
     const recoveredPubKey = secp.recoverPublicKey(
       hash,
-      signature,
+      fromBase64(signature),
       recoveryIndex,
       true
     );
