@@ -12,7 +12,6 @@
 
 </div>
 
-
 ## ⚡ Get started
 
 ### Connect wallet

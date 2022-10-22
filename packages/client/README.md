@@ -39,6 +39,46 @@ const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
 const result = await client.signAndBroadcast(account, [msgSendtoken], 'auto')
 ```
 
+### Sign Arbitary message
+
+This is an experimental implementation of [ADR-36](https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-036-arbitrary-signature.md). Use this feature at your own risk.
+
+```ts
+import { experimentalAdr36Verify } from '@gotabit/client'
+const client = await gotabit.signStargateClient()
+
+const signed = await client.experimentalAdr36Sign(
+  account,
+  JSON.stringify({ title: 'Hello Gotabit' }),
+)
+const ok = await experimentalAdr36Verify(signed)
+```
+
+### Query with extensions
+
+Query base extensions
+
+```ts
+const client = await gotabit.stargateClient()
+const queryClient = client.makeQueryClient()
+
+const response = await _client.distribution.delegationRewards(
+  delegatorAddress,
+  validatorAddress,
+)
+```
+
+Query with additional extensions
+
+```ts
+import { setupGovExtension } from '@cosmjs/stargate'
+
+const client = await gotabit.stargateClient()
+const queryClient = client.makeQueryClient(setupGovExtension)
+
+const response = await _client.gov.vote(proposalId, voterAddress)
+```
+
 ## Credits
 
 Code built with the help of these related projects:

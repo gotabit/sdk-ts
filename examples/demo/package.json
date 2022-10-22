@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@keplr-wallet/types": "^0.10.19",
     "@gotabit/client": "file:../../packages/client/dist/cjs",
     "@gotabit/react": "file:../../packages/react/dist",
     "@gotabit/messages": "file:../../packages/messages/dist/cjs",

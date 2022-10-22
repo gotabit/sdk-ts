@@ -1,4 +1,4 @@
-import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { Window as KeplrWindow, KeplrSignOptions } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
   StdSignDoc,
@@ -185,12 +185,29 @@ export class KeplrWallet implements ICosmosWallet {
     return sign;
   }
 
+  public signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ): Promise<AminoSignResponse>;
+
+  public signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc,
+    keplrSignOptions: KeplrSignOptions
+  ): Promise<AminoSignResponse>;
+
   public async signAmino(
     address: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
+    keplrSignOptions?: KeplrSignOptions
   ): Promise<AminoSignResponse> {
-    const sign = await this.signer.signAmino(address, signDoc);
+    const sign = await window.keplr?.signAmino(
+      this.chainConfig.chainId,
+      address,
+      signDoc,
+      keplrSignOptions
+    );
 
-    return sign;
+    return sign as AminoSignResponse;
   }
 }

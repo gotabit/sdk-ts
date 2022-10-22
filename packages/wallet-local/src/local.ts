@@ -26,8 +26,6 @@ import {
 
 export type WalletGenerateLength = 12 | 15 | 18 | 21 | 24;
 
-export type MnemonicType = string | WalletGenerateLength;
-
 /**
  * Types
  */
@@ -37,8 +35,12 @@ interface CommonInitArguments {
 }
 
 interface MnemonicArguments extends CommonInitArguments {
-  mnemonic: MnemonicType;
+  mnemonic: string;
   password?: string;
+}
+
+interface WalletGenerateArguments extends CommonInitArguments {
+  walletGenerateLength: WalletGenerateLength;
 }
 
 interface PasswordArguments extends CommonInitArguments {
@@ -58,7 +60,7 @@ type AminoSigner = Secp256k1HdWallet | Secp256k1Wallet;
  */
 export class LocalWallet implements ICosmosWallet {
   public readonly chainConfig: ChainConfig;
-  private mnemonic: MnemonicType;
+  private mnemonic: string;
 
   public directSigner: DirectSigner;
 
@@ -67,7 +69,7 @@ export class LocalWallet implements ICosmosWallet {
   public type: WalletType;
 
   private constructor(
-    mnemonic: MnemonicType,
+    mnemonic: string,
     directSigner: DirectSigner,
     aminoSigner: AminoSigner
   ) {
@@ -82,39 +84,51 @@ export class LocalWallet implements ICosmosWallet {
     path,
     prefix,
     ...args
-  }: MnemonicArguments | PasswordArguments | PrivateKeyArguments) {
-    const mnemonic = (args as MnemonicArguments)?.mnemonic;
+  }:
+    | MnemonicArguments
+    | PasswordArguments
+    | PrivateKeyArguments
+    | WalletGenerateArguments) {
+    const walletGenerateLength = (args as WalletGenerateArguments)
+      .walletGenerateLength;
+    const mnemonic = (args as MnemonicArguments).mnemonic;
     const password = (args as PasswordArguments)?.password;
-    const serialization = (args as PasswordArguments)?.serialization;
-    const privateKey = (args as PrivateKeyArguments)?.privateKey;
+    const serialization = (args as PasswordArguments).serialization;
+    const privateKey = (args as PrivateKeyArguments).privateKey;
     const options = {
       hdPaths: [stringToPath(path ?? DEFAULT_HD_PATH)],
       prefix: prefix ?? DEFAULT_ADDRESS_PREFIX,
       bip39Password: password,
     };
 
-    if ((!serialization || !password) && !mnemonic && !privateKey)
+    if (
+      (!serialization || !password) &&
+      !mnemonic &&
+      !privateKey &&
+      !walletGenerateLength
+    )
       throw new Error(
-        'Please init with mnemonic, private key or encryption key with password!'
+        'Please init with mnemonic, walletGenerateLength, private key or encryption key with password!'
       );
 
     let directSigner: DirectSigner;
     let aminoSigner: AminoSigner;
 
     if (mnemonic) {
-      if (typeof mnemonic === 'string') {
-        directSigner = await DirectSecp256k1HdWallet.fromMnemonic(
-          mnemonic,
-          options
-        );
-        aminoSigner = await Secp256k1HdWallet.fromMnemonic(mnemonic, options);
-      } else {
-        directSigner = await DirectSecp256k1HdWallet.generate(
-          mnemonic,
-          options
-        );
-        aminoSigner = await Secp256k1HdWallet.generate(mnemonic, options);
-      }
+      directSigner = await DirectSecp256k1HdWallet.fromMnemonic(
+        mnemonic,
+        options
+      );
+      aminoSigner = await Secp256k1HdWallet.fromMnemonic(mnemonic, options);
+    } else if (walletGenerateLength) {
+      directSigner = await DirectSecp256k1HdWallet.generate(
+        walletGenerateLength,
+        options
+      );
+      aminoSigner = await Secp256k1HdWallet.generate(
+        walletGenerateLength,
+        options
+      );
     } else if (privateKey) {
       directSigner = await DirectSecp256k1Wallet.fromKey(fromHex(privateKey));
       aminoSigner = await Secp256k1Wallet.fromKey(fromHex(privateKey));
