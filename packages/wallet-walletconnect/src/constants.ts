@@ -5,4 +5,5 @@ export const COSMOS_METHODS = {
   COSMOS_SIGN_AMINO: 'cosmos_signAmino',
   COSMOS_GET_ACCOUNT: 'cosmos_getAccount',
   COSMOS_GET_ACCOUNTS: 'cosmos_getAccounts',
+  COSMOS_SHARED_SECRET: 'cosmos_getSharedSecret',
 };

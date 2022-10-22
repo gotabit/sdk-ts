@@ -139,7 +139,7 @@ export function recoverSigningAddress(
 export function verifySignature(
   address: string,
   signature: string,
-  hash: Uint8Array
+  hash: string | Uint8Array
 ): boolean {
   for (let i = 0; i < 4; i++) {
     const { prefix } = fromBech32(address);
