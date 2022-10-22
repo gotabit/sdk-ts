@@ -62,7 +62,7 @@ Query base extensions
 const client = await gotabit.stargateClient()
 const queryClient = client.makeQueryClient()
 
-const response = await _client.distribution.delegationRewards(
+const response = await queryClient.distribution.delegationRewards(
   delegatorAddress,
   validatorAddress,
 )
@@ -76,7 +76,7 @@ import { setupGovExtension } from '@cosmjs/stargate'
 const client = await gotabit.stargateClient()
 const queryClient = client.makeQueryClient(setupGovExtension)
 
-const response = await _client.gov.vote(proposalId, voterAddress)
+const response = await queryClient.gov.vote(proposalId, voterAddress)
 ```
 
 ## Credits
