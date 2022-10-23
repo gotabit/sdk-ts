@@ -11,7 +11,7 @@ import {
   DEFAULT_ADDRESS_PREFIX,
 } from '@gotabit/wallet-core'
 
-import { GotabitStargateClient } from './stargateClient'
+import { GotabitStargateClient } from './stargateclient'
 import { GotabitSigningStargateClient } from './signingstargetclient'
 
 export class GotabitClient {

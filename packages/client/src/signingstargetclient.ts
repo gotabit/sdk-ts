@@ -20,7 +20,7 @@ import { fromBech32, fromBase64, toBase64, toAscii } from '@cosmjs/encoding'
 import { arrayContentEquals, assert, isNonNullObject } from '@cosmjs/utils'
 import equals from 'fast-deep-equal'
 
-import { GotabitStargateClient } from './stargateClient'
+import { GotabitStargateClient } from './stargateclient'
 
 /**
  * See ADR-036
