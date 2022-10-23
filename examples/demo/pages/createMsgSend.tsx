@@ -16,6 +16,15 @@ function CreateMsgSend() {
     })
   }, [])
 
+  const handleQuery = async () => {
+    const stargateClient = await gotabit.stargateClient()
+    const queryClient = await stargateClient.makeQueryClient()
+    const validators = await queryClient.staking.validators(
+      'BOND_STATUS_BONDED',
+    )
+    console.log(validators)
+  }
+
   const sendFeegrant = async () => {
     if (!gotabit) return
     const { chainId } = gotabit.config
@@ -25,6 +34,7 @@ function CreateMsgSend() {
     const account = accounts?.[0].address
 
     if (!account) throw new Error('Failed to get accounts')
+
     const client = await gotabit.signStargateClient()
     const msg = createMsgGrantBasicAllowance(account, toAddress, [
       {
@@ -73,6 +83,7 @@ function CreateMsgSend() {
       </div>
       <button onClick={sendFeegrant}>test feegrant</button>
       <button onClick={sendTokenWithMsgSend}>test msgSend</button>
+      <button onClick={handleQuery}>query validators</button>
       <div>
         <a
           href={`https://explorer.hjcore.io/GotaBit-test/tx/${transactionHash}`}
