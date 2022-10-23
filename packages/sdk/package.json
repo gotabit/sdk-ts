@@ -38,7 +38,9 @@
     "@gotabit/client": "^1.1.5",
     "@gotabit/messages": "^1.1.5",
     "@gotabit/proto": "^1.1.5",
-    "@gotabit/wallet": "^1.1.5",
+    "@gotabit/wallet": "^1.1.5"
+  },
+  "devDependencies": {
     "@types/node": "^17.0.21",
     "link-module-alias": "^1.2.0",
     "shx": "^0.3.4"

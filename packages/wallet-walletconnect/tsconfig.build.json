@@ -4,6 +4,9 @@
     "rootDir": "./src",
     "outDir": "./dist/cjs"
   },
-  "include": ["./src/**/*.ts"],
-  "references": [{ "path": "../wallet-core/tsconfig.build.json" }]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "references": [
+    { "path": "../wallet-core/tsconfig.build.json" },
+    { "path": "../qrcode-modal/tsconfig.build.json" }
+  ]
 }

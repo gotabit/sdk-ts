@@ -35,16 +35,15 @@
   "dependencies": {
     "@gotabit/client": "^1.1.5",
     "@gotabit/wallet-core": "^1.1.5",
-    "@types/node": "^17.0.21",
-    "link-module-alias": "^1.2.0",
     "react": "^18.2.0",
-    "shx": "^0.3.4",
     "zustand": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
-    "@types/react": "^18.0.21"
+    "@types/react": "^18.0.21",
+    "link-module-alias": "^1.2.0",
+    "shx": "^0.3.4"
   }
 }

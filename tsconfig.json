@@ -5,9 +5,10 @@
     "paths": {
       "sdk": ["packages/sdk"],
       "@gotabit/proto": ["packages/proto"],
-      "@gotabit/provider": ["./packages/provider/*"],
-      "@gotabit/transactions": ["./packages/transactions/*"],
-      "@gotabit/wallet-core": ["packages/wallet-core/*"]
+      "@gotabit/react": ["./packages/react/*"],
+      "@gotabit/messages": ["./packages/messages/*"],
+      "@gotabit/wallet-core": ["packages/wallet-core/*"],
+      "@gotabit/qrcode-modal": ["packages/qrcode-modal/*"]
     }
   }
 }
