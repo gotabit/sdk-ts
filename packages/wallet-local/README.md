@@ -6,13 +6,13 @@ Gotabit Local Wallet with Direct and Amino signing
 
 npm install
 
-```
+```sh
 npm i @gotabit/wallet-local
 ```
 
 yarn install
 
-```
+```sh
 yarn add @gotabit/wallet-local
 ```
 
@@ -35,6 +35,11 @@ const wallet = await LocalWallet.init({
 const wallet = await LocalWallet.init({
   password: 'your password',
   serialization: 'your encrypted serialization',
+});
+
+// generate a wallet account
+const wallet = await LocalWallet.init({
+  walletGenerateLength: 12,
 });
 ```
 
