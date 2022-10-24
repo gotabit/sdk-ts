@@ -18,7 +18,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist', 'umd'),
     filename: '[name].min.js',
     libraryTarget: 'umd',
-    library: 'GotaBitWallet',
+    library: 'GotaBitKeplrWallet',
     umdNamedDefine: true,
     globalObject: 'this',
   },

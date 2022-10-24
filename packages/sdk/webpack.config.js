@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   mode: 'production',
@@ -18,8 +18,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist', 'umd'),
     filename: '[name].min.js',
     libraryTarget: 'umd',
-    library: 'GotaBitWallet',
+    library: 'GotaBitSDK',
     umdNamedDefine: true,
     globalObject: 'this',
   },
-};
+}
