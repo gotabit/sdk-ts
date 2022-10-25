@@ -1,120 +1,40 @@
-import React, { useLayoutEffect, useMemo, useState } from 'react'
-import {
-  IMobileRegistryEntry,
-  IQRCodeModalOptions,
-  IAppRegistry,
-} from '@walletconnect/types'
-import {
-  isMobile,
-  isAndroid,
-  formatIOSMobile,
-  saveMobileLinkInfo,
-  getMobileLinkRegistry,
-  getWalletRegistryUrl,
-  formatMobileRegistry,
-} from '@walletconnect/browser-utils'
+import React, { useMemo } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Header from './Header'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import LinkDisplay from './LinkDisplay'
+import MobileDisplay from './MobileDisplay'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import QRCodeDisplay from './QRCodeDisplay'
 
 import { WALLETCONNECT_MODAL_ID } from '../constants'
 import { TextMap } from '../types'
 
+export function isMobile(): boolean {
+  return (
+    window.navigator.userAgent.match(
+      /Android|webOS|iPhone|iPad|iPod|bada|Symbian|Palm|CriOS|BlackBerry|IEMobile|WindowsMobile|Opera Mini/i,
+    ) !== null
+  )
+}
+
 interface ModalProps {
   text: TextMap
   uri: string
   onClose: any
-  qrcodeModalOptions?: IQRCodeModalOptions
 }
 
 function Modal(props: ModalProps) {
-  const android = isAndroid()
   const mobile = isMobile()
-
-  const whitelist = useMemo(
-    () =>
-      mobile
-        ? props.qrcodeModalOptions && props.qrcodeModalOptions.mobileLinks
-          ? props.qrcodeModalOptions.mobileLinks
-          : undefined
-        : props.qrcodeModalOptions && props.qrcodeModalOptions.desktopLinks
-        ? props.qrcodeModalOptions.desktopLinks
-        : undefined,
-    [mobile, props],
-  )
-  const [loading, setLoading] = useState(false)
-  const [fetched, setFetched] = useState(false)
-  const [displayQRCode, setDisplayQRCode] = useState(!mobile)
   const displayProps = useMemo(
     () => ({
       mobile,
       text: props.text,
       uri: props.uri,
-      qrcodeModalOptions: props.qrcodeModalOptions,
     }),
     [props, mobile],
   )
 
-  const [singleLinkHref, setSingleLinkHref] = useState('')
-  const [hasSingleLink, setHasSingleLink] = useState(false)
-  const [links, setLinks] = useState<IMobileRegistryEntry[]>([])
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const getLinksIfNeeded = () => {
-    if (
-      fetched ||
-      loading ||
-      (whitelist && !whitelist.length) ||
-      links.length > 0
-    ) {
-      return
-    }
-
-    const initLinks = async () => {
-      if (android) return
-      setLoading(true)
-      try {
-        const url =
-          props.qrcodeModalOptions && props.qrcodeModalOptions.registryUrl
-            ? props.qrcodeModalOptions.registryUrl
-            : getWalletRegistryUrl()
-        const registryResponse = await fetch(url)
-        const registry = (await registryResponse.json())
-          .listings as IAppRegistry
-        const platform = mobile ? 'mobile' : 'desktop'
-        const _links = getMobileLinkRegistry(
-          formatMobileRegistry(registry, platform),
-          whitelist,
-        )
-        setLoading(false)
-        setFetched(true)
-        setErrorMessage(!_links.length ? props.text.no_supported_wallets : '')
-        setLinks(_links)
-        const hasSingleLink = _links.length === 1
-        if (hasSingleLink) {
-          setSingleLinkHref(formatIOSMobile(props.uri, _links[0]))
-          setDisplayQRCode(true)
-        }
-        setHasSingleLink(hasSingleLink)
-      } catch (e) {
-        setLoading(false)
-        setFetched(true)
-        setErrorMessage(props.text.something_went_wrong)
-        console.error(e) // eslint-disable-line no-console
-      }
-    }
-    initLinks()
-  }
-
-  useLayoutEffect(() => {
-    getLinksIfNeeded()
-  }, [getLinksIfNeeded])
-
-  const rightSelected = mobile ? displayQRCode : !displayQRCode
   return (
     <div
       id={WALLETCONNECT_MODAL_ID}
@@ -122,67 +42,12 @@ function Modal(props: ModalProps) {
     >
       <div className="walletconnect-modal__base">
         <Header onClose={props.onClose} />
-        {hasSingleLink && displayQRCode ? (
-          <div className="walletconnect-modal__single_wallet">
-            <a
-              onClick={() =>
-                saveMobileLinkInfo({
-                  name: links[0].name,
-                  href: singleLinkHref,
-                })
-              }
-              href={singleLinkHref}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {props.text.connect_with +
-                ' ' +
-                (hasSingleLink ? links[0].name : '') +
-                ' ›'}
-            </a>
-          </div>
-        ) : android || loading || (!loading && links.length) ? (
-          <div
-            className={`walletconnect-modal__mobile__toggle${
-              rightSelected ? ' right__selected' : ''
-            }`}
-          >
-            <div className="walletconnect-modal__mobile__toggle_selector" />
-            {mobile ? (
-              <>
-                <a
-                  onClick={() => (setDisplayQRCode(false), getLinksIfNeeded())}
-                >
-                  {props.text.mobile}
-                </a>
-                <a onClick={() => setDisplayQRCode(true)}>
-                  {props.text.qrcode}
-                </a>
-              </>
-            ) : (
-              <>
-                <a onClick={() => setDisplayQRCode(true)}>
-                  {props.text.qrcode}
-                </a>
-                <a
-                  onClick={() => (setDisplayQRCode(false), getLinksIfNeeded())}
-                >
-                  {props.text.desktop}
-                </a>
-              </>
-            )}
-          </div>
-        ) : null}
 
         <div>
-          {displayQRCode || (!android && !loading && !links.length) ? (
+          {!isMobile() ? (
             <QRCodeDisplay {...displayProps} />
           ) : (
-            <LinkDisplay
-              {...displayProps}
-              links={links}
-              errorMessage={errorMessage}
-            />
+            <MobileDisplay uri={props.uri} />
           )}
         </div>
       </div>

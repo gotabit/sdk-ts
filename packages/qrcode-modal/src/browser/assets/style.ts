@@ -423,6 +423,7 @@ export const WALLETCONNECT_STYLE_SHEET = `:root {
 
 .walletconnect-connect__buttons__wrapper {
   max-height: 44vh;
+  display: flex;
 }
 
 .walletconnect-connect__buttons__wrapper__android {
@@ -441,12 +442,14 @@ export const WALLETCONNECT_STYLE_SHEET = `:root {
   }
 }
 
+.walletconnect-connect__item {
+  margin-right: 24px;
+  color: #000;
+}
+
 .walletconnect-connect__button {
-  background-color: rgb(64, 153, 255);
-  padding: 12px;
   border-radius: 8px;
   text-decoration: none;
-  color: rgb(255, 255, 255);
   font-weight: 500;
 }
 
@@ -512,4 +515,4 @@ export const WALLETCONNECT_STYLE_SHEET = `:root {
   margin: 0;
   margin-bottom: 8px;
 }
-`;
+`

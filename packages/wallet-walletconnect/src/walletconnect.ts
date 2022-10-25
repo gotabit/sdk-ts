@@ -29,7 +29,6 @@ import {
 import { NAMESPACE, COSMOS_METHODS } from './constants';
 
 import { getAddress, getChainIdWithNameSpace } from './utils';
-import { IQRCodeModalOptions } from './types';
 
 export class Walletconnect implements ICosmosWallet {
   public readonly chainConfig: ChainConfig;
@@ -149,7 +148,6 @@ export class Walletconnect implements ICosmosWallet {
     settings?: {
       qrcodeModal?: {
         onClosed?: (...args: any[]) => void;
-        options?: IQRCodeModalOptions;
       };
       onConnected?: (session: SessionTypes.Struct) => void;
     }
@@ -170,13 +168,9 @@ export class Walletconnect implements ICosmosWallet {
     });
 
     uri &&
-      QRCodeModal.open(
-        uri,
-        (...args: any[]) => {
-          settings?.qrcodeModal?.onClosed?.(...args);
-        },
-        settings?.qrcodeModal?.options
-      );
+      QRCodeModal.open(uri, (...args: any[]) => {
+        settings?.qrcodeModal?.onClosed?.(...args);
+      });
 
     const session = await approval();
 

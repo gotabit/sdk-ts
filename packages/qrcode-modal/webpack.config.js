@@ -1,4 +1,5 @@
 const path = require('path')
+const svgToMiniDataURI = require('mini-svg-data-uri')
 
 module.exports = {
   mode: 'production',
@@ -22,7 +23,18 @@ module.exports = {
   module: {
     rules: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
-      { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: true,
+            },
+          },
+        ],
+      },
     ],
   },
 }

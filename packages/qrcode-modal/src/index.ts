@@ -1,5 +1,3 @@
-import { IQRCodeModalOptions } from '@walletconnect/types'
-
 import * as nodeLib from './node'
 import * as browserLib from './browser'
 
@@ -8,17 +6,13 @@ const isNode = () =>
   typeof process.versions !== 'undefined' &&
   typeof process.versions.node !== 'undefined'
 
-export function open(
-  uri: string,
-  cb: any,
-  qrcodeModalOptions?: IQRCodeModalOptions,
-) {
+export function open(uri: string, cb: any) {
   // eslint-disable-next-line no-console
   console.log(uri)
   if (isNode()) {
     nodeLib.open(uri)
   } else {
-    browserLib.open(uri, cb, qrcodeModalOptions)
+    browserLib.open(uri, cb)
   }
 }
 
@@ -29,5 +23,3 @@ export function close() {
     browserLib.close()
   }
 }
-
-export default { open, close }

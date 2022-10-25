@@ -207,9 +207,10 @@
   background: #ffffff;
   border-radius: 24px;
   box-shadow: 0 10px 50px 5px rgba(0, 0, 0, 0.4);
-  font-family: ui-rounded, "SF Pro Rounded", "SF Pro Text", medium-content-sans-serif-font,
-    -apple-system, BlinkMacSystemFont, ui-sans-serif, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: ui-rounded, 'SF Pro Rounded', 'SF Pro Text',
+    medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont,
+    ui-sans-serif, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
   margin-top: 41px;
   padding: 24px 24px 22px;
   pointer-events: auto;
@@ -259,7 +260,7 @@
   background-color: #3399ff;
   height: 21px;
   margin-right: 5px;
-  mask-image: url("images/wc-logo.svg") center no-repeat;
+  mask-image: url('./logo.svg') center no-repeat;
   width: 32px;
 }
 
@@ -382,7 +383,8 @@
   transform: translate3d(4px, 0, 0);
 }
 
-.walletconnect-modal__mobile__toggle.right__selected .walletconnect-modal__mobile__toggle_selector {
+.walletconnect-modal__mobile__toggle.right__selected
+  .walletconnect-modal__mobile__toggle_selector {
   transform: translate3d(calc(100% + 12px), 0, 0);
 }
 
@@ -423,6 +425,7 @@
 
 .walletconnect-connect__buttons__wrapper {
   max-height: 44vh;
+  display: flex;
 }
 
 .walletconnect-connect__buttons__wrapper__android {
@@ -441,12 +444,14 @@
   }
 }
 
+.walletconnect-connect__item {
+  margin-right: 24px;
+  color: #000;
+}
+
 .walletconnect-connect__button {
-  background-color: rgb(64, 153, 255);
-  padding: 12px;
   border-radius: 8px;
   text-decoration: none;
-  color: rgb(255, 255, 255);
   font-weight: 500;
 }
 

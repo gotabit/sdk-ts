@@ -3,10 +3,6 @@
 import * as React from 'react'
 // @ts-ignore
 import { createRoot } from 'react-dom/client'
-import {
-  getDocumentOrThrow,
-  getNavigatorOrThrow,
-} from '@walletconnect/browser-utils'
 
 import { WALLETCONNECT_STYLE_SHEET } from './assets/style'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,8 +14,35 @@ import {
   WALLETCONNECT_MODAL_ID,
   WALLETCONNECT_STYLE_ID,
 } from './constants'
-import { IQRCodeModalOptions } from '@walletconnect/types'
+
 import { TextMap } from './types'
+
+function getFromWindow<T>(name: string): T | undefined {
+  let res: T | undefined = undefined
+  if (
+    typeof window !== 'undefined' &&
+    typeof window[name as any] !== 'undefined'
+  ) {
+    res = window[name as any] as T
+  }
+  return res
+}
+
+function getFromWindowOrThrow<T>(name: string): T {
+  const res = getFromWindow<T>(name)
+  if (!res) {
+    throw new Error(`${name} is not defined in Window`)
+  }
+  return res
+}
+
+function getDocumentOrThrow(): Document {
+  return getFromWindowOrThrow<Document>('document')
+}
+
+function getNavigatorOrThrow(): Navigator {
+  return getFromWindowOrThrow<Navigator>('navigator')
+}
 
 function injectStyleSheet() {
   const doc = getDocumentOrThrow()
@@ -69,20 +92,11 @@ function getText(): TextMap {
   return Languages[lang] || Languages['en']
 }
 
-export function open(
-  uri: string,
-  cb: any,
-  qrcodeModalOptions?: IQRCodeModalOptions,
-) {
+export function open(uri: string, cb: any) {
   injectStyleSheet()
   const wrapper = renderWrapper()
   createRoot(wrapper).render(
-    <Modal
-      text={getText()}
-      uri={uri}
-      onClose={getWrappedCallback(cb)}
-      qrcodeModalOptions={qrcodeModalOptions}
-    />,
+    <Modal text={getText()} uri={uri} onClose={getWrappedCallback(cb)} />,
   )
 }
 

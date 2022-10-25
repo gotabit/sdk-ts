@@ -6,5 +6,6 @@
     "jsx": "react"
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
-  "references": []
+  "references": [],
+  "files": ["custom.d.ts"]
 }

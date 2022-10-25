@@ -18,7 +18,7 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist",
-    "build:module": "microbundle --jsx React.createElement --jsxFragment React.Fragment --target browser --no-compress -f cjs,esm,modern --tsconfig ./tsconfig.build.json",
+    "build:module": "microbundle --css-modules --jsx React.createElement --jsxFragment React.Fragment --target browser --no-compress -f cjs,esm,modern --tsconfig ./tsconfig.build.json",
     "build:umd": "yarn webpack",
     "build": "yarn clean && yarn build:module && yarn build:umd && link-module-alias",
     "dev": "microbundle watch"
@@ -27,17 +27,16 @@
     "@types/qrcode": "^1.5.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "css-loader": "^6.7.1",
     "link-module-alias": "^1.2.0",
     "microbundle": "^0.15.1",
+    "mini-svg-data-uri": "^1.4.4",
     "shx": "^0.3.4",
     "style-loader": "^3.3.1",
-    "svg-url-loader": "^8.0.0",
-    "ts-loader": "^9.4.1"
+    "ts-loader": "^9.4.1",
+    "url-loader": "^4.1.1"
   },
   "dependencies": {
-    "@walletconnect/browser-utils": "^1.8.0",
-    "@walletconnect/mobile-registry": "^1.4.0",
-    "@walletconnect/qrcode-modal": "^1.7.8",
     "@walletconnect/types": "^1.8.0",
     "copy-to-clipboard": "^3.3.2",
     "qrcode": "^1.5.1",
