@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/sdk",
   "description": "JS and TS libs for Gotabit",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
