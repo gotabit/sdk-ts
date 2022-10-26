@@ -34,9 +34,11 @@ const common = {
     browser: true,
     'jest/globals': true,
   },
-  plugins: ['prettier', 'jest'],
+  plugins: ['prettier', 'jest', 'react-hooks'],
   extends: ['airbnb-base', 'prettier', 'plugin:jest/all'],
   rules: {
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
     'prettier/prettier': 'error',
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

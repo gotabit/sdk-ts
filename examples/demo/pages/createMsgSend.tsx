@@ -18,7 +18,7 @@ function CreateMsgSend() {
 
   const handleQuery = async () => {
     const stargateClient = await gotabit.stargateClient()
-    const queryClient = await stargateClient.makeQueryClient()
+    const queryClient = stargateClient.makeQueryClient()
     const validators = await queryClient.staking.validators(
       'BOND_STATUS_BONDED',
     )

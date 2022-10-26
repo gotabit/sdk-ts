@@ -4,11 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "rootDir": ".",
-    "lib": [
-      "DOM",
-      "es2019",
-      "es2021",
-    ],
+    "lib": ["DOM", "es2019", "es2021"],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -20,18 +16,11 @@
     "declarationMap": true,
     "sourceMap": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "incremental": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": [
-      "node",
-      "jest"
-    ]
+    "types": ["node", "jest"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.spec.ts"
-  ]
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

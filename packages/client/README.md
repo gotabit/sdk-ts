@@ -39,6 +39,15 @@ const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
 const result = await client.signAndBroadcast(account, [msgSendtoken], 'auto')
 ```
 
+Init client without wallet. You can only use stargateClient and wasmClient without wallet.
+
+```ts
+const gotabit = await GotabitClient.init(null, 'test')
+const wasmClient = await gotabit.wasmClient()
+
+const response = await wasmClient.queryContractSmart(contractAddress, queryMsg)
+```
+
 ### Sign Arbitary message
 
 This is an experimental implementation of [ADR-36](https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-036-arbitrary-signature.md). Use this feature at your own risk.
@@ -68,7 +77,7 @@ const response = await queryClient.distribution.delegationRewards(
 )
 ```
 
-Query with additional extensions
+Query with additional extensions. You can pass multiple extensions as params.
 
 ```ts
 import { setupGovExtension } from '@cosmjs/stargate'
