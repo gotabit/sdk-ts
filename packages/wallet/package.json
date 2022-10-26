@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet",
   "description": "Cosmos Wallets with Direct and Amino signing",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [
@@ -57,12 +57,12 @@
     "@typescript-eslint/typescript-estree": "^5.38.0",
     "eslint": "^8.23.1",
     "husky": "8.0.1",
+    "link-module-alias": "^1.2.0",
+    "long": "5.2.0",
     "tslib": "2.4.0",
     "typescript": "4.8.3",
     "webpack": "5.74.0",
-    "webpack-cli": "4.10.0",
-    "link-module-alias": "^1.2.0",
-    "long": "5.2.0"
+    "webpack-cli": "4.10.0"
   },
   "prettier": {
     "printWidth": 80,
@@ -71,9 +71,9 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@gotabit/wallet-core": "^1.1.5",
-    "@gotabit/wallet-keplr": "^1.1.5",
-    "@gotabit/wallet-local": "^1.1.5",
-    "@gotabit/wallet-walletconnect": "^1.1.5"
+    "@gotabit/wallet-core": "^1.1.6",
+    "@gotabit/wallet-keplr": "^1.1.6",
+    "@gotabit/wallet-local": "^1.1.6",
+    "@gotabit/wallet-walletconnect": "^1.1.6"
   }
 }
