@@ -1,5 +1,5 @@
 import { fromBase64 } from '@cosmjs/encoding';
-import QRCodeModal from '@gotabit/qrcode-modal';
+import * as QRCodeModal from '@gotabit/qrcode-modal';
 import Client from '@walletconnect/sign-client';
 import { getSdkError } from '@walletconnect/utils';
 import {
