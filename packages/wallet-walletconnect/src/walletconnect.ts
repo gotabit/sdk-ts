@@ -26,7 +26,7 @@ import {
   verifyAminoSignature,
   verifyDirectSignature,
 } from '@gotabit/wallet-core';
-import { NAMESPACE, COSMOS_METHODS } from './constants';
+import { NAMESPACE, COSMOS_METHODS, RELAY_URL } from './constants';
 
 import { getAddress, getChainIdWithNameSpace } from './utils';
 
@@ -168,9 +168,12 @@ export class Walletconnect implements ICosmosWallet {
     });
 
     uri &&
-      QRCodeModal.open(uri, (...args: any[]) => {
-        settings?.qrcodeModal?.onClosed?.(...args);
-      });
+      QRCodeModal.open(
+        `${uri}&relay-url=${signOpts.relayUrl || RELAY_URL}`,
+        (...args: any[]) => {
+          settings?.qrcodeModal?.onClosed?.(...args);
+        }
+      );
 
     const session = await approval();
 

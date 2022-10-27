@@ -1,4 +1,4 @@
-import { fromHex } from '@cosmjs/encoding';
+import { fromHex, toHex } from '@cosmjs/encoding';
 import {
   StdSignDoc,
   Secp256k1HdWallet,
@@ -61,6 +61,7 @@ type AminoSigner = Secp256k1HdWallet | Secp256k1Wallet;
 export class LocalWallet implements ICosmosWallet {
   public readonly chainConfig: ChainConfig;
   private mnemonic: string;
+  private privateKey: string;
 
   public directSigner: DirectSigner;
 
@@ -68,12 +69,19 @@ export class LocalWallet implements ICosmosWallet {
 
   public type: WalletType;
 
-  private constructor(
-    mnemonic: string,
-    directSigner: DirectSigner,
-    aminoSigner: AminoSigner
-  ) {
+  private constructor({
+    mnemonic,
+    privateKey,
+    directSigner,
+    aminoSigner,
+  }: {
+    mnemonic: string;
+    privateKey: string;
+    directSigner: DirectSigner;
+    aminoSigner: AminoSigner;
+  }) {
     this.mnemonic = mnemonic;
+    this.privateKey = privateKey;
     this.directSigner = directSigner;
     this.aminoSigner = aminoSigner;
     this.type = 'local';
@@ -143,7 +151,7 @@ export class LocalWallet implements ICosmosWallet {
       );
     }
 
-    return new LocalWallet(mnemonic, directSigner, aminoSigner);
+    return new LocalWallet({ mnemonic, privateKey, directSigner, aminoSigner });
   }
 
   public getMnemonic() {
@@ -178,5 +186,14 @@ export class LocalWallet implements ICosmosWallet {
     const sign = await this.aminoSigner.signAmino(address, signDoc);
 
     return sign;
+  }
+
+  public async getPrivateKey(): Promise<string> {
+    if (this.privateKey) return this.privateKey;
+    const { privkey } = await (
+      this.directSigner as any
+    ).getAccountsWithPrivkeys();
+
+    return toHex(privkey as Uint8Array);
   }
 }

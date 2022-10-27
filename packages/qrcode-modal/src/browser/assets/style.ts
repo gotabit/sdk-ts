@@ -380,13 +380,19 @@ export const WALLETCONNECT_STYLE_SHEET = `:root {
   top: 4px;
   transition: all 0.2s ease-in-out;
   transform: translate3d(4px, 0, 0);
+  color: #000;
+  z-index: 99;
+  font-size: 12px;
+  line-height: 1.8;
+  font-weight: 500;
 }
 
 .walletconnect-modal__mobile__toggle.right__selected .walletconnect-modal__mobile__toggle_selector {
   transform: translate3d(calc(100% + 12px), 0, 0);
 }
 
-.walletconnect-modal__mobile__toggle a {
+.walletconnect-modal__toggle_item {
+  cursor: pointer;
   font-size: 12px;
   width: 50%;
   text-align: center;
@@ -424,6 +430,7 @@ export const WALLETCONNECT_STYLE_SHEET = `:root {
 .walletconnect-connect__buttons__wrapper {
   max-height: 44vh;
   display: flex;
+  padding: 0 20px;
 }
 
 .walletconnect-connect__buttons__wrapper__android {
