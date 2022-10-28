@@ -7,3 +7,5 @@ export const COSMOS_METHODS = {
   COSMOS_GET_ACCOUNTS: 'cosmos_getAccounts',
   COSMOS_SHARED_SECRET: 'cosmos_getSharedSecret',
 };
+
+export const RELAY_URL = 'wss://relay.gotabit.dev';

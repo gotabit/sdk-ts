@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Header from './Header'
@@ -26,6 +26,8 @@ interface ModalProps {
 
 function Modal(props: ModalProps) {
   const mobile = isMobile()
+  const [isDisplayQRCode, setIsDisplayQRCode] = useState(!mobile)
+
   const displayProps = useMemo(
     () => ({
       mobile,
@@ -35,6 +37,14 @@ function Modal(props: ModalProps) {
     [props, mobile],
   )
 
+  const rightSelected = useMemo(
+    () => (mobile ? isDisplayQRCode : !isDisplayQRCode),
+    [mobile, isDisplayQRCode],
+  )
+
+  const displayQRCode = useCallback(() => setIsDisplayQRCode(true), [])
+  const displayMobileApp = useCallback(() => setIsDisplayQRCode(false), [])
+
   return (
     <div
       id={WALLETCONNECT_MODAL_ID}
@@ -42,9 +52,31 @@ function Modal(props: ModalProps) {
     >
       <div className="walletconnect-modal__base">
         <Header onClose={props.onClose} />
-
+        {mobile && (
+          <div
+            className={`walletconnect-modal__mobile__toggle${
+              rightSelected ? ' right__selected' : ''
+            }`}
+          >
+            <div className="walletconnect-modal__mobile__toggle_selector">
+              {isDisplayQRCode ? props.text.qrcode : props.text.mobile}
+            </div>
+            <a
+              className="walletconnect-modal__toggle_item"
+              onClick={displayMobileApp}
+            >
+              {props.text.mobile}
+            </a>
+            <a
+              className="walletconnect-modal__toggle_item"
+              onClick={displayQRCode}
+            >
+              {props.text.qrcode}
+            </a>
+          </div>
+        )}
         <div>
-          {!isMobile() ? (
+          {isDisplayQRCode ? (
             <QRCodeDisplay {...displayProps} />
           ) : (
             <MobileDisplay uri={props.uri} />

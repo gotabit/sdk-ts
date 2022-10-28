@@ -17,6 +17,8 @@ function CreateMsgSend() {
   }, [])
 
   const handleQuery = async () => {
+    if (!gotabit) return
+
     const stargateClient = await gotabit.stargateClient()
     const queryClient = stargateClient.makeQueryClient()
     const validators = await queryClient.staking.validators(
@@ -67,8 +69,6 @@ function CreateMsgSend() {
 
     setResponseData(result)
     setTransactionHash(result.transactionHash)
-
-    console.log('--------feegrant', result)
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
