@@ -1,4 +1,4 @@
-import { fromBase64 } from '@cosmjs/encoding';
+import { fromBase64, toHex } from '@cosmjs/encoding';
 import * as QRCodeModal from '@gotabit/qrcode-modal';
 import Client from '@walletconnect/sign-client';
 import { getSdkError } from '@walletconnect/utils';
@@ -31,6 +31,7 @@ import { NAMESPACE, COSMOS_METHODS, RELAY_URL } from './constants';
 import { getAddress, getChainIdWithNameSpace } from './utils';
 
 export class Walletconnect implements ICosmosWallet {
+  private accounts: AccountData[];
   public readonly chainConfig: ChainConfig;
   public readonly type: WalletType;
   public readonly client: Client;
@@ -47,9 +48,10 @@ export class Walletconnect implements ICosmosWallet {
     this.client = client;
     this.session = session;
     this.chainIdWithNamespace = getChainIdWithNameSpace(chainConfig.chainId);
+    this.accounts = [];
   }
 
-  public async getAccounts(): Promise<readonly AccountData[]> {
+  public async getAccountsForced(): Promise<readonly AccountData[]> {
     const accounts = await this.client.request<
       Array<{ address: string; pubKey: string }>
     >({
@@ -62,16 +64,29 @@ export class Walletconnect implements ICosmosWallet {
         },
       },
     });
-    return this.session.namespaces[NAMESPACE].accounts.map((cosmosAddress) => {
-      const address = getAddress(cosmosAddress);
-      return {
-        address,
-        algo: 'secp256k1',
-        pubkey: fromBase64(
-          accounts.find((account) => account.address === address)?.pubKey ?? ''
-        ),
-      };
-    });
+    const accountDataList = this.session.namespaces[NAMESPACE].accounts.map(
+      (cosmosAddress) => {
+        const address = getAddress(cosmosAddress);
+        return {
+          address,
+          algo: 'secp256k1',
+          pubkey: fromBase64(
+            accounts.find((account) => account.address === address)?.pubKey ??
+              ''
+          ),
+        } as AccountData;
+      }
+    );
+
+    this.accounts = accountDataList;
+
+    return accountDataList;
+  }
+
+  public async getAccounts(): Promise<readonly AccountData[]> {
+    if (this.accounts?.length) return this.accounts;
+
+    return await this.getAccountsForced();
   }
 
   public async signDirect(
