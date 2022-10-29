@@ -36,6 +36,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@cosmjs/encoding": "^0.29.2",
     "@gotabit/proto": "^1.1.6"
   },
   "devDependencies": {
