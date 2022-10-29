@@ -2,8 +2,8 @@ import { TextMap } from '../types'
 
 const en: TextMap = {
   choose_preferred_wallet: 'Choose your preferred wallet',
-  connect_mobile_wallet: 'Connect to Mobile Wallet',
-  scan_qrcode_with_wallet: 'scan qrcode with gotabit mobile gotabit wallet',
+  connect_mobile_wallet: 'Connect to GotaBit Mobile Wallet',
+  scan_qrcode_with_wallet: 'scan qrcode with GotaBit Wallet',
   connect: 'Connect',
   qrcode: 'QR Code',
   mobile: 'Mobile',
