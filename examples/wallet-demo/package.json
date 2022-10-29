@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gotabit/wallet-local": "file:../../packages/wallet-local/dist/cjs",
     "@json-rpc-tools/utils": "^1.7.6",
     "@nextui-org/react": "1.0.8-beta.5",
     "cosmos-wallet": "^1.2.0",

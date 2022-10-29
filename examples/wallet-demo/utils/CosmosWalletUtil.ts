@@ -1,8 +1,7 @@
-import CosmosLib from '../lib/CosmosLib'
-
-export let wallet1: CosmosLib
-export let wallet2: CosmosLib
-export let cosmosWallets: Record<string, CosmosLib>
+import { LocalWallet } from '@gotabit/wallet-local'
+export let wallet1: LocalWallet
+export let wallet2: LocalWallet
+export let cosmosWallets: Record<string, LocalWallet>
 export let cosmosAddresses: string[]
 
 let address1: string
@@ -16,11 +15,12 @@ export async function createOrRestoreCosmosWallet() {
   const mnemonic2 = localStorage.getItem('COSMOS_MNEMONIC_2')
 
   if (mnemonic1 && mnemonic2) {
-    wallet1 = await CosmosLib.init({ mnemonic: mnemonic1 })
-    wallet2 = await CosmosLib.init({ mnemonic: mnemonic2 })
+    wallet1 = await LocalWallet.init({ mnemonic: mnemonic1 })
+
+    wallet2 = await LocalWallet.init({ mnemonic: mnemonic2 })
   } else {
-    wallet1 = await CosmosLib.init({})
-    wallet2 = await CosmosLib.init({})
+    wallet1 = await LocalWallet.init({ walletGenerateLength: 12 })
+    wallet2 = await LocalWallet.init({ walletGenerateLength: 12 })
 
     // Don't store mnemonic in local storage in a production project!
     localStorage.setItem('COSMOS_MNEMONIC_1', wallet1.getMnemonic())
