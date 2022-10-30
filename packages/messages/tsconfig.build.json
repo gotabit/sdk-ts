@@ -4,7 +4,6 @@
     "rootDir": "./src",
     "outDir": "./dist/cjs"
   },
-  "declaration": true,
   "include": ["./src/**/*.ts"],
   "references": []
 }

@@ -49,10 +49,8 @@
     "start": "node dist/cjs/index.js"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
     "link-module-alias": "^1.2.0",
-    "shx": "^0.3.4",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "prettier": {
     "printWidth": 80,
@@ -61,16 +59,15 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@cosmjs/amino": "0.29.2",
-    "@cosmjs/proto-signing": "^0.29.2",
-    "@gotabit/qrcode-modal": "^1.1.6",
-    "@gotabit/wallet-core": "^1.1.6",
-    "@walletconnect/encoding": "^1.0.1",
-    "@walletconnect/sign-client": "2.0.0-rc.2",
-    "@walletconnect/types": "2.0.0-rc.2",
-    "@walletconnect/utils": "2.0.0-rc.2",
+    "@cosmjs/amino": "0.29.3",
+    "@cosmjs/encoding": "^0.29.3",
+    "@cosmjs/proto-signing": "^0.29.3",
+    "@gotabit/qrcode-modal": "^1.1.7",
+    "@gotabit/wallet-core": "^1.1.7",
+    "@walletconnect/sign-client": "2.1.0",
+    "@walletconnect/types": "2.1.0",
+    "@walletconnect/utils": "2.1.0",
     "better-sqlite3": "^7.6.2",
-    "cosmjs-types": "0.5.1",
-    "long": "5.2.0"
+    "cosmjs-types": "0.5.2"
   }
 }
