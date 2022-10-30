@@ -1,6 +1,6 @@
 import { ParamChange, ParamChangeSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 
 export interface QueryParamsRequest {
@@ -23,13 +23,13 @@ export interface QueryParamsRequestSDKType {
 
 export interface QueryParamsResponse {
   /** param defines the queried parameter. */
-  param: ParamChange;
+  param?: ParamChange;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 
 export interface QueryParamsResponseSDKType {
   /** param defines the queried parameter. */
-  param: ParamChangeSDKType;
+  param?: ParamChangeSDKType;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -102,7 +102,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();

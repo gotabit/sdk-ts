@@ -10,7 +10,7 @@ export const COSMOS_MAINNET_CHAINS = {
   'cosmos:gotabit-test-1': {
     chainId: 'gotabit-test-1',
     name: 'Gotabit Testnet',
-    logo: 'https://res.gotabit.io/svg/logo.svg',
+    logo: 'https://res.gotabit.io/svg/gotabit-coin.svg',
     rgb: '107, 111, 147',
     rpc: 'https://rpc-testnet.gotabit.dev:443',
   },
@@ -29,14 +29,14 @@ export const COSMOS_TESTNET_CHAINS = {
   'cosmos:gotabit-test-1': {
     chainId: 'gotabit-test-1',
     name: 'Gotabit Testnet',
-    logo: 'https://res.gotabit.io/svg/logo.svg',
+    logo: 'https://res.gotabit.io/svg/gotabit-coin.svg',
     rgb: '107, 111, 147',
     rpc: 'https://rpc-testnet.gotabit.dev:443',
   },
   'cosmos:gotabit-dev-1': {
     chainId: 'gotabit-dev-1',
     name: 'Gotabit Devnet',
-    logo: 'https://res.gotabit.io/svg/logo.svg',
+    logo: 'https://res.gotabit.io/svg/gotabit-coin.svg',
     rgb: '107, 111, 147',
     rpc: 'https://rpc-devtnet.gotabit.dev:443',
   },

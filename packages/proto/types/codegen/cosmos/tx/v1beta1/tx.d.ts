@@ -3,16 +3,16 @@ import { SignMode, SignModeSDKType } from "../signing/v1beta1/signing";
 import { CompactBitArray, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../../helpers";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
     /** body is the processable content of the transaction */
-    body: TxBody;
+    body?: TxBody;
     /**
      * auth_info is the authorization related content of the transaction,
      * specifically signers, signer modes and fee
      */
-    authInfo: AuthInfo;
+    authInfo?: AuthInfo;
     /**
      * signatures is a list of signatures that matches the length and order of
      * AuthInfo's signer_infos to allow connecting signature meta information like
@@ -23,12 +23,12 @@ export interface Tx {
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
     /** body is the processable content of the transaction */
-    body: TxBodySDKType;
+    body?: TxBodySDKType;
     /**
      * auth_info is the authorization related content of the transaction,
      * specifically signers, signer modes and fee
      */
-    auth_info: AuthInfoSDKType;
+    auth_info?: AuthInfoSDKType;
     /**
      * signatures is a list of signatures that matches the length and order of
      * AuthInfo's signer_infos to allow connecting signature meta information like
@@ -218,7 +218,7 @@ export interface AuthInfo {
      * based on the cost of evaluating the body and doing signature verification
      * of the signers. This can be estimated via simulation.
      */
-    fee: Fee;
+    fee?: Fee;
 }
 /**
  * AuthInfo describes the fee and signer modes that are used to sign a
@@ -238,7 +238,7 @@ export interface AuthInfoSDKType {
      * based on the cost of evaluating the body and doing signature verification
      * of the signers. This can be estimated via simulation.
      */
-    fee: FeeSDKType;
+    fee?: FeeSDKType;
 }
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
@@ -250,12 +250,12 @@ export interface SignerInfo {
      * that already exist in state. If unset, the verifier can use the required \
      * signer address for this position and lookup the public key.
      */
-    publicKey: Any;
+    publicKey?: Any;
     /**
      * mode_info describes the signing mode of the signer and is a nested
      * structure to support nested multisig pubkey's
      */
-    modeInfo: ModeInfo;
+    modeInfo?: ModeInfo;
     /**
      * sequence is the sequence of the account, which describes the
      * number of committed transactions signed by a given address. It is used to
@@ -273,12 +273,12 @@ export interface SignerInfoSDKType {
      * that already exist in state. If unset, the verifier can use the required \
      * signer address for this position and lookup the public key.
      */
-    public_key: AnySDKType;
+    public_key?: AnySDKType;
     /**
      * mode_info describes the signing mode of the signer and is a nested
      * structure to support nested multisig pubkey's
      */
-    mode_info: ModeInfoSDKType;
+    mode_info?: ModeInfoSDKType;
     /**
      * sequence is the sequence of the account, which describes the
      * number of committed transactions signed by a given address. It is used to
@@ -321,7 +321,7 @@ export interface ModeInfo_SingleSDKType {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_Multi {
     /** bitarray specifies which keys within the multisig are signing */
-    bitarray: CompactBitArray;
+    bitarray?: CompactBitArray;
     /**
      * mode_infos is the corresponding modes of the signers of the multisig
      * which could include nested multisig public keys
@@ -331,7 +331,7 @@ export interface ModeInfo_Multi {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_MultiSDKType {
     /** bitarray specifies which keys within the multisig are signing */
-    bitarray: CompactBitArraySDKType;
+    bitarray?: CompactBitArraySDKType;
     /**
      * mode_infos is the corresponding modes of the signers of the multisig
      * which could include nested multisig public keys

@@ -1,6 +1,6 @@
 import { cosmos } from '@gotabit/proto'
 
-const staking = cosmos.staking.v1beta1
+const staking = cosmos.staking.v1beta1 as any
 
 const NOT_MODIFY = '[do-not-modify]'
 

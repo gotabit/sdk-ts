@@ -1,6 +1,6 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../helpers";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
@@ -10,10 +10,10 @@ export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
 }
 export interface QueryCurrentEpochRequest {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochRequestSDKType {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
@@ -71,7 +71,7 @@ export const QueryEpochsInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoResponse();
@@ -161,7 +161,7 @@ export const QueryCurrentEpochResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochResponse();

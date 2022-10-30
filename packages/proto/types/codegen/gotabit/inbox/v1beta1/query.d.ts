@@ -1,6 +1,6 @@
 import { Msg, MsgSDKType } from "./inbox";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /** SentMessagesRequest is request type for the Query/SentMessages RPC method */
 export interface SentMessagesRequest {
     /** SentMessagesRequest is request type for the Query/SentMessages RPC method */
@@ -24,12 +24,12 @@ export interface SentMessagesResponseSDKType {
 /** ReceivedMessagesRequest is request type for the Query/ReceivedMessages RPC method */
 export interface ReceivedMessagesRequest {
     address: string;
-    topics?: string;
+    topics: string;
 }
 /** ReceivedMessagesRequest is request type for the Query/ReceivedMessages RPC method */
 export interface ReceivedMessagesRequestSDKType {
     address: string;
-    topics?: string;
+    topics: string;
 }
 /** ReceivedMessagesResponse is response type for the Query/ReceivedMessages RPC method */
 export interface ReceivedMessagesResponse {
@@ -48,7 +48,7 @@ export declare const SentMessagesRequest: {
 };
 export declare const SentMessagesResponse: {
     encode(message: SentMessagesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SentMessagesResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): SentMessagesResponse;
     fromPartial(object: DeepPartial<SentMessagesResponse>): SentMessagesResponse;
 };
 export declare const ReceivedMessagesRequest: {
@@ -58,6 +58,6 @@ export declare const ReceivedMessagesRequest: {
 };
 export declare const ReceivedMessagesResponse: {
     encode(message: ReceivedMessagesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ReceivedMessagesResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): ReceivedMessagesResponse;
     fromPartial(object: DeepPartial<ReceivedMessagesResponse>): ReceivedMessagesResponse;
 };

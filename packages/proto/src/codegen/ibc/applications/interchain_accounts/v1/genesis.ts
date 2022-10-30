@@ -3,18 +3,18 @@ import { ParamsSDKType as Params1SDKType } from "../controller/v1/controller";
 import { Params as Params2 } from "../host/v1/host";
 import { ParamsSDKType as Params2SDKType } from "../host/v1/host";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../../helpers";
 /** GenesisState defines the interchain accounts genesis state */
 
 export interface GenesisState {
-  controllerGenesisState: ControllerGenesisState;
-  hostGenesisState: HostGenesisState;
+  controllerGenesisState?: ControllerGenesisState;
+  hostGenesisState?: HostGenesisState;
 }
 /** GenesisState defines the interchain accounts genesis state */
 
 export interface GenesisStateSDKType {
-  controller_genesis_state: ControllerGenesisStateSDKType;
-  host_genesis_state: HostGenesisStateSDKType;
+  controller_genesis_state?: ControllerGenesisStateSDKType;
+  host_genesis_state?: HostGenesisStateSDKType;
 }
 /**
  * ControllerGenesisState defines the interchain accounts controller genesis
@@ -25,7 +25,7 @@ export interface ControllerGenesisState {
   activeChannels: ActiveChannel[];
   interchainAccounts: RegisteredInterchainAccount[];
   ports: string[];
-  params: Params1;
+  params?: Params1;
 }
 /**
  * ControllerGenesisState defines the interchain accounts controller genesis
@@ -36,7 +36,7 @@ export interface ControllerGenesisStateSDKType {
   active_channels: ActiveChannelSDKType[];
   interchain_accounts: RegisteredInterchainAccountSDKType[];
   ports: string[];
-  params: Params1SDKType;
+  params?: Params1SDKType;
 }
 /** HostGenesisState defines the interchain accounts host genesis state */
 
@@ -44,7 +44,7 @@ export interface HostGenesisState {
   activeChannels: ActiveChannel[];
   interchainAccounts: RegisteredInterchainAccount[];
   port: string;
-  params: Params2;
+  params?: Params2;
 }
 /** HostGenesisState defines the interchain accounts host genesis state */
 
@@ -52,7 +52,7 @@ export interface HostGenesisStateSDKType {
   active_channels: ActiveChannelSDKType[];
   interchain_accounts: RegisteredInterchainAccountSDKType[];
   port: string;
-  params: Params2SDKType;
+  params?: Params2SDKType;
 }
 /**
  * ActiveChannel contains a connection ID, port ID and associated active channel
@@ -219,7 +219,7 @@ export const ControllerGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.ports = object.ports?.map(e => e) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : undefined;
     return message;
   }
 
@@ -294,7 +294,7 @@ export const HostGenesisState = {
     message.activeChannels = object.activeChannels?.map(e => ActiveChannel.fromPartial(e)) || [];
     message.interchainAccounts = object.interchainAccounts?.map(e => RegisteredInterchainAccount.fromPartial(e)) || [];
     message.port = object.port ?? "";
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : undefined;
     return message;
   }
 

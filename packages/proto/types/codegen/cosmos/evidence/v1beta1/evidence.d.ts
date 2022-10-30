@@ -1,12 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "../../../helpers";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
  */
 export interface Equivocation {
     height: Long;
-    time: Date;
+    time?: Date;
     power: Long;
     consensusAddress: string;
 }
@@ -16,7 +16,7 @@ export interface Equivocation {
  */
 export interface EquivocationSDKType {
     height: Long;
-    time: Date;
+    time?: Date;
     power: Long;
     consensus_address: string;
 }

@@ -2,7 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
@@ -15,7 +15,7 @@ export interface BasicAllowance {
      */
     spendLimit: Coin[];
     /** expiration specifies an optional time when this allowance expires */
-    expiration: Date;
+    expiration?: Date;
 }
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -29,7 +29,7 @@ export interface BasicAllowanceSDKType {
      */
     spend_limit: CoinSDKType[];
     /** expiration specifies an optional time when this allowance expires */
-    expiration: Date;
+    expiration?: Date;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -37,12 +37,12 @@ export interface BasicAllowanceSDKType {
  */
 export interface PeriodicAllowance {
     /** basic specifies a struct of `BasicAllowance` */
-    basic: BasicAllowance;
+    basic?: BasicAllowance;
     /**
      * period specifies the time duration in which period_spend_limit coins can
      * be spent before that allowance is reset
      */
-    period: Duration;
+    period?: Duration;
     /**
      * period_spend_limit specifies the maximum number of coins that can be spent
      * in the period
@@ -55,7 +55,7 @@ export interface PeriodicAllowance {
      * it is calculated from the start time of the first transaction after the
      * last period ended
      */
-    periodReset: Date;
+    periodReset?: Date;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -63,12 +63,12 @@ export interface PeriodicAllowance {
  */
 export interface PeriodicAllowanceSDKType {
     /** basic specifies a struct of `BasicAllowance` */
-    basic: BasicAllowanceSDKType;
+    basic?: BasicAllowanceSDKType;
     /**
      * period specifies the time duration in which period_spend_limit coins can
      * be spent before that allowance is reset
      */
-    period: DurationSDKType;
+    period?: DurationSDKType;
     /**
      * period_spend_limit specifies the maximum number of coins that can be spent
      * in the period
@@ -81,19 +81,19 @@ export interface PeriodicAllowanceSDKType {
      * it is calculated from the start time of the first transaction after the
      * last period ended
      */
-    period_reset: Date;
+    period_reset?: Date;
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: Any;
+    allowance?: Any;
     /** allowed_messages are the messages for which the grantee has the access. */
     allowedMessages: string[];
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: AnySDKType;
+    allowance?: AnySDKType;
     /** allowed_messages are the messages for which the grantee has the access. */
     allowed_messages: string[];
 }
@@ -104,7 +104,7 @@ export interface Grant {
     /** grantee is the address of the user being granted an allowance of another user's funds. */
     grantee: string;
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: Any;
+    allowance?: Any;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {
@@ -113,7 +113,7 @@ export interface GrantSDKType {
     /** grantee is the address of the user being granted an allowance of another user's funds. */
     grantee: string;
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: AnySDKType;
+    allowance?: AnySDKType;
 }
 export declare const BasicAllowance: {
     encode(message: BasicAllowance, writer?: _m0.Writer): _m0.Writer;

@@ -1,4 +1,4 @@
-import { fromBase64, toHex } from '@cosmjs/encoding';
+import { fromBase64 } from '@cosmjs/encoding';
 import * as QRCodeModal from '@gotabit/qrcode-modal';
 import Client from '@walletconnect/sign-client';
 import { getSdkError } from '@walletconnect/utils';
@@ -140,7 +140,7 @@ export class Walletconnect implements ICosmosWallet {
       },
     });
 
-    const valid = await verifyAminoSignature(
+    const valid = verifyAminoSignature(
       signerAddress,
       result.signature,
       stdSignDoc

@@ -1,7 +1,7 @@
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, Long, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, DeepPartial } from "../../helpers";
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
@@ -16,7 +16,7 @@ export interface EpochInfo {
    * time.
    */
 
-  startTime: Date;
+  startTime?: Date;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
@@ -24,7 +24,7 @@ export interface EpochInfo {
    * Duration must be non-zero.
    */
 
-  duration: Duration;
+  duration?: Duration;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
@@ -53,7 +53,7 @@ export interface EpochInfo {
    * * The **t=36** block will start the epoch for (35, 40]
    */
 
-  currentEpochStartTime: Date;
+  currentEpochStartTime?: Date;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
@@ -81,7 +81,7 @@ export interface EpochInfoSDKType {
    * time.
    */
 
-  start_time: Date;
+  start_time?: Date;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
@@ -89,7 +89,7 @@ export interface EpochInfoSDKType {
    * Duration must be non-zero.
    */
 
-  duration: DurationSDKType;
+  duration?: DurationSDKType;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
@@ -118,7 +118,7 @@ export interface EpochInfoSDKType {
    * * The **t=36** block will start the epoch for (35, 40]
    */
 
-  current_epoch_start_time: Date;
+  current_epoch_start_time?: Date;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
@@ -238,7 +238,7 @@ export const EpochInfo = {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
-    message.duration = object.duration ?? undefined;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import GotabitIcon from './gotabitIcon'
+import GotabitIcon from './GotabitIcon'
 
 import { WALLETCONNECT_CONNECT_BUTTON_ID } from '../constants'
 

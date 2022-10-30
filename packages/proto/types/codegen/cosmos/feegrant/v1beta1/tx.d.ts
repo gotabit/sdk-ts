@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
@@ -11,7 +11,7 @@ export interface MsgGrantAllowance {
     /** grantee is the address of the user being granted an allowance of another user's funds. */
     grantee: string;
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: Any;
+    allowance?: Any;
 }
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -23,7 +23,7 @@ export interface MsgGrantAllowanceSDKType {
     /** grantee is the address of the user being granted an allowance of another user's funds. */
     grantee: string;
     /** allowance can be any of basic and filtered fee allowance. */
-    allowance: AnySDKType;
+    allowance?: AnySDKType;
 }
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {
@@ -58,7 +58,7 @@ export declare const MsgGrantAllowance: {
 };
 export declare const MsgGrantAllowanceResponse: {
     encode(_: MsgGrantAllowanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse;
     fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse;
 };
 export declare const MsgRevokeAllowance: {
@@ -68,6 +68,6 @@ export declare const MsgRevokeAllowance: {
 };
 export declare const MsgRevokeAllowanceResponse: {
     encode(_: MsgRevokeAllowanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse;
     fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse;
 };

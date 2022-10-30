@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "../../../../helpers";
 /** Snapshot contains Tendermint state sync snapshot info. */
 
 export interface Snapshot {
@@ -7,7 +7,7 @@ export interface Snapshot {
   format: number;
   chunks: number;
   hash: Uint8Array;
-  metadata: Metadata;
+  metadata?: Metadata;
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 
@@ -16,7 +16,7 @@ export interface SnapshotSDKType {
   format: number;
   chunks: number;
   hash: Uint8Array;
-  metadata: MetadataSDKType;
+  metadata?: MetadataSDKType;
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 

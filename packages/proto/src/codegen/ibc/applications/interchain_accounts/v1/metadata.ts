@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../../helpers";
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27
  * channel version bytestring See ICS004:

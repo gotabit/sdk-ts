@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../../helpers";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {
 }
@@ -53,7 +53,7 @@ export declare const ListAllInterfacesRequest: {
 };
 export declare const ListAllInterfacesResponse: {
     encode(message: ListAllInterfacesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse;
     fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse;
 };
 export declare const ListImplementationsRequest: {
@@ -63,6 +63,6 @@ export declare const ListImplementationsRequest: {
 };
 export declare const ListImplementationsResponse: {
     encode(message: ListImplementationsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse;
     fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse;
 };

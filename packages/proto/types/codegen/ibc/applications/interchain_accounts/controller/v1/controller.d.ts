@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../../../helpers";
 /**
  * Params defines the set of on-chain interchain accounts parameters.
  * The following parameters may be used to disable the controller submodule.

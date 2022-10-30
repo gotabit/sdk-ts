@@ -1,20 +1,20 @@
-import * as _87 from "./epochs/genesis";
-import * as _88 from "./epochs/query";
-import * as _89 from "./inbox/v1beta1/tx";
-import * as _90 from "./mint/v1beta1/genesis";
-import * as _91 from "./mint/v1beta1/mint";
-import * as _92 from "./mint/v1beta1/query";
+import * as _84 from "./epochs/genesis";
+import * as _85 from "./epochs/query";
+import * as _86 from "./inbox/v1beta1/tx";
+import * as _87 from "./mint/v1beta1/genesis";
+import * as _88 from "./mint/v1beta1/mint";
+import * as _89 from "./mint/v1beta1/query";
 export declare namespace gotabit {
     namespace epochs {
         const v1beta1: {
             QueryEpochsInfoRequest: {
-                encode(_: _88.QueryEpochsInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.QueryEpochsInfoRequest;
-                fromPartial(_: {}): _88.QueryEpochsInfoRequest;
+                encode(_: _85.QueryEpochsInfoRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _85.QueryEpochsInfoRequest;
+                fromPartial(_: {}): _85.QueryEpochsInfoRequest;
             };
             QueryEpochsInfoResponse: {
-                encode(message: _88.QueryEpochsInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.QueryEpochsInfoResponseSDKType;
+                encode(message: _85.QueryEpochsInfoResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _85.QueryEpochsInfoResponse;
                 fromPartial(object: {
                     epochs?: {
                         identifier?: string;
@@ -28,25 +28,25 @@ export declare namespace gotabit {
                         epochCountingStarted?: boolean;
                         currentEpochStartHeight?: any;
                     }[];
-                }): _88.QueryEpochsInfoResponse;
+                }): _85.QueryEpochsInfoResponse;
             };
             QueryCurrentEpochRequest: {
-                encode(message: _88.QueryCurrentEpochRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.QueryCurrentEpochRequest;
+                encode(message: _85.QueryCurrentEpochRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _85.QueryCurrentEpochRequest;
                 fromPartial(object: {
                     identifier?: string;
-                }): _88.QueryCurrentEpochRequest;
+                }): _85.QueryCurrentEpochRequest;
             };
             QueryCurrentEpochResponse: {
-                encode(message: _88.QueryCurrentEpochResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.QueryCurrentEpochResponseSDKType;
+                encode(message: _85.QueryCurrentEpochResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _85.QueryCurrentEpochResponse;
                 fromPartial(object: {
                     currentEpoch?: any;
-                }): _88.QueryCurrentEpochResponse;
+                }): _85.QueryCurrentEpochResponse;
             };
             EpochInfo: {
-                encode(message: _87.EpochInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _87.EpochInfo;
+                encode(message: _84.EpochInfo, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _84.EpochInfo;
                 fromPartial(object: {
                     identifier?: string;
                     startTime?: Date;
@@ -58,11 +58,11 @@ export declare namespace gotabit {
                     currentEpochStartTime?: Date;
                     epochCountingStarted?: boolean;
                     currentEpochStartHeight?: any;
-                }): _87.EpochInfo;
+                }): _84.EpochInfo;
             };
             GenesisState: {
-                encode(message: _87.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _87.GenesisState;
+                encode(message: _84.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _84.GenesisState;
                 fromPartial(object: {
                     epochs?: {
                         identifier?: string;
@@ -76,7 +76,7 @@ export declare namespace gotabit {
                         epochCountingStarted?: boolean;
                         currentEpochStartHeight?: any;
                     }[];
-                }): _87.GenesisState;
+                }): _84.GenesisState;
             };
         };
     }
@@ -85,28 +85,28 @@ export declare namespace gotabit {
         load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
         MessageComposer: {
             encoded: {
-                send(value: _89.MsgSend): {
+                send(value: _86.MsgSend): {
                     typeUrl: string;
                     value: Uint8Array;
                 };
             };
             withTypeUrl: {
-                send(value: _89.MsgSend): {
+                send(value: _86.MsgSend): {
                     typeUrl: string;
-                    value: _89.MsgSend;
+                    value: _86.MsgSend;
                 };
             };
             fromPartial: {
-                send(value: _89.MsgSend): {
+                send(value: _86.MsgSend): {
                     typeUrl: string;
-                    value: _89.MsgSend;
+                    value: _86.MsgSend;
                 };
             };
         };
         AminoConverter: {
             "/gotabit.inbox.MsgSend": {
                 aminoType: string;
-                toAmino: ({ sender, to, topics, message }: _89.MsgSend) => {
+                toAmino: ({ sender, to, topics, message }: _86.MsgSend) => {
                     sender: string;
                     to: string;
                     topics: string;
@@ -117,41 +117,41 @@ export declare namespace gotabit {
                     to: string;
                     topics: string;
                     message: string;
-                }) => _89.MsgSend;
+                }) => _86.MsgSend;
             };
         };
         MsgSend: {
-            encode(message: _89.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.MsgSend;
+            encode(message: _86.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _86.MsgSend;
             fromPartial(object: {
                 sender?: string;
                 to?: string;
                 topics?: string;
                 message?: string;
-            }): _89.MsgSend;
+            }): _86.MsgSend;
         };
         MsgSendResponse: {
-            encode(message: _89.MsgSendResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.MsgSendResponseSDKType;
+            encode(message: _86.MsgSendResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+            decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _86.MsgSendResponse;
             fromPartial(object: {
                 id?: any;
                 sender?: string;
                 to?: string;
                 topics?: string;
                 message?: string;
-            }): _89.MsgSendResponse;
+            }): _86.MsgSendResponse;
         };
     };
     namespace mint {
         const v1beta1: {
             QueryParamsRequest: {
-                encode(_: _92.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryParamsRequest;
-                fromPartial(_: {}): _92.QueryParamsRequest;
+                encode(_: _89.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.QueryParamsRequest;
+                fromPartial(_: {}): _89.QueryParamsRequest;
             };
             QueryParamsResponse: {
-                encode(message: _92.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryParamsResponseSDKType;
+                encode(message: _89.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.QueryParamsResponse;
                 fromPartial(object: {
                     params?: {
                         mintDenom?: string;
@@ -169,40 +169,40 @@ export declare namespace gotabit {
                         ecoFundPoolAddress?: string;
                         developerFundPoolAddress?: string;
                     };
-                }): _92.QueryParamsResponse;
+                }): _89.QueryParamsResponse;
             };
             QueryEpochProvisionsRequest: {
-                encode(_: _92.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryEpochProvisionsRequest;
-                fromPartial(_: {}): _92.QueryEpochProvisionsRequest;
+                encode(_: _89.QueryEpochProvisionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.QueryEpochProvisionsRequest;
+                fromPartial(_: {}): _89.QueryEpochProvisionsRequest;
             };
             QueryEpochProvisionsResponse: {
-                encode(message: _92.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _92.QueryEpochProvisionsResponseSDKType;
+                encode(message: _89.QueryEpochProvisionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _89.QueryEpochProvisionsResponse;
                 fromPartial(object: {
                     epochProvisions?: Uint8Array;
-                }): _92.QueryEpochProvisionsResponse;
+                }): _89.QueryEpochProvisionsResponse;
             };
             Minter: {
-                encode(message: _91.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.Minter;
+                encode(message: _88.Minter, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.Minter;
                 fromPartial(object: {
                     epochProvisions?: string;
-                }): _91.Minter;
+                }): _88.Minter;
             };
             DistributionProportions: {
-                encode(message: _91.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.DistributionProportions;
+                encode(message: _88.DistributionProportions, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.DistributionProportions;
                 fromPartial(object: {
                     staking?: string;
                     ecoFundPool?: string;
                     developerFundPool?: string;
                     communityPool?: string;
-                }): _91.DistributionProportions;
+                }): _88.DistributionProportions;
             };
             Params: {
-                encode(message: _91.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.Params;
+                encode(message: _88.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _88.Params;
                 fromPartial(object: {
                     mintDenom?: string;
                     genesisEpochProvisions?: string;
@@ -218,11 +218,11 @@ export declare namespace gotabit {
                     mintingRewardsDistributionStartEpoch?: any;
                     ecoFundPoolAddress?: string;
                     developerFundPoolAddress?: string;
-                }): _91.Params;
+                }): _88.Params;
             };
             GenesisState: {
-                encode(message: _90.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _90.GenesisState;
+                encode(message: _87.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _87.GenesisState;
                 fromPartial(object: {
                     minter?: {
                         epochProvisions?: string;
@@ -244,7 +244,7 @@ export declare namespace gotabit {
                         developerFundPoolAddress?: string;
                     };
                     reductionStartedEpoch?: any;
-                }): _90.GenesisState;
+                }): _87.GenesisState;
             };
         };
     }

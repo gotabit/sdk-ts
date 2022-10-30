@@ -1,11 +1,11 @@
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../../helpers";
 /** GenesisState defines the slashing module's genesis state. */
 
 export interface GenesisState {
   /** params defines all the paramaters of related to deposit. */
-  params: Params;
+  params?: Params;
   /**
    * signing_infos represents a map between validator addresses and their
    * signing infos.
@@ -23,7 +23,7 @@ export interface GenesisState {
 
 export interface GenesisStateSDKType {
   /** params defines all the paramaters of related to deposit. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
   /**
    * signing_infos represents a map between validator addresses and their
    * signing infos.
@@ -44,7 +44,7 @@ export interface SigningInfo {
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
 
-  validatorSigningInfo: ValidatorSigningInfo;
+  validatorSigningInfo?: ValidatorSigningInfo;
 }
 /** SigningInfo stores validator signing info of corresponding address. */
 
@@ -53,7 +53,7 @@ export interface SigningInfoSDKType {
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
 
-  validator_signing_info: ValidatorSigningInfoSDKType;
+  validator_signing_info?: ValidatorSigningInfoSDKType;
 }
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding

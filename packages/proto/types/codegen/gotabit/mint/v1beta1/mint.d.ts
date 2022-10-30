@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../../helpers";
 /** Minter represents the minting state. */
 export interface Minter {
     /** epoch_provisions represent rewards for the current epoch. */
@@ -79,7 +79,7 @@ export interface Params {
      * denom. In other words, defines which stakeholders will receive the minted
      * denoms and how much.
      */
-    distributionProportions: DistributionProportions;
+    distributionProportions?: DistributionProportions;
     /**
      * minting_rewards_distribution_start_epoch start epoch to distribute minting
      * rewards
@@ -111,7 +111,7 @@ export interface ParamsSDKType {
      * denom. In other words, defines which stakeholders will receive the minted
      * denoms and how much.
      */
-    distribution_proportions: DistributionProportionsSDKType;
+    distribution_proportions?: DistributionProportionsSDKType;
     /**
      * minting_rewards_distribution_start_epoch start epoch to distribute minting
      * rewards
