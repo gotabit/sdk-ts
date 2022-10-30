@@ -8,6 +8,8 @@ import { Fragment, useState } from 'react'
 export default function PairingsPage() {
   const [pairings, setPairings] = useState(signClient.pairing.values)
 
+  console.log(signClient);
+
   async function onDelete(topic: string) {
     await signClient.disconnect({
       topic,

@@ -5,7 +5,6 @@ export let signClient: SignClient
 export async function createSignClient() {
   signClient = await SignClient.init({
     logger: 'debug',
-    projectId: '2c921904d8ebc91517cd11c1cc4a267f',
     relayUrl: 'wss://relay.gotabit.dev',
     metadata: {
       name: 'Gotabit WalletConnect test',
