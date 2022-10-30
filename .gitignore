@@ -30,3 +30,4 @@ build/Release
 .yarn
 .idea
 yarn.lock
+package-lock.json
