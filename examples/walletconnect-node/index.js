@@ -64,6 +64,7 @@ const onSessionProposal = async (proposal) => {
     })
     namespaces[key] = {
       accounts,
+      accountData,
       methods: requiredNamespaces[key].methods,
       events: requiredNamespaces[key].events,
     }
@@ -108,8 +109,7 @@ const onSessionRequest = async (requestEvent) => {
 }
 
 const uri =
-  'wc:f281626cd9f4054a4a5579c1833a0514b6618c00a6baf432b7475ef26287748c@2?relay-protocol=irn&symKey=e4be34a6fbd832235d3de820a23b89a464650d307bdc7c038a45018bf1565734&relay-url=wss://wc.g.ds.cc'
-
+'wc:2963a71a3987b3f8228562ea4cb681439f65925b1d8cf5624d9e7864dc90d45a@2?relay-protocol=irn&symKey=283cd308c3351a977a1fa9489883a9f03a9885d5e72627463896fc4880658cf8&relay-url=wss://relay.gotabit.dev'
 await createSignClient()
 
 const pair = await signClient.pair({ uri })

@@ -23,6 +23,8 @@ function WalletconnectPage() {
       },
     })
 
+    console.log(wallet.session);
+
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
     const accounts = await wallet.getAccounts()
