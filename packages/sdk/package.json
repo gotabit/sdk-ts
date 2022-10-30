@@ -35,9 +35,9 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@gotabit/client": "^1.1.6",
-    "@gotabit/messages": "^1.1.6",
-    "@gotabit/proto": "^1.1.6",
+    "@gotabit/client": "^1.1.7",
+    "@gotabit/messages": "^1.1.7",
+    "@gotabit/proto": "^1.1.7",
     "@gotabit/wallet": "^1.1.7"
   },
   "devDependencies": {

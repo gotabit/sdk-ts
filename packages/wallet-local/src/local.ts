@@ -155,7 +155,9 @@ export class LocalWallet implements ICosmosWallet {
   }
 
   public getMnemonic() {
-    return this.mnemonic;
+    return (
+      this.mnemonic || (this.directSigner as DirectSecp256k1HdWallet).mnemonic
+    );
   }
 
   public async getAccounts(): Promise<readonly AccountData[]> {

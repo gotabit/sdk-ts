@@ -14,7 +14,12 @@ export async function createOrRestoreCosmosWallet() {
   const mnemonic1 = localStorage.getItem('COSMOS_MNEMONIC_1')
   const mnemonic2 = localStorage.getItem('COSMOS_MNEMONIC_2')
 
-  if (mnemonic1 && mnemonic2 && mnemonic1 != 'undefined' && mnemonic2 != 'undefined') {
+  if (
+    mnemonic1 &&
+    mnemonic2 &&
+    mnemonic1 != 'undefined' &&
+    mnemonic2 != 'undefined'
+  ) {
     wallet1 = await LocalWallet.init({ mnemonic: mnemonic1 })
 
     wallet2 = await LocalWallet.init({ mnemonic: mnemonic2 })
@@ -23,8 +28,8 @@ export async function createOrRestoreCosmosWallet() {
     wallet2 = await LocalWallet.init({ walletGenerateLength: 12 })
 
     // Don't store mnemonic in local storage in a production project!
-    localStorage.setItem('COSMOS_MNEMONIC_1', wallet1.directSigner?.mnemonic)
-    localStorage.setItem('COSMOS_MNEMONIC_2', wallet2.directSigner?.mnemonic)
+    localStorage.setItem('COSMOS_MNEMONIC_1', wallet1.getMnemonic())
+    localStorage.setItem('COSMOS_MNEMONIC_2', wallet1.getMnemonic())
   }
 
   address1 = await wallet1.getAddress()
