@@ -20,7 +20,8 @@
     "build:proto": "npm run clean && npm run codegen",
     "codegen": "cross-env NODE_ENV=development babel-node scripts/codegen.js",
     "build:ts": "tsc --project ./tsconfig.json",
-    "clean": "rimraf ./types && rimraf ./src/codegen",
+    "clean:all": "rimraf ./types && rimraf ./src/codegen",
+    "clean": "rimraf ./dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
