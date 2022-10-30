@@ -71,9 +71,9 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@gotabit/wallet-core": "^1.1.6",
-    "@gotabit/wallet-keplr": "^1.1.6",
-    "@gotabit/wallet-local": "^1.1.6",
+    "@gotabit/wallet-core": "^1.1.7",
+    "@gotabit/wallet-keplr": "^1.1.7",
+    "@gotabit/wallet-local": "^1.1.7",
     "@gotabit/wallet-walletconnect": "^1.1.7"
   }
 }
