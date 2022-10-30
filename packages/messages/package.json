@@ -36,13 +36,11 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@cosmjs/encoding": "^0.29.2",
-    "@gotabit/proto": "^1.1.6"
+    "@cosmjs/encoding": "^0.29.3",
+    "@gotabit/proto": "^1.1.7",
+    "@osmonauts/helpers": "^0.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-typescript": "^7.17.12",
     "link-module-alias": "^1.2.0",
     "shx": "^0.3.4"
   }

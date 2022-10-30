@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "../../../helpers";
 /** EventMsgSend defines the event for MsgSend. */
 export interface EventMsgSend {
     /** msg sender address */

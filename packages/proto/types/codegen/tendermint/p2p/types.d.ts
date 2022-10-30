@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../helpers";
 export interface NetAddress {
     id: string;
     ip: string;
@@ -21,24 +21,24 @@ export interface ProtocolVersionSDKType {
     app: Long;
 }
 export interface DefaultNodeInfo {
-    protocolVersion: ProtocolVersion;
+    protocolVersion?: ProtocolVersion;
     defaultNodeId: string;
     listenAddr: string;
     network: string;
     version: string;
     channels: Uint8Array;
     moniker: string;
-    other: DefaultNodeInfoOther;
+    other?: DefaultNodeInfoOther;
 }
 export interface DefaultNodeInfoSDKType {
-    protocol_version: ProtocolVersionSDKType;
+    protocol_version?: ProtocolVersionSDKType;
     default_node_id: string;
     listen_addr: string;
     network: string;
     version: string;
     channels: Uint8Array;
     moniker: string;
-    other: DefaultNodeInfoOtherSDKType;
+    other?: DefaultNodeInfoOtherSDKType;
 }
 export interface DefaultNodeInfoOther {
     txIndex: string;

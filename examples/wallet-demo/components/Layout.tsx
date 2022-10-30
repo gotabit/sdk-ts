@@ -29,8 +29,8 @@ export default function Layout({ children, signClient }: Props) {
       }}
     >
       <Card
-        bordered={{ '@initial': false, '@xs': true }}
-        borderWeight={{ '@initial': 'light', '@xs': 'light' }}
+        variant="bordered"
+        borderWeight="light"
         css={{
           height: '100%',
           width: '100%',

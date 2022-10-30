@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
@@ -14,7 +14,7 @@ export interface MsgGrantAllowance {
   grantee: string;
   /** allowance can be any of basic and filtered fee allowance. */
 
-  allowance: Any;
+  allowance?: Any;
 }
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -29,7 +29,7 @@ export interface MsgGrantAllowanceSDKType {
   grantee: string;
   /** allowance can be any of basic and filtered fee allowance. */
 
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
 }
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 
@@ -136,7 +136,7 @@ export const MsgGrantAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowanceResponse();
@@ -225,7 +225,7 @@ export const MsgRevokeAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowanceResponse();

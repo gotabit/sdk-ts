@@ -4,7 +4,7 @@ import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { DefaultNodeInfo, DefaultNodeInfoSDKType } from "../../../../tendermint/p2p/types";
 import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "../../../../helpers";
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
     height: Long;
@@ -58,14 +58,14 @@ export interface GetLatestValidatorSetResponseSDKType {
 /** Validator is the type for the validator-set. */
 export interface Validator {
     address: string;
-    pubKey: Any;
+    pubKey?: Any;
     votingPower: Long;
     proposerPriority: Long;
 }
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
     address: string;
-    pub_key: AnySDKType;
+    pub_key?: AnySDKType;
     voting_power: Long;
     proposer_priority: Long;
 }
@@ -79,13 +79,13 @@ export interface GetBlockByHeightRequestSDKType {
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
-    blockId: BlockID;
-    block: Block;
+    blockId?: BlockID;
+    block?: Block;
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponseSDKType {
-    block_id: BlockIDSDKType;
-    block: BlockSDKType;
+    block_id?: BlockIDSDKType;
+    block?: BlockSDKType;
 }
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequest {
@@ -95,13 +95,13 @@ export interface GetLatestBlockRequestSDKType {
 }
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
-    blockId: BlockID;
-    block: Block;
+    blockId?: BlockID;
+    block?: Block;
 }
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponseSDKType {
-    block_id: BlockIDSDKType;
-    block: BlockSDKType;
+    block_id?: BlockIDSDKType;
+    block?: BlockSDKType;
 }
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequest {
@@ -125,13 +125,13 @@ export interface GetNodeInfoRequestSDKType {
 }
 /** GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
-    defaultNodeInfo: DefaultNodeInfo;
-    applicationVersion: VersionInfo;
+    defaultNodeInfo?: DefaultNodeInfo;
+    applicationVersion?: VersionInfo;
 }
 /** GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponseSDKType {
-    default_node_info: DefaultNodeInfoSDKType;
-    application_version: VersionInfoSDKType;
+    default_node_info?: DefaultNodeInfoSDKType;
+    application_version?: VersionInfoSDKType;
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
@@ -182,7 +182,7 @@ export declare const GetValidatorSetByHeightRequest: {
 };
 export declare const GetValidatorSetByHeightResponse: {
     encode(message: GetValidatorSetByHeightResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponse;
     fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse;
 };
 export declare const GetLatestValidatorSetRequest: {
@@ -192,7 +192,7 @@ export declare const GetLatestValidatorSetRequest: {
 };
 export declare const GetLatestValidatorSetResponse: {
     encode(message: GetLatestValidatorSetResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponse;
     fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse;
 };
 export declare const Validator: {
@@ -207,7 +207,7 @@ export declare const GetBlockByHeightRequest: {
 };
 export declare const GetBlockByHeightResponse: {
     encode(message: GetBlockByHeightResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponse;
     fromPartial(object: DeepPartial<GetBlockByHeightResponse>): GetBlockByHeightResponse;
 };
 export declare const GetLatestBlockRequest: {
@@ -217,7 +217,7 @@ export declare const GetLatestBlockRequest: {
 };
 export declare const GetLatestBlockResponse: {
     encode(message: GetLatestBlockResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponse;
     fromPartial(object: DeepPartial<GetLatestBlockResponse>): GetLatestBlockResponse;
 };
 export declare const GetSyncingRequest: {
@@ -227,7 +227,7 @@ export declare const GetSyncingRequest: {
 };
 export declare const GetSyncingResponse: {
     encode(message: GetSyncingResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponse;
     fromPartial(object: DeepPartial<GetSyncingResponse>): GetSyncingResponse;
 };
 export declare const GetNodeInfoRequest: {
@@ -237,7 +237,7 @@ export declare const GetNodeInfoRequest: {
 };
 export declare const GetNodeInfoResponse: {
     encode(message: GetNodeInfoResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponse;
     fromPartial(object: DeepPartial<GetNodeInfoResponse>): GetNodeInfoResponse;
 };
 export declare const VersionInfo: {

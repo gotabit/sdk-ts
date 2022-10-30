@@ -4,7 +4,7 @@ import { getWalletAddressFromParams } from '../utils/HelperUtil'
 import { formatJsonRpcError, formatJsonRpcResult } from '@json-rpc-tools/utils'
 import { SignClientTypes } from '@walletconnect/types'
 import { getSdkError } from '@walletconnect/utils'
-import { parseSignDocValues } from 'cosmos-wallet'
+import { parseSignDocValues } from '@gotabit/wallet-core'
 
 export async function approveCosmosRequest(
   requestEvent: SignClientTypes.EventArguments['session_request'],

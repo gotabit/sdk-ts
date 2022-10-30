@@ -23,7 +23,8 @@ export default function AccountSelectCard({
   return (
     <Card
       onClick={onSelect}
-      clickable
+      isPressable
+      isHoverable
       key={address}
       css={{
         marginTop: '$5',
@@ -31,7 +32,7 @@ export default function AccountSelectCard({
       }}
     >
       <Row justify="space-between" align="center">
-        <Checkbox size="lg" color="success" checked={selected} />
+        <Checkbox size="lg" color="success" isSelected={selected} />
 
         <Text>{`${truncate(address, 14)} - Account ${index + 1}`} </Text>
       </Row>

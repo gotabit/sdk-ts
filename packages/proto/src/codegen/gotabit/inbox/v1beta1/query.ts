@@ -1,6 +1,6 @@
 import { Msg, MsgSDKType } from "./inbox";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /** SentMessagesRequest is request type for the Query/SentMessages RPC method */
 
 export interface SentMessagesRequest {
@@ -29,13 +29,13 @@ export interface SentMessagesResponseSDKType {
 
 export interface ReceivedMessagesRequest {
   address: string;
-  topics?: string;
+  topics: string;
 }
 /** ReceivedMessagesRequest is request type for the Query/ReceivedMessages RPC method */
 
 export interface ReceivedMessagesRequestSDKType {
   address: string;
-  topics?: string;
+  topics: string;
 }
 /** ReceivedMessagesResponse is response type for the Query/ReceivedMessages RPC method */
 
@@ -110,7 +110,7 @@ export const SentMessagesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SentMessagesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SentMessagesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSentMessagesResponse();
@@ -210,7 +210,7 @@ export const ReceivedMessagesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReceivedMessagesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReceivedMessagesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReceivedMessagesResponse();

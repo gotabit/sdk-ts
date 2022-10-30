@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "../../../helpers";
 /** MsgSend defines a message for sending a message */
 export interface MsgSend {
     /** msg sender address */
@@ -55,6 +55,6 @@ export declare const MsgSend: {
 };
 export declare const MsgSendResponse: {
     encode(message: MsgSendResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse;
     fromPartial(object: DeepPartial<MsgSendResponse>): MsgSendResponse;
 };

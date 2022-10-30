@@ -2,7 +2,7 @@ import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, toTimestamp, Long, fromTimestamp } from "@osmonauts/helpers";
+import { DeepPartial, toTimestamp, Long, fromTimestamp } from "../../helpers";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
   lightClientAttackEvidence?: LightClientAttackEvidence;
@@ -17,11 +17,11 @@ export interface EvidenceSDKType {
  */
 
 export interface DuplicateVoteEvidence {
-  voteA: Vote;
-  voteB: Vote;
+  voteA?: Vote;
+  voteB?: Vote;
   totalVotingPower: Long;
   validatorPower: Long;
-  timestamp: Date;
+  timestamp?: Date;
 }
 /**
  * DuplicateVoteEvidence contains evidence of a validator signed two conflicting
@@ -29,11 +29,11 @@ export interface DuplicateVoteEvidence {
  */
 
 export interface DuplicateVoteEvidenceSDKType {
-  vote_a: VoteSDKType;
-  vote_b: VoteSDKType;
+  vote_a?: VoteSDKType;
+  vote_b?: VoteSDKType;
   total_voting_power: Long;
   validator_power: Long;
-  timestamp: Date;
+  timestamp?: Date;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting
@@ -41,11 +41,11 @@ export interface DuplicateVoteEvidenceSDKType {
  */
 
 export interface LightClientAttackEvidence {
-  conflictingBlock: LightBlock;
+  conflictingBlock?: LightBlock;
   commonHeight: Long;
   byzantineValidators: Validator[];
   totalVotingPower: Long;
-  timestamp: Date;
+  timestamp?: Date;
 }
 /**
  * LightClientAttackEvidence contains evidence of a set of validators attempting
@@ -53,11 +53,11 @@ export interface LightClientAttackEvidence {
  */
 
 export interface LightClientAttackEvidenceSDKType {
-  conflicting_block: LightBlockSDKType;
+  conflicting_block?: LightBlockSDKType;
   common_height: Long;
   byzantine_validators: ValidatorSDKType[];
   total_voting_power: Long;
-  timestamp: Date;
+  timestamp?: Date;
 }
 export interface EvidenceList {
   evidence: Evidence[];

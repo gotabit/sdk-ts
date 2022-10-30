@@ -18,7 +18,7 @@ interface IProps {
 export default function PairingCard({ logo, name, url, onDelete }: IProps) {
   return (
     <Card
-      bordered
+      variant="bordered"
       borderWeight="light"
       css={{
         position: 'relative',

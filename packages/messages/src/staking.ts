@@ -2,7 +2,7 @@ import { cosmos } from '@gotabit/proto'
 
 const staking = cosmos.staking.v1beta1
 const coin = cosmos.base.v1beta1.Coin
-const dist = cosmos.distribution.v1beta1
+const dist = cosmos.distribution.v1beta1 as any
 
 export function createMsgDelegate(
   delegatorAddress: string,

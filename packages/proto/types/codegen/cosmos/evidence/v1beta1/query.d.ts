@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
     /** evidence_hash defines the hash of the requested evidence. */
@@ -15,12 +15,12 @@ export interface QueryEvidenceRequestSDKType {
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
     /** evidence returns the requested evidence. */
-    evidence: Any;
+    evidence?: Any;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseSDKType {
     /** evidence returns the requested evidence. */
-    evidence: AnySDKType;
+    evidence?: AnySDKType;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -65,7 +65,7 @@ export declare const QueryEvidenceRequest: {
 };
 export declare const QueryEvidenceResponse: {
     encode(message: QueryEvidenceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponse;
     fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse;
 };
 export declare const QueryAllEvidenceRequest: {
@@ -75,6 +75,6 @@ export declare const QueryAllEvidenceRequest: {
 };
 export declare const QueryAllEvidenceResponse: {
     encode(message: QueryAllEvidenceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponseSDKType;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponse;
     fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse;
 };

@@ -1,13 +1,13 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "../../../../helpers";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
  * pagination. Ex:
  * 
- * message SomeRequest {
- * Foo some_parameter = 1;
- * PageRequest pagination = 2;
- * }
+ *  message SomeRequest {
+ *          Foo some_parameter = 1;
+ *          PageRequest pagination = 2;
+ *  }
  */
 
 export interface PageRequest {
@@ -23,13 +23,13 @@ export interface PageRequest {
    * be set.
    */
 
-  offset?: Long;
+  offset: Long;
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
 
-  limit?: Long;
+  limit: Long;
   /**
    * count_total is set to true  to indicate that the result set should include
    * a count of the total number of items available for pagination in UIs.
@@ -37,23 +37,23 @@ export interface PageRequest {
    * is set.
    */
 
-  countTotal?: boolean;
+  countTotal: boolean;
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
    * Since: cosmos-sdk 0.43
    */
 
-  reverse?: boolean;
+  reverse: boolean;
 }
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
  * pagination. Ex:
  * 
- * message SomeRequest {
- * Foo some_parameter = 1;
- * PageRequest pagination = 2;
- * }
+ *  message SomeRequest {
+ *          Foo some_parameter = 1;
+ *          PageRequest pagination = 2;
+ *  }
  */
 
 export interface PageRequestSDKType {
@@ -69,13 +69,13 @@ export interface PageRequestSDKType {
    * be set.
    */
 
-  offset?: Long;
+  offset: Long;
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
 
-  limit?: Long;
+  limit: Long;
   /**
    * count_total is set to true  to indicate that the result set should include
    * a count of the total number of items available for pagination in UIs.
@@ -83,23 +83,23 @@ export interface PageRequestSDKType {
    * is set.
    */
 
-  count_total?: boolean;
+  count_total: boolean;
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
    * Since: cosmos-sdk 0.43
    */
 
-  reverse?: boolean;
+  reverse: boolean;
 }
 /**
  * PageResponse is to be embedded in gRPC response messages where the
  * corresponding request message has used PageRequest.
  * 
- * message SomeResponse {
- * repeated Bar results = 1;
- * PageResponse page = 2;
- * }
+ *  message SomeResponse {
+ *          repeated Bar results = 1;
+ *          PageResponse page = 2;
+ *  }
  */
 
 export interface PageResponse {
@@ -107,7 +107,7 @@ export interface PageResponse {
    * next_key is the key to be passed to PageRequest.key to
    * query the next page most efficiently
    */
-  nextKey?: Uint8Array;
+  nextKey: Uint8Array;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
@@ -119,10 +119,10 @@ export interface PageResponse {
  * PageResponse is to be embedded in gRPC response messages where the
  * corresponding request message has used PageRequest.
  * 
- * message SomeResponse {
- * repeated Bar results = 1;
- * PageResponse page = 2;
- * }
+ *  message SomeResponse {
+ *          repeated Bar results = 1;
+ *          PageResponse page = 2;
+ *  }
  */
 
 export interface PageResponseSDKType {
@@ -130,7 +130,7 @@ export interface PageResponseSDKType {
    * next_key is the key to be passed to PageRequest.key to
    * query the next page most efficiently
    */
-  next_key?: Uint8Array;
+  next_key: Uint8Array;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise

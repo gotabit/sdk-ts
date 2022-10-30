@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 
 export interface QueryAllowanceRequest {
@@ -24,13 +24,13 @@ export interface QueryAllowanceRequestSDKType {
 
 export interface QueryAllowanceResponse {
   /** allowance is a allowance granted for grantee by granter. */
-  allowance: Grant;
+  allowance?: Grant;
 }
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 
 export interface QueryAllowanceResponseSDKType {
   /** allowance is a allowance granted for grantee by granter. */
-  allowance: GrantSDKType;
+  allowance?: GrantSDKType;
 }
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 
@@ -137,7 +137,7 @@ export const QueryAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceResponse();
@@ -242,7 +242,7 @@ export const QueryAllowancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesResponse();

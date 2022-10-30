@@ -11,7 +11,7 @@ interface Props {
 export default function ChainCard({ rgb, children, flexDirection, alignItems }: Props) {
   return (
     <Card
-      bordered
+      variant="bordered"
       borderWeight="light"
       css={{
         borderColor: `rgba(${rgb}, 0.4)`,
