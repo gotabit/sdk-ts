@@ -22,7 +22,7 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
 
         const wallet = await f()
         const accounts = await wallet.getAccounts()
-        const chainConfig = wallet.chainConfig
+        const { chainConfig } = wallet
         const client = await GotabitClient.init(wallet, chainConfig.chainType)
 
         const mapAccounts = (accountData: typeof accounts) =>

@@ -3,9 +3,14 @@ import * as secp from '@noble/secp256k1';
 import { pubkeyToAddress, serializeSignDoc, StdSignDoc } from '@cosmjs/amino';
 
 import { stringToPath, sha256 } from '@cosmjs/crypto';
-import { fromBase64, fromHex, toBase64, toHex } from '@cosmjs/encoding';
+import {
+  fromBase64,
+  fromHex,
+  toBase64,
+  toHex,
+  fromBech32,
+} from '@cosmjs/encoding';
 import { makeSignBytes } from '@cosmjs/proto-signing';
-import { fromBech32 } from '@cosmjs/encoding';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
 
@@ -66,9 +71,11 @@ export function getChainConfig(
   const customFormats =
     typeof chainConfig === 'string'
       ? getEnvObject(chainConfig)
-      : Object.assign({}, TEST_CONFIG, chainConfig, {
+      : {
+          ...TEST_CONFIG,
+          ...chainConfig,
           chainType: ConfigTypeEnum.ConfigTest,
-        });
+        };
 
   customFormats.gasPrices =
     typeof customFormats.gasPrices === 'string'
@@ -108,7 +115,7 @@ export function parseSignDocValues(signDoc: any) {
 }
 
 export function recoverSigningAddress(
-  /** signature with base64 **/
+  /** signature with base64 * */
   signature: string,
   hash: string | Uint8Array,
   recoveryIndex: number,
@@ -141,6 +148,7 @@ export function verifySignature(
   signature: string,
   hash: string | Uint8Array
 ): boolean {
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 4; i++) {
     const { prefix } = fromBech32(address);
 

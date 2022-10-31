@@ -16,6 +16,7 @@ import { GotabitSigningStargateClient } from './signingstargetclient'
 
 export class GotabitClient {
   public readonly wallet: ICosmosWallet | null
+
   public readonly config: ChainConfig
 
   private constructor(wallet: ICosmosWallet | null, config: ChainConfig) {

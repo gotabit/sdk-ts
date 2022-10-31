@@ -31,7 +31,7 @@
     "coverage": "jest --coverage",
     "coverage:unit": "yarn test:unit --coverage",
     "coverage:integration": "yarn test:integration --coverage",
-    "lint": "eslint -c './.eslintrc.js' './packages/**/*.{ts,js}'",
+    "lint": "eslint './packages/**/*.{ts.tsx,js}'",
     "lint:ci": "yarn lint . --format junit",
     "lint:md": "markdownlint --ignore node_modules --ignore .git",
     "format": "yarn lint --fix",
@@ -73,5 +73,66 @@
     "typescript": "^4.8.4",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true,
+      "jest/globals": true
+    },
+    "plugins": [
+      "prettier",
+      "jest",
+      "react-hooks"
+    ],
+    "extends": [
+      "airbnb-base",
+      "prettier",
+      "plugin:jest/all",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
+      "prettier/prettier": "error",
+      "jest/no-disabled-tests": "warn",
+      "jest/no-focused-tests": "error",
+      "jest/no-identical-title": "error",
+      "jest/prefer-to-have-length": "warn",
+      "jest/unbound-method": "off",
+      "jest/valid-expect": "error",
+      "jest/expect-expect": "off",
+      "jest/prefer-expect-assertions": "off",
+      "jest/no-test-return-statement": "off",
+      "import/prefer-default-export": "off",
+      "import/extensions": "off",
+      "import/no-unresolved": "error",
+      "no-console": "off",
+      "no-iterator": "off",
+      "no-restricted-syntax": "off",
+      "no-await-in-loop": "off",
+      "consistent-return": "off",
+      "no-shadow": "off",
+      "no-unused-vars": "off",
+      "no-useless-constructor": "off",
+      "@typescript-eslint/explicit-function-return-type": "off"
+    },
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    }
   }
 }
