@@ -28,7 +28,6 @@ function WalletconnectPage() {
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
     const accounts = await wallet.getAccounts()
-    console.log(accounts);
 
     if (accounts?.[0]) setAccount(accounts?.[0].address)
   }
@@ -39,12 +38,10 @@ function WalletconnectPage() {
     const accounts = await gotabit.wallet?.getAccounts()
     const account = accounts?.[0].address
 
-    console.log(accounts);
-
     if (!account) throw new Error('Failed to get accounts')
     const client = await gotabit?.signStargateClient()
 
-    const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
+    const msgSendtoken = createMsgSend(account, toAddress, '30', 'ugtb')
     const result = await client.signAndBroadcast(
       account,
       [msgSendtoken],

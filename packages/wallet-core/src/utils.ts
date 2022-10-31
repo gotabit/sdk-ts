@@ -66,7 +66,7 @@ export function getChainConfig(
   const customFormats =
     typeof chainConfig === 'string'
       ? getEnvObject(chainConfig)
-      : Object.assign(TEST_CONFIG, chainConfig, {
+      : Object.assign({}, TEST_CONFIG, chainConfig, {
           chainType: ConfigTypeEnum.ConfigTest,
         });
 
@@ -103,7 +103,7 @@ export function parseSignDocValues(signDoc: any) {
     ...signDoc,
     bodyBytes: fromHex(signDoc.bodyBytes),
     authInfoBytes: fromHex(signDoc.authInfoBytes),
-    accountNumber: new Long(signDoc.accountNumber),
+    accountNumber: Long.fromString(signDoc.accountNumber, false, 16),
   };
 }
 
