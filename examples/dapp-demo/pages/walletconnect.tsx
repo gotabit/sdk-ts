@@ -13,9 +13,8 @@ function WalletconnectPage() {
 
   const handleConnect = async () => {
     const wallet = await Walletconnect.init('test', {
-      logger: 'debug',
+      logger: 'error',
       relayUrl: 'wss://relay.gotabit.dev',
-      projectId: '2c921904d8ebc91517cd11c1cc4a267f',
       metadata: {
         name: 'Gotabit SDK WalletConnect test',
         description: 'Gotabit SDK WalletConnect test',
@@ -23,6 +22,8 @@ function WalletconnectPage() {
         icons: [`https:\/\/res.gotabit.io\/svg\/icon.svg`],
       },
     })
+
+    console.log(wallet.session);
 
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
@@ -40,7 +41,7 @@ function WalletconnectPage() {
     if (!account) throw new Error('Failed to get accounts')
     const client = await gotabit?.signStargateClient()
 
-    const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
+    const msgSendtoken = createMsgSend(account, toAddress, '30', 'ugtb')
     const result = await client.signAndBroadcast(
       account,
       [msgSendtoken],
