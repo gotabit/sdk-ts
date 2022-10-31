@@ -58,7 +58,7 @@ export class Walletconnect implements ICosmosWallet {
 
   public async getAccountsForced(): Promise<readonly AccountData[]> {
     const accounts = await this.client.request<
-      Array<{ address: string; pubKey: string }>
+      Array<{ address: string; pubkey: string }>
     >({
       topic: this.session.topic,
       chainId: this.chainIdWithNamespace,
@@ -76,7 +76,7 @@ export class Walletconnect implements ICosmosWallet {
           address,
           algo: 'secp256k1',
           pubkey: fromBase64(
-            accounts.find((account) => account.address === address)?.pubKey ??
+            accounts.find((account) => account.address === address)?.pubkey ??
               ''
           ),
         } as AccountData;
