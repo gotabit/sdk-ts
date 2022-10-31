@@ -75,7 +75,7 @@ const onSessionRequest = async (requestEvent) => {
 }
 
 const uri =
-'wc:ced50b7e2661f01d201e889cb5abc8faf1ae1228c5171e69459afa7e8f3f8204@2?relay-protocol=irn&symKey=f72a923b41528b6f006c0517f898c3e651a467630fcd25c20be0ea4a15b45518&relay-url=wss://relay.gotabit.dev'
+'wc:b3525c93469d96d4353d9fe13217c7b65026302a153e013049898da9af85a13e@2?relay-protocol=irn&symKey=7b1a7209bc9363f5ad208204d3e599835e4feb5543722122c5de4cb07592c4dd&relay-url=wss://relay.gotabit.dev'
 
 const pair = await signClient.pair({ uri })
 
