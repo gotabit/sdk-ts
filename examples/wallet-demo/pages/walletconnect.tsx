@@ -3,10 +3,9 @@ import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
 import QrReader from '../components/QrReader'
 
-import { useSignClient } from '../hooks/useSignClient'
+import { signClient } from '../utils/WalletConnectUtil'
 
 function WalletConnectPage() {
-  const signClient = useSignClient()
   const [uri, setUri] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -14,7 +13,8 @@ function WalletConnectPage() {
     if (!signClient) return
     try {
       setLoading(true)
-      await signClient.pair({ uri })
+
+      const pair = await signClient.pair({ uri })
     } catch (err: unknown) {
       alert(err)
     } finally {
