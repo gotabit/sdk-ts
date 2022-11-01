@@ -31,7 +31,7 @@
     "url": "https://github.com/gotabit/sdk-ts/issues"
   },
   "_moduleAliases": {
-    "~wallet-keplr": "dist/cjs"
+    "~wallet-gotabit": "dist/cjs"
   },
   "scripts": {
     "clean": "rm -rf dist tsconfig.build.tsbuildinfo",
