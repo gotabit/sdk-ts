@@ -23,8 +23,7 @@ import {
   GotaBitInitWalletOptions,
 } from '@gotabit/wallet-core';
 
-const ASSERT_GOTABIT_ERROR =
-  'Gotabit is not supported or installed on this browser!';
+const ASSERT_GOTABIT_ERROR = 'Gotabit Wallet is not supported or installed!';
 
 /**
  * Redeclare the window type, inheriting from the GotabitWindow type
