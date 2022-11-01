@@ -7,7 +7,7 @@ import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { ChainConfig } from './utils';
 
-export type WalletType = 'local' | 'keplr' | 'ledger' | 'walletconnect';
+export type WalletType = 'local' | 'keplr' | 'gotabit' | 'walletconnect';
 
 export abstract class ICosmosWallet implements OfflineDirectSigner {
   public abstract type: WalletType;
