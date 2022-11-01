@@ -65,7 +65,9 @@ export class Walletconnect implements ICosmosWallet {
     this.session = session;
     this.chainIdWithNamespace = getChainIdWithNameSpace(chainConfig.chainId);
 
-    const accountDataList = this.session.namespaces[NAMESPACE].accountsData.map(
+    const accountDataList = this.session.namespaces[
+      NAMESPACE
+    ]?.accountsData.map(
       ({ address, pubkey }) =>
         ({
           address,
@@ -174,10 +176,33 @@ export class Walletconnect implements ICosmosWallet {
     };
   }
 
+  public async getSharedSecret(signerAddress: string, pubkey: string) {
+    const result = await this.client.request<{
+      secret: string;
+      pubkey: string;
+    }>({
+      topic: this.session.topic,
+      chainId: this.chainIdWithNamespace,
+      request: {
+        method: COSMOS_METHODS.COSMOS_SHARED_SECRET,
+        params: {
+          signerAddress,
+          pubkey,
+        },
+      },
+    });
+
+    return {
+      secret: result.secret,
+      pubkey: result.pubkey,
+    };
+  }
+
   public static async init(
     chain: ConfigType | GotaBitConfig,
     signOpts: SignClientTypes.Options,
     settings?: {
+      methods?: Array<keyof typeof COSMOS_METHODS>;
       qrcodeModal?: {
         onClosed?: (...args: any[]) => void;
       };
@@ -190,7 +215,7 @@ export class Walletconnect implements ICosmosWallet {
     const requiredNamespaces: ProposalTypes.RequiredNamespaces = {
       cosmos: {
         chains: [`cosmos:${chainConfig.chainId}`],
-        methods: Object.values(COSMOS_METHODS),
+        methods: settings?.methods ?? Object.values(COSMOS_METHODS),
         events: [],
       },
     };
