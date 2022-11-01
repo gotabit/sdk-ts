@@ -182,22 +182,23 @@ export class KeplrWallet implements ICosmosWallet {
 
   public async signDirect(
     address: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
+    keplrSignOptions?: KeplrSignOptions
   ): Promise<DirectSignResponse> {
-    const sign = await this.signer.signDirect(address, signDoc);
+    const sign = await window.keplr?.signDirect(
+      this.chainConfig.chainId,
+      address,
+      signDoc,
+      keplrSignOptions
+    );
 
-    return sign;
+    return sign as DirectSignResponse;
   }
 
   public signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
-  ): Promise<AminoSignResponse>;
-
-  public signAmino(
-    signerAddress: string,
     signDoc: StdSignDoc,
-    keplrSignOptions: KeplrSignOptions
+    keplrSignOptions?: KeplrSignOptions
   ): Promise<AminoSignResponse>;
 
   public async signAmino(

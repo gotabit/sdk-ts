@@ -28,7 +28,18 @@ import {
 } from '@gotabit/wallet-core';
 import { NAMESPACE, COSMOS_METHODS, RELAY_URL } from './constants';
 
-import { getAddress, getChainIdWithNameSpace } from './utils';
+import { getChainIdWithNameSpace } from './utils';
+
+interface Session extends SessionTypes.Struct {
+  namespaces: SessionTypes.Namespaces & {
+    [x: string]: {
+      accountsData: Array<{
+        address: string;
+        pubkey: string;
+      }>;
+    };
+  };
+}
 
 export class Walletconnect implements ICosmosWallet {
   private accounts: AccountData[];
@@ -39,26 +50,38 @@ export class Walletconnect implements ICosmosWallet {
 
   public readonly client: Client;
 
-  public readonly session: SessionTypes.Struct;
+  public readonly session: Session;
 
   public readonly chainIdWithNamespace: string;
 
   private constructor(
     chainConfig: ChainConfig,
     client: Client,
-    session: SessionTypes.Struct
+    session: Session
   ) {
     this.type = 'walletconnect';
     this.chainConfig = chainConfig;
     this.client = client;
     this.session = session;
     this.chainIdWithNamespace = getChainIdWithNameSpace(chainConfig.chainId);
-    this.accounts = [];
+
+    const accountDataList = this.session.namespaces[
+      NAMESPACE
+    ]?.accountsData.map(
+      ({ address, pubkey }) =>
+        ({
+          address,
+          algo: 'secp256k1',
+          pubkey: fromBase64(pubkey),
+        } as AccountData)
+    );
+
+    this.accounts = accountDataList;
   }
 
   public async getAccountsForced(): Promise<readonly AccountData[]> {
     const accounts = await this.client.request<
-      Array<{ address: string; pubKey: string }>
+      Array<{ address: string; pubkey: string }>
     >({
       topic: this.session.topic,
       chainId: this.chainIdWithNamespace,
@@ -69,29 +92,20 @@ export class Walletconnect implements ICosmosWallet {
         },
       },
     });
-    const accountDataList = this.session.namespaces[NAMESPACE].accounts.map(
-      (cosmosAddress) => {
-        const address = getAddress(cosmosAddress);
-        return {
-          address,
-          algo: 'secp256k1',
-          pubkey: fromBase64(
-            accounts.find((account) => account.address === address)?.pubKey ??
-              ''
-          ),
-        } as AccountData;
-      }
-    );
 
-    this.accounts = accountDataList;
+    this.accounts = accounts.map((account) => ({
+      address: account.address,
+      pubkey: fromBase64(account.pubkey),
+      algo: 'secp256k1',
+    }));
 
-    return accountDataList;
+    return this.accounts;
   }
 
   public async getAccounts(): Promise<readonly AccountData[]> {
     if (this.accounts?.length) return this.accounts;
 
-    return await this.getAccountsForced();
+    return this.getAccountsForced();
   }
 
   public async signDirect(
@@ -162,10 +176,33 @@ export class Walletconnect implements ICosmosWallet {
     };
   }
 
+  public async getSharedSecret(signerAddress: string, pubkey: string) {
+    const result = await this.client.request<{
+      secret: string;
+      pubkey: string;
+    }>({
+      topic: this.session.topic,
+      chainId: this.chainIdWithNamespace,
+      request: {
+        method: COSMOS_METHODS.COSMOS_SHARED_SECRET,
+        params: {
+          signerAddress,
+          pubkey,
+        },
+      },
+    });
+
+    return {
+      secret: result.secret,
+      pubkey: result.pubkey,
+    };
+  }
+
   public static async init(
     chain: ConfigType | GotaBitConfig,
     signOpts: SignClientTypes.Options,
     settings?: {
+      methods?: Array<keyof typeof COSMOS_METHODS>;
       qrcodeModal?: {
         onClosed?: (...args: any[]) => void;
       };
@@ -178,7 +215,7 @@ export class Walletconnect implements ICosmosWallet {
     const requiredNamespaces: ProposalTypes.RequiredNamespaces = {
       cosmos: {
         chains: [`cosmos:${chainConfig.chainId}`],
-        methods: Object.values(COSMOS_METHODS),
+        methods: settings?.methods ?? Object.values(COSMOS_METHODS),
         events: [],
       },
     };
@@ -187,6 +224,7 @@ export class Walletconnect implements ICosmosWallet {
       requiredNamespaces,
     });
 
+    // eslint-disable-next-line no-unused-expressions
     uri &&
       QRCodeModal.open(
         `${uri}&relay-url=${signOpts.relayUrl || RELAY_URL}`,
@@ -201,7 +239,7 @@ export class Walletconnect implements ICosmosWallet {
 
     QRCodeModal.close();
 
-    return new Walletconnect(chainConfig, client, session);
+    return new Walletconnect(chainConfig, client, session as Session);
   }
 
   public async disconnect() {
