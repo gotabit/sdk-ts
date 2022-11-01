@@ -60,7 +60,9 @@ type AminoSigner = Secp256k1HdWallet | Secp256k1Wallet;
  */
 export class LocalWallet implements ICosmosWallet {
   public readonly chainConfig: ChainConfig;
+
   private mnemonic: string;
+
   private privateKey: string;
 
   public directSigner: DirectSigner;
@@ -97,12 +99,11 @@ export class LocalWallet implements ICosmosWallet {
     | PasswordArguments
     | PrivateKeyArguments
     | WalletGenerateArguments) {
-    const walletGenerateLength = (args as WalletGenerateArguments)
-      .walletGenerateLength;
-    const mnemonic = (args as MnemonicArguments).mnemonic;
+    const { walletGenerateLength } = args as WalletGenerateArguments;
+    const { mnemonic } = args as MnemonicArguments;
     const password = (args as PasswordArguments)?.password;
-    const serialization = (args as PasswordArguments).serialization;
-    const privateKey = (args as PrivateKeyArguments).privateKey;
+    const { serialization } = args as PasswordArguments;
+    const { privateKey } = args as PrivateKeyArguments;
     const options = {
       hdPaths: [stringToPath(path ?? DEFAULT_HD_PATH)],
       prefix: prefix ?? DEFAULT_ADDRESS_PREFIX,

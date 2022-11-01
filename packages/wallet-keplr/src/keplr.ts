@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 import { Window as KeplrWindow, KeplrSignOptions } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
@@ -7,8 +8,9 @@ import {
 } from '@cosmjs/amino';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { OfflineDirectSigner, DirectSignResponse } from '@cosmjs/proto-signing';
-import { ICosmosWallet, WalletType } from '@gotabit/wallet-core';
 import {
+  ICosmosWallet,
+  WalletType,
   GotaBitConfig,
   getGotabitOptions,
   GotaBitWalletOptions,
@@ -96,9 +98,11 @@ type Signer = OfflineAminoSigner & OfflineDirectSigner;
 
 export class KeplrWallet implements ICosmosWallet {
   public type: WalletType;
+
   public chainConfig: ChainConfig;
 
   private signer: Signer;
+
   private walletOptions: GotaBitWalletOptions;
 
   public static async init(

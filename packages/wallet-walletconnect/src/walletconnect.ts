@@ -32,10 +32,15 @@ import { getAddress, getChainIdWithNameSpace } from './utils';
 
 export class Walletconnect implements ICosmosWallet {
   private accounts: AccountData[];
+
   public readonly chainConfig: ChainConfig;
+
   public readonly type: WalletType;
+
   public readonly client: Client;
+
   public readonly session: SessionTypes.Struct;
+
   public readonly chainIdWithNamespace: string;
 
   private constructor(
@@ -95,7 +100,7 @@ export class Walletconnect implements ICosmosWallet {
   ): Promise<DirectSignResponse> {
     // cosmos_signDirect params
     const params = {
-      signerAddress: signerAddress,
+      signerAddress,
       signDoc: stringifySignDocValues(signDoc),
     };
     const result = await this.client.request<StdSignature>({
@@ -103,7 +108,7 @@ export class Walletconnect implements ICosmosWallet {
       chainId: this.chainIdWithNamespace,
       request: {
         method: COSMOS_METHODS.COSMOS_SIGN_DIRECT,
-        params: params,
+        params,
       },
     });
 
@@ -179,7 +184,7 @@ export class Walletconnect implements ICosmosWallet {
     };
 
     const { uri, approval } = await client.connect({
-      requiredNamespaces: requiredNamespaces,
+      requiredNamespaces,
     });
 
     uri &&

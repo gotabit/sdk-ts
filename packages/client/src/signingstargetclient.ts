@@ -67,7 +67,7 @@ export async function experimentalAdr36Verify(signed: StdTx): Promise<boolean> {
   }
   // TODO: restrict number of messages?
 
-  const signatures = signed.signatures
+  const { signatures } = signed
   if (signatures.length !== 1)
     throw new Error('Must have exactly one signature to be supported.')
   const signature = signatures[0]

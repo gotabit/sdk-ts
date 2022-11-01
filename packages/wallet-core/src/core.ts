@@ -11,6 +11,7 @@ export type WalletType = 'local' | 'keplr' | 'ledger' | 'walletconnect';
 
 export abstract class ICosmosWallet implements OfflineDirectSigner {
   public abstract type: WalletType;
+
   public abstract chainConfig: ChainConfig;
 
   public abstract getAccounts(): Promise<readonly AccountData[]>;
