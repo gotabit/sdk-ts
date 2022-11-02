@@ -20,7 +20,7 @@ await Promise.all(
 
     cosmosAccounts.push({
       address,
-      pubKey: toBase64(pubkey),
+      pubkey: toBase64(pubkey),
     })
   }),
 )
@@ -112,17 +112,6 @@ export const signAmino = async (wc_params) => {
   const accounts = selectedAccounts.cosmos
   const response = formatJsonRpcResult(id, accounts)
 
-  const signedDirect = await wallet.signDirect(
-    request.params.signerAddress,
-    parseSignDocValues(request.params.signDoc),
-  )
-  return formatJsonRpcResult(id, signedDirect.signature)
-
-  console.log(chainId, request)
-  await signClient.respond({
-    topic,
-    response,
-  })
 }
 
 export const selectedAccounts = {

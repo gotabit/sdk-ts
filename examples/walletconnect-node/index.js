@@ -14,11 +14,11 @@ const onSessionProposal = async (proposal) => {
 
   Object.keys(requiredNamespaces).forEach((key) => {
     const accounts = []
-    const accountData = []
+    const accountsData = []
     requiredNamespaces[key].chains.map((chain) => {
       selectedAccounts[key].map((acc) => {
         accounts.push(`${chain}:${acc.address}`)
-        accountData.push({
+        accountsData.push({
           address: acc.address,
           pubkey: acc.pubkey,
         })
@@ -26,7 +26,7 @@ const onSessionProposal = async (proposal) => {
     })
     namespaces[key] = {
       accounts,
-      accountData,
+      accountsData,
       methods: requiredNamespaces[key].methods,
       events: requiredNamespaces[key].events,
     }
