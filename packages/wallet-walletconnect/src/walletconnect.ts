@@ -33,15 +33,19 @@ import { getChainIdWithNameSpace } from './utils';
 interface Session extends SessionTypes.Struct {
   namespaces: SessionTypes.Namespaces & {
     [x: string]: {
-      accountsData: Array<{
+      accounts: Array<{ address: string }>;
+      accountsData?: Array<{
         address: string;
         pubkey: string;
+        algo: string;
       }>;
     };
   };
 }
 
 export class Walletconnect implements ICosmosWallet {
+  private addresses: Array<{ address: string }>;
+
   private accounts: AccountData[];
 
   public readonly chainConfig: ChainConfig;
@@ -65,23 +69,26 @@ export class Walletconnect implements ICosmosWallet {
     this.session = session;
     this.chainIdWithNamespace = getChainIdWithNameSpace(chainConfig.chainId);
 
+    const addresses = this.session.namespaces[NAMESPACE].accounts;
+
     const accountDataList = this.session.namespaces[
       NAMESPACE
-    ]?.accountsData.map(
-      ({ address, pubkey }) =>
+    ]?.accountsData?.map(
+      ({ address, pubkey, algo }) =>
         ({
           address,
-          algo: 'secp256k1',
+          algo: algo ?? 'secp256k1',
           pubkey: fromBase64(pubkey),
         } as AccountData)
     );
 
-    this.accounts = accountDataList;
+    this.addresses = addresses;
+    this.accounts = accountDataList ?? [];
   }
 
   public async getAccountsForced(): Promise<readonly AccountData[]> {
     const accounts = await this.client.request<
-      Array<{ address: string; pubkey: string }>
+      Array<{ address: string; pubkey: string; algo: AccountData['algo'] }>
     >({
       topic: this.session.topic,
       chainId: this.chainIdWithNamespace,
@@ -96,7 +103,7 @@ export class Walletconnect implements ICosmosWallet {
     this.accounts = accounts.map((account) => ({
       address: account.address,
       pubkey: fromBase64(account.pubkey),
-      algo: 'secp256k1',
+      algo: account.algo ?? 'secp256k1',
     }));
 
     return this.accounts;
@@ -106,6 +113,10 @@ export class Walletconnect implements ICosmosWallet {
     if (this.accounts?.length) return this.accounts;
 
     return this.getAccountsForced();
+  }
+
+  public getAddresses(): Array<{ address: string }> {
+    return this.addresses ?? [];
   }
 
   public async signDirect(
