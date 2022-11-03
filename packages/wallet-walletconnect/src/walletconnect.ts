@@ -196,7 +196,7 @@ export class Walletconnect implements ICosmosWallet {
       topic: this.session.topic,
       chainId: this.chainIdWithNamespace,
       request: {
-        method: COSMOS_METHODS.COSMOS_SHARED_SECRET,
+        method: COSMOS_METHODS.COSMOS_GET_SHARED_SECRET,
         params: {
           signerAddress,
           pubkey,
