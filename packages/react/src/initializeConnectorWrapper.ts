@@ -21,7 +21,10 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
         selectedGotabitStore.setState(initialState)
 
         const wallet = await f()
-        const accounts = await wallet.getAccounts()
+        const accounts: Array<{ address: string }> =
+          wallet.type === 'walletconnect'
+            ? (wallet as any).getAddresses()
+            : await wallet.getAccounts()
         const { chainConfig } = wallet
         const client = await GotabitClient.init(wallet, chainConfig.chainType)
 
@@ -48,7 +51,7 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
         handleKeplrAccountChange = async () => {
           const accounts = await wallet.getAccounts()
           gotabitStore.setState({
-            accounts: mapAccounts(accounts),
+            accounts: mapAccounts(accounts as any),
           })
         }
 
