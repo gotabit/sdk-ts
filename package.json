@@ -111,6 +111,7 @@
       "import/prefer-default-export": "off",
       "import/extensions": "off",
       "import/no-unresolved": "error",
+      "no-void": "off",
       "no-console": "off",
       "no-iterator": "off",
       "no-restricted-syntax": "off",

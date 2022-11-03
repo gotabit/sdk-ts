@@ -28,12 +28,11 @@ import {
 } from '@gotabit/wallet-core';
 import { NAMESPACE, COSMOS_METHODS, RELAY_URL } from './constants';
 
-import { getChainIdWithNameSpace } from './utils';
+import { getChainIdWithNameSpace, getAddress } from './utils';
 
 interface Session extends SessionTypes.Struct {
   namespaces: SessionTypes.Namespaces & {
     [x: string]: {
-      accounts: Array<{ address: string }>;
       accountsData?: Array<{
         address: string;
         pubkey: string;
@@ -69,7 +68,9 @@ export class Walletconnect implements ICosmosWallet {
     this.session = session;
     this.chainIdWithNamespace = getChainIdWithNameSpace(chainConfig.chainId);
 
-    const addresses = this.session.namespaces[NAMESPACE].accounts;
+    const addresses = this.session.namespaces[NAMESPACE].accounts.map(
+      (address) => ({ address: getAddress(address) })
+    );
 
     const accountDataList = this.session.namespaces[
       NAMESPACE
@@ -78,7 +79,7 @@ export class Walletconnect implements ICosmosWallet {
         ({
           address,
           algo: algo ?? 'secp256k1',
-          pubkey: fromBase64(pubkey),
+          pubkey: fromBase64(pubkey ?? ''),
         } as AccountData)
     );
 
@@ -102,7 +103,7 @@ export class Walletconnect implements ICosmosWallet {
 
     this.accounts = accounts.map((account) => ({
       address: account.address,
-      pubkey: fromBase64(account.pubkey),
+      pubkey: fromBase64(account.pubkey ?? ''),
       algo: account.algo ?? 'secp256k1',
     }));
 
