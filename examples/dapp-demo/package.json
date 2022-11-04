@@ -14,7 +14,7 @@
     "@gotabit/messages": "file:../../packages/messages/dist/cjs",
     "@gotabit/wallet-keplr": "file:../../packages/wallet-keplr/dist/cjs",
     "@gotabit/wallet-walletconnect": "file:../../packages/wallet-walletconnect/dist/cjs",
-    "next": "13.0.0",
+    "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

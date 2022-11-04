@@ -43,6 +43,7 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
               ;(wallet as any).client.disconnect()
             }
             gotabitStore.setState(DEFAULT_CONTEXT)
+            selectedGotabitStore.setState(DEFAULT_CONTEXT)
           },
         }
         gotabitStore.setState(state)

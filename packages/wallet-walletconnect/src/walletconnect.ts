@@ -255,9 +255,13 @@ export class Walletconnect implements ICosmosWallet {
   }
 
   public async disconnect() {
-    await this.client.disconnect({
-      topic: this.session.topic,
-      reason: getSdkError('USER_DISCONNECTED'),
-    });
+    try {
+      await this.client.disconnect({
+        topic: this.session.topic,
+        reason: getSdkError('USER_DISCONNECTED'),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

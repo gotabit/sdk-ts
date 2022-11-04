@@ -23,7 +23,7 @@ function WalletconnectPage() {
       },
     })
 
-    console.log(wallet.session);
+    console.log(wallet.session)
 
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
@@ -56,9 +56,15 @@ function WalletconnectPage() {
     setToAddress(event.target.value)
   }
 
+  const handleDisconnect = () => {
+    console.log(gotabit?.wallet?.disconnect)
+    gotabit?.wallet?.disconnect()
+  }
+
   return (
     <div>
       <button onClick={handleConnect}>connect</button>
+      <button onClick={handleDisconnect}>disconnect</button>
       <p>Address: {account}</p>
       <br />
       <div>
