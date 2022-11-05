@@ -17,7 +17,7 @@ const msg = send({
   toAddress: 'receiver address',
   amount: [
     {
-      amount: '3000000',
+      amount: '3',
       denom: 'ugtb',
     },
   ],

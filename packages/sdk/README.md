@@ -29,7 +29,7 @@ const account = accounts.[0].address
 const client = await gotabit.signStargateClient()
 
 const toAddress = 'gio1qdgzfy4vta5p43l4urdtmawka3qv2ldh4h0jay'
-const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
+const msgSendtoken = createMsgSend(account, toAddress, '3', 'ugtb')
 
 const result = await client.signAndBroadcast(
   account,
