@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet-core",
   "description": "Cosmos Wallet core",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [

@@ -32,7 +32,7 @@ function WalletGotabit() {
     if (!account) throw new Error('Failed to get accounts')
     const client = await gotabit?.signStargateClient()
 
-    const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
+    const msgSendtoken = createMsgSend(account, toAddress, '3', 'ugtb')
     const result = await client.signAndBroadcast(
       account,
       [msgSendtoken],
