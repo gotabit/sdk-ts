@@ -25,6 +25,9 @@ const Home: NextPage = () => {
         <Link href="/wallet-keplr">Connect with wallet-keplr.</Link>
         <br />
         <br />
+        <Link href="/wallet-gotabit">Connect with wallet-gotabit.</Link>
+        <br />
+        <br />
         <Link href="/walletconnect">Connect with walletconnect.</Link>
         <br />
         <br />
