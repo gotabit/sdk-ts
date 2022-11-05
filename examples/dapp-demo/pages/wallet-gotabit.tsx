@@ -18,6 +18,8 @@ function WalletconnectPage() {
 
     const accounts = await wallet.getAccounts()
 
+    console.log('---accounts', accounts);
+
     if (accounts?.[0]) setAccount(accounts?.[0].address)
   }
 

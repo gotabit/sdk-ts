@@ -23,7 +23,7 @@ function WalletconnectPage() {
       },
     })
 
-    console.log(wallet.session)
+    console.log('---session', wallet.session);
 
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
