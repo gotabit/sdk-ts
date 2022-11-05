@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react'
-import { Walletconnect } from '@gotabit/wallet-walletconnect'
+import { GotabitWallet } from '@gotabit/wallet-gotabit'
 import { createMsgSend } from '@gotabit/messages'
 import { GotabitClient } from '@gotabit/client'
 
@@ -12,22 +12,13 @@ function WalletconnectPage() {
   const [transactionHash, setTransactionHash] = useState<string>()
 
   const handleConnect = async () => {
-    const wallet = await Walletconnect.init('test', {
-      logger: 'error',
-      relayUrl: 'wss://relay.gotabit.dev',
-      metadata: {
-        name: 'Gotabit SDK WalletConnect test',
-        description: 'Gotabit SDK WalletConnect test',
-        url: 'https://sdk.gotabit.dev',
-        icons: [`https:\/\/res.gotabit.io\/svg\/icon.svg`],
-      },
-    })
-
-    console.log('---session', wallet.session);
+    const wallet = await GotabitWallet.init('test')
 
     GotabitClient.init(wallet, 'test').then(setGotabitInstance)
 
     const accounts = await wallet.getAccounts()
+
+    console.log('---accounts', accounts);
 
     if (accounts?.[0]) setAccount(accounts?.[0].address)
   }
@@ -56,15 +47,9 @@ function WalletconnectPage() {
     setToAddress(event.target.value)
   }
 
-  const handleDisconnect = () => {
-    console.log(gotabit?.wallet?.disconnect)
-    gotabit?.wallet?.disconnect()
-  }
-
   return (
     <div>
       <button onClick={handleConnect}>connect</button>
-      <button onClick={handleDisconnect}>disconnect</button>
       <p>Address: {account}</p>
       <br />
       <div>
