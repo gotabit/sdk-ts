@@ -12,6 +12,7 @@
     "@gotabit/client": "file:../../packages/client/dist/cjs",
     "@gotabit/react": "file:../../packages/react/dist",
     "@gotabit/messages": "file:../../packages/messages/dist/cjs",
+    "@gotabit/wallet-gotabit": "file:../../packages/wallet-gotabit/dist/cjs",
     "@gotabit/wallet-keplr": "file:../../packages/wallet-keplr/dist/cjs",
     "@gotabit/wallet-walletconnect": "file:../../packages/wallet-walletconnect/dist/cjs",
     "next": "12.2.5",

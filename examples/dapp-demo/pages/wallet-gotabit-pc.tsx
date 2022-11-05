@@ -1,9 +1,9 @@
 import { useState, useEffect, ChangeEvent } from 'react'
-import { KeplrWallet } from '@gotabit/wallet-keplr'
+import { GotabitWallet } from '@gotabit/wallet-gotabit'
 import { GotabitClient } from '@gotabit/client'
 import { createMsgSend } from '@gotabit/messages'
 
-function WalletKeplr() {
+function WalletGotabit() {
   const [toAddress, setToAddress] = useState<string>('')
   const [responseData, setResponseData] = useState<any>()
   const [gotabit, setGotabitInstance] = useState<GotabitClient>()
@@ -11,12 +11,12 @@ function WalletKeplr() {
   const [account, setAccount] = useState<string>()
 
   useEffect(() => {
-    KeplrWallet.init('test').then((wallet) => {
+    GotabitWallet.init('test').then((wallet) => {
       GotabitClient.init(wallet, 'test').then(setGotabitInstance)
     })
   }, [])
   const handleConnect = async () => {
-    const wallet = await KeplrWallet.init('test')
+    const wallet = await GotabitWallet.init('test')
 
     const accounts = await wallet.getAccounts()
 
@@ -72,4 +72,4 @@ function WalletKeplr() {
   )
 }
 
-export default WalletKeplr
+export default WalletGotabit

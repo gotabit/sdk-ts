@@ -47,11 +47,24 @@ export class GotabitWallet implements ICosmosWallet {
 
   public static async init(
     chainConfig: ConfigType | GotaBitConfig,
+    option?: Partial<GotaBitInitWalletOptions> | null
+  ): Promise<GotabitWallet>;
+
+  public static async init(
+    chainConfig: ConfigType | GotaBitConfig,
+    option: Partial<GotaBitInitWalletOptions> | null,
+    settings: {
+      mobileLink: string;
+    }
+  ): Promise<undefined>;
+
+  public static async init(
+    chainConfig: ConfigType | GotaBitConfig,
     option?: Partial<GotaBitInitWalletOptions> | null,
     settings?: {
       mobileLink?: string;
     }
-  ) {
+  ): Promise<GotabitWallet | undefined> {
     if (!window.gotabit) {
       if (settings?.mobileLink) {
         window.open(`gio://web?url=${settings.mobileLink}`);
