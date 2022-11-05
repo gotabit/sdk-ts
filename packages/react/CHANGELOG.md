@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.13](https://github.com/gotabit/sdk-ts/compare/@gotabit/react@1.1.12...@gotabit/react@1.1.13) (2022-11-04)
+
+**Note:** Version bump only for package @gotabit/react
+
 ## [1.1.12](https://github.com/gotabit/sdk-ts/compare/@gotabit/react@1.1.11...@gotabit/react@1.1.12) (2022-11-04)
 
 **Note:** Version bump only for package @gotabit/react

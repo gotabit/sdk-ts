@@ -25,7 +25,14 @@ const Home: NextPage = () => {
         <Link href="/wallet-keplr">Connect with wallet-keplr.</Link>
         <br />
         <br />
-        <Link href="/wallet-gotabit">Connect with wallet-gotabit.</Link>
+        <Link href="/wallet-gotabit-pc">
+          Connect with wallet-gotabit on PC.
+        </Link>
+        <br />
+        <br />
+        <Link href="/wallet-gotabit-mobile">
+          Connect with wallet-gotabit on Mobile.
+        </Link>
         <br />
         <br />
         <Link href="/walletconnect">Connect with walletconnect.</Link>
