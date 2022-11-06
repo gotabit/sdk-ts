@@ -1,8 +1,5 @@
 /* eslint-disable no-dupe-class-members */
-import {
-  Window as GotabitWindow,
-  KeplrSignOptions as GotabitSignOptions,
-} from '@keplr-wallet/types';
+import { Window as GotabitWindow, Keplr } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
   StdSignDoc,
@@ -25,12 +22,33 @@ import {
 
 const ASSERT_GOTABIT_ERROR = 'Gotabit Wallet is not supported or installed!';
 
+interface Gotabit extends Omit<Keplr, 'signAmino' | 'signDirect'> {
+  signDirect: (
+    address: string,
+    signDoc: SignDoc
+  ) => Promise<DirectSignResponse>;
+  signAmino: (
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ) => Promise<AminoSignResponse>;
+  getSharedSecret: (
+    signerAddress: string,
+    pubkey: string,
+    method: 'basic' | 'ecies'
+  ) => {
+    tmpPubKey?: string;
+    pubEncrypt?: string;
+    encryptKey: string;
+  };
+}
+
 /**
  * Redeclare the window type, inheriting from the GotabitWindow type
  */
 declare global {
   interface Window extends Omit<GotabitWindow, 'keplr'> {
-    gotabit?: GotabitWindow['keplr'];
+    // @ts-ignore
+    gotabit?: Gotabit;
   }
 }
 
@@ -136,38 +154,42 @@ export class GotabitWallet implements ICosmosWallet {
     return this;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  public async getSharedSecret(
+    signerAddress: string,
+    pubkey: string,
+    method: 'basic' | 'ecies'
+  ) {
+    const result = await (window.gotabit as any)?.getSharedSecret(
+      signerAddress,
+      pubkey,
+      method
+    );
+
+    return result;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   public async signDirect(
     address: string,
-    signDoc: SignDoc,
-    gotabitSignOptions?: GotabitSignOptions
+    signDoc: SignDoc
   ): Promise<DirectSignResponse> {
-    const sign = await window.gotabit?.signDirect(
-      this.chainConfig.chainId,
-      address,
-      signDoc,
-      gotabitSignOptions
-    );
+    const sign = await (window.gotabit as any)?.signDirect(address, signDoc);
 
     return sign as DirectSignResponse;
   }
 
   public signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc,
-    gotabitSignOptions?: GotabitSignOptions
+    signDoc: StdSignDoc
   ): Promise<AminoSignResponse>;
 
+  // eslint-disable-next-line class-methods-use-this
   public async signAmino(
     address: string,
-    signDoc: StdSignDoc,
-    gotabitSignOptions?: GotabitSignOptions
+    signDoc: StdSignDoc
   ): Promise<AminoSignResponse> {
-    const sign = await window.gotabit?.signAmino(
-      this.chainConfig.chainId,
-      address,
-      signDoc,
-      gotabitSignOptions
-    );
+    const sign = await (window.gotabit as any)?.signAmino(address, signDoc);
 
     return sign as AminoSignResponse;
   }
