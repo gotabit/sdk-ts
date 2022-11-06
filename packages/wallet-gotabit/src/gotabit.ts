@@ -1,5 +1,4 @@
 /* eslint-disable no-dupe-class-members */
-import { Window as GotabitWindow, Keplr } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
   StdSignDoc,
@@ -22,15 +21,10 @@ import {
 
 const ASSERT_GOTABIT_ERROR = 'Gotabit Wallet is not supported or installed!';
 
-interface Gotabit extends Omit<Keplr, 'signAmino' | 'signDirect'> {
-  signDirect: (
-    address: string,
-    signDoc: SignDoc
-  ) => Promise<DirectSignResponse>;
-  signAmino: (
-    signerAddress: string,
-    signDoc: StdSignDoc
-  ) => Promise<AminoSignResponse>;
+interface Gotabit extends ICosmosWallet {
+  readonly version: string;
+  enable(chainIds: string | string[]): Promise<void>;
+  getOfflineSigner(chainIds: string | string[]): ICosmosWallet;
   getSharedSecret: (
     signerAddress: string,
     pubkey: string,
@@ -42,14 +36,15 @@ interface Gotabit extends Omit<Keplr, 'signAmino' | 'signDirect'> {
   };
 }
 
+interface GotabitWindow {
+  gotabit?: Gotabit;
+}
+
 /**
  * Redeclare the window type, inheriting from the GotabitWindow type
  */
 declare global {
-  interface Window extends Omit<GotabitWindow, 'keplr'> {
-    // @ts-ignore
-    gotabit?: Gotabit;
-  }
+  interface Window extends GotabitWindow {}
 }
 
 type Signer = OfflineAminoSigner & OfflineDirectSigner;
@@ -158,7 +153,7 @@ export class GotabitWallet implements ICosmosWallet {
   public async getSharedSecret(
     signerAddress: string,
     pubkey: string,
-    method: 'basic' | 'ecies'
+    method?: 'basic' | 'ecies'
   ) {
     const result = await (window.gotabit as any)?.getSharedSecret(
       signerAddress,
@@ -174,7 +169,7 @@ export class GotabitWallet implements ICosmosWallet {
     address: string,
     signDoc: SignDoc
   ): Promise<DirectSignResponse> {
-    const sign = await (window.gotabit as any)?.signDirect(address, signDoc);
+    const sign = await window.gotabit?.signDirect(address, signDoc);
 
     return sign as DirectSignResponse;
   }
@@ -189,7 +184,7 @@ export class GotabitWallet implements ICosmosWallet {
     address: string,
     signDoc: StdSignDoc
   ): Promise<AminoSignResponse> {
-    const sign = await (window.gotabit as any)?.signAmino(address, signDoc);
+    const sign = await window.gotabit?.signAmino(address, signDoc);
 
     return sign as AminoSignResponse;
   }

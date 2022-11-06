@@ -191,7 +191,7 @@ export class Walletconnect implements ICosmosWallet {
   public async getSharedSecret(
     signerAddress: string,
     pubkey: string,
-    method: 'basic' | 'ecies'
+    method?: 'basic' | 'ecies'
   ) {
     const result = await this.client.request<{
       tmpPubKey?: string;
