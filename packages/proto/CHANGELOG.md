@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.15](https://github.com/gotabit/sdk-ts/compare/@gotabit/proto@1.1.14...@gotabit/proto@1.1.15) (2022-11-06)
+
+**Note:** Version bump only for package @gotabit/proto
+
 ## [1.1.14](https://github.com/gotabit/sdk-ts/compare/@gotabit/proto@1.1.12...@gotabit/proto@1.1.14) (2022-11-05)
 
 **Note:** Version bump only for package @gotabit/proto
