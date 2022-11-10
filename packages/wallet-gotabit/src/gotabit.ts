@@ -1,13 +1,8 @@
 /* eslint-disable no-dupe-class-members */
+import { StdSignDoc, AccountData, AminoSignResponse } from '@cosmjs/amino';
+import { DirectSignResponse } from '@cosmjs/proto-signing';
 import {
-  OfflineAminoSigner,
-  StdSignDoc,
-  AccountData,
-  AminoSignResponse,
-} from '@cosmjs/amino';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { OfflineDirectSigner, DirectSignResponse } from '@cosmjs/proto-signing';
-import {
+  SignDoc,
   ICosmosWallet,
   WalletType,
   GotaBitConfig,
@@ -47,14 +42,12 @@ declare global {
   interface Window extends GotabitWindow {}
 }
 
-type Signer = OfflineAminoSigner & OfflineDirectSigner;
-
 export class GotabitWallet implements ICosmosWallet {
   public type: WalletType;
 
   public chainConfig: ChainConfig;
 
-  private signer: Signer;
+  private signer: ICosmosWallet;
 
   private walletOptions: GotaBitWalletOptions;
 
@@ -101,7 +94,7 @@ export class GotabitWallet implements ICosmosWallet {
   }
 
   private constructor(
-    signer: Signer,
+    signer: ICosmosWallet,
     config: ChainConfig,
     walletOptions: GotaBitWalletOptions
   ) {
@@ -166,10 +159,10 @@ export class GotabitWallet implements ICosmosWallet {
 
   // eslint-disable-next-line class-methods-use-this
   public async signDirect(
-    address: string,
+    signerAddress: string,
     signDoc: SignDoc
   ): Promise<DirectSignResponse> {
-    const sign = await window.gotabit?.signDirect(address, signDoc);
+    const sign = await window.gotabit?.signDirect(signerAddress, signDoc);
 
     return sign as DirectSignResponse;
   }
@@ -181,10 +174,10 @@ export class GotabitWallet implements ICosmosWallet {
 
   // eslint-disable-next-line class-methods-use-this
   public async signAmino(
-    address: string,
+    signerAddress: string,
     signDoc: StdSignDoc
   ): Promise<AminoSignResponse> {
-    const sign = await window.gotabit?.signAmino(address, signDoc);
+    const sign = await window.gotabit?.signAmino(signerAddress, signDoc);
 
     return sign as AminoSignResponse;
   }

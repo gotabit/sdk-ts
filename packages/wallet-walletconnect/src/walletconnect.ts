@@ -13,9 +13,9 @@ import {
   AccountData,
   AminoSignResponse,
 } from '@cosmjs/amino';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { DirectSignResponse } from '@cosmjs/proto-signing';
 import {
+  SignDoc,
   ConfigType,
   ICosmosWallet,
   GotaBitConfig,

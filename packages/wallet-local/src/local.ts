@@ -12,9 +12,9 @@ import {
   DirectSignResponse,
   DirectSecp256k1Wallet,
 } from '@cosmjs/proto-signing';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
 import {
+  SignDoc,
   ICosmosWallet,
   WalletType,
   ChainConfig,
