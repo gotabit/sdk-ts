@@ -52,7 +52,8 @@
     "eslint": "^8.23.1",
     "link-module-alias": "^1.2.0",
     "typescript": "4.8.3",
-    "webpack": "5.74.0"
+    "webpack": "5.74.0",
+    "cosmjs-types": "0.5.2"
   },
   "prettier": {
     "printWidth": 80,
@@ -64,6 +65,7 @@
     "@gotabit/wallet-core": "^1.1.15",
     "@gotabit/wallet-keplr": "^1.1.15",
     "@gotabit/wallet-local": "^1.1.15",
-    "@gotabit/wallet-walletconnect": "^1.1.15"
+    "@gotabit/wallet-walletconnect": "^1.1.15",
+    "@gotabit/wallet-gotabit": "^1.1.15"
   }
 }

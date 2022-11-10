@@ -1,4 +1,3 @@
-import { GasPrice } from '@cosmjs/stargate';
 import * as secp from '@noble/secp256k1';
 import { pubkeyToAddress, serializeSignDoc, StdSignDoc } from '@cosmjs/amino';
 
@@ -11,8 +10,17 @@ import {
   fromBech32,
 } from '@cosmjs/encoding';
 import { makeSignBytes } from '@cosmjs/proto-signing';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
+
+import {
+  SignDoc,
+  GasPrice,
+  ConfigType,
+  GotaBitConfig,
+  ConfigTypeEnum,
+  GotaBitWalletOptions,
+  GotaBitInitWalletOptions,
+} from './types';
 
 import {
   TEST_CONFIG,
@@ -23,13 +31,6 @@ import {
   DEFAULT_ADDRESS_PREFIX,
   DEV_CONFIG,
 } from './constants';
-import {
-  ConfigType,
-  GotaBitConfig,
-  ConfigTypeEnum,
-  GotaBitWalletOptions,
-  GotaBitInitWalletOptions,
-} from './types';
 
 export interface ChainConfig extends GotaBitConfig {
   chainType: ConfigType;

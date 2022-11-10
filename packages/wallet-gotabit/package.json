@@ -61,7 +61,6 @@
   "dependencies": {
     "@cosmjs/amino": "0.29.3",
     "@cosmjs/proto-signing": "^0.29.3",
-    "@gotabit/wallet-core": "^1.1.15",
-    "cosmjs-types": "0.5.2"
+    "@gotabit/wallet-core": "^1.1.15"
   }
 }

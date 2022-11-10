@@ -4,7 +4,7 @@ import {
   OfflineDirectSigner,
 } from '@cosmjs/proto-signing';
 import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { SignDoc } from './types';
 import { ChainConfig } from './utils';
 
 export type WalletType =
@@ -21,8 +21,9 @@ export abstract class ICosmosWallet implements OfflineDirectSigner {
 
   public abstract getAccounts(): Promise<readonly AccountData[]>;
 
+  // @ts-ignore
   public abstract signDirect(
-    address: string,
+    signerAddress: string,
     signDoc: SignDoc
   ): Promise<DirectSignResponse>;
 
