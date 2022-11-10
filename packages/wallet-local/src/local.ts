@@ -193,8 +193,8 @@ export class LocalWallet implements ICosmosWallet {
 
   public async getPrivateKey(): Promise<string> {
     if (this.privateKey) return this.privateKey;
-    const { privkey } = await (
-      this.directSigner as any
+    const [{ privkey }] = await (
+      this.aminoSigner as any
     ).getAccountsWithPrivkeys();
 
     return toHex(privkey as Uint8Array);
