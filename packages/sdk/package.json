@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/sdk",
   "description": "JS and TS libs for Gotabit",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,10 +35,10 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@gotabit/client": "^1.1.17",
-    "@gotabit/messages": "^1.1.15",
-    "@gotabit/proto": "^1.1.15",
-    "@gotabit/wallet": "^1.1.17"
+    "@gotabit/client": "^1.1.18",
+    "@gotabit/messages": "^1.1.16",
+    "@gotabit/proto": "^1.1.16",
+    "@gotabit/wallet": "^1.1.18"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
