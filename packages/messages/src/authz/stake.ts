@@ -1,24 +1,21 @@
-import { cosmos } from '@gotabit/proto'
-
-import { ValueOf } from '../types'
-
-const staking = cosmos.staking.v1beta1
-const coin = cosmos.base.v1beta1.Coin
-
-const AuthorizationType = staking.AuthorizationType
+import { Coin } from 'cosmjs-types/cosmos/base/v1beta1/coin'
+import {
+  StakeAuthorization,
+  AuthorizationType,
+} from 'cosmjs-types/cosmos/staking/v1beta1/authz'
 
 export function createStakeAuthorization(
   allowAddress: string,
   denom: string,
   maxTokens: string | undefined,
-  authorizationType: ValueOf<typeof AuthorizationType>,
+  authorizationType: AuthorizationType,
 ) {
-  const msg = staking.StakeAuthorization.fromPartial({
+  const msg = StakeAuthorization.fromPartial({
     allowList: {
       address: [allowAddress],
     },
     maxTokens: maxTokens
-      ? coin.fromPartial({
+      ? Coin.fromPartial({
           denom,
           amount: maxTokens,
         })
@@ -27,7 +24,7 @@ export function createStakeAuthorization(
   })
 
   return {
-    message: msg,
-    path: '/StakeAuthorization',
+    value: msg,
+    typeUrl: '/cosmos.staking.v1beta1.StakeAuthorization',
   }
 }

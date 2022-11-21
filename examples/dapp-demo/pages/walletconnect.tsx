@@ -12,7 +12,7 @@ function WalletconnectPage() {
   const [transactionHash, setTransactionHash] = useState<string>()
 
   const handleConnect = async () => {
-    const wallet = await Walletconnect.init('test', {
+    const wallet = await Walletconnect.init('dev', {
       logger: 'error',
       relayUrl: 'wss://relay.gotabit.dev',
       metadata: {
@@ -23,9 +23,9 @@ function WalletconnectPage() {
       },
     })
 
-    console.log('---session', wallet.session);
+    console.log('---session', wallet.session)
 
-    GotabitClient.init(wallet, 'test').then(setGotabitInstance)
+    GotabitClient.init(wallet, 'dev').then(setGotabitInstance)
 
     const accounts = await wallet.getAccounts()
 
