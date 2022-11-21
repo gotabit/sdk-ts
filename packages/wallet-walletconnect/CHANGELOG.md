@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.20](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet-walletconnect@1.1.19...@gotabit/wallet-walletconnect@1.1.20) (2022-11-21)
+
+**Note:** Version bump only for package @gotabit/wallet-walletconnect
+
 ## [1.1.19](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet-walletconnect@1.1.18...@gotabit/wallet-walletconnect@1.1.19) (2022-11-19)
 
 **Note:** Version bump only for package @gotabit/wallet-walletconnect
