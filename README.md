@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://github.com/gotabit/gotabitjs"><img alt="GotaBit" src="https://res.gotabit.io/svg/icon.svg" width="150"/></a>
+<a href="https://github.com/gotabit/sdk-ts"><img alt="GotaBit" src="https://res.gotabit.io/svg/icon.svg" width="150"/></a>
 
 ## GotaBit SDK
 
