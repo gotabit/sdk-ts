@@ -1,10 +1,16 @@
-import { cosmos, google } from '@gotabit/proto'
-
+import {
+  BasicAllowance,
+  PeriodicAllowance,
+} from 'cosmjs-types/cosmos/feegrant/v1beta1/feegrant'
+import {
+  MsgGrantAllowance,
+  MsgRevokeAllowance,
+} from 'cosmjs-types/cosmos/feegrant/v1beta1/tx'
+import * as coin from 'cosmjs-types/cosmos/base/v1beta1/coin'
+import * as google from 'cosmjs-types/google/protobuf/duration'
 import { createAnyMessage } from './utils'
 
-const feegrant = cosmos.feegrant.v1beta1
-const coin = cosmos.base.v1beta1.Coin
-const googleDuration = google.protobuf.Duration
+const googleDuration = google.Duration
 
 export interface AllowanceItem {
   amount: string
@@ -16,23 +22,23 @@ export type Allowance = AllowanceItem[]
  * BasicAllowance is permission for grantee to use fee from a granter's account
  *
  * @typedef {Object} Allowance
- * @typedef {BasicAllowance} feegrantAllowance.cosmos.feegrant.v1beta1.BasicAllowance
+ * @typedef {BasicAllowance} feegrantAllowance.cosmos.v1beta1.BasicAllowance
  * @param {Allowance} allowance specifies the maximum amount of tokens that can be spent before the expiration.
  * @param {number} expiration specifies an optional time when this allowance expires. If the value is left empty, there is no expiry for the grant.
- * @returns {BasicAllowance} feegrantAllowance.cosmos.feegrant.v1beta1.BasicAllowance
+ * @returns {BasicAllowance} feegrantAllowance.cosmos.v1beta1.BasicAllowance
  */
 export function createBasicAllowance(
   allowance: Allowance,
   expiration?: number,
 ) {
   const spendLimit = allowance.map((item) =>
-    coin.fromPartial({
+    coin.Coin.fromPartial({
       denom: item.denom,
       amount: item.amount,
     }),
   )
 
-  return feegrant.BasicAllowance.fromPartial({
+  return BasicAllowance.fromPartial({
     spendLimit,
     expiration: expiration ? new Date(expiration * 1000) : undefined,
   })
@@ -43,8 +49,8 @@ export function createBasicAllowance(
  * we can mention when the grant can expire as well as when a period can reset. We can also define the maximum number of coins that can be used in a mentioned period of time.
  *
  * @typedef {{amount: string, denom: string}} Allowance
- * @typedef {BasicAllowance} feegrantAllowance.cosmos.feegrant.v1beta1.BasicAllowance
- * @typedef {PeriodicAllowance} feegrantAllowance.cosmos.feegrant.v1beta1.PeriodicAllowance
+ * @typedef {BasicAllowance} feegrantAllowance.cosmos.v1beta1.BasicAllowance
+ * @typedef {PeriodicAllowance} feegrantAllowance.cosmos.v1beta1.PeriodicAllowance
  * @typedef {{allowance: Allowance, expiration: number, periodDuration: number, periodAllowance?: Allowance, periodAlloanceBeforeReset?: Allowance, periodResetTimestamp: number}} createPeriodAllowanceParam
  * @param {createPeriodAllowanceParam} createPeriodAllowanceParam
  * @param {number} createPeriodAllowanceParam.expiration specifies an optional time when this allowance expires. If the value is left empty, there is no expiry for the grant.
@@ -73,7 +79,7 @@ export function createPeriodAllowance({
 
   const getAllownce = (allowance?: Allowance) =>
     allowance?.map((item) =>
-      coin.fromPartial({
+      coin.Coin.fromPartial({
         denom: item.denom,
         amount: item.amount,
       }),
@@ -81,7 +87,7 @@ export function createPeriodAllowance({
   const periodSpendLimit = getAllownce(periodAllowance)
   const periodCanSpendBeforeReset = getAllownce(periodAlloanceBeforeReset)
 
-  return feegrant.PeriodicAllowance.fromPartial({
+  return PeriodicAllowance.fromPartial({
     basic: basicAllowance,
     period: googleDuration.fromPartial({
       seconds: periodDuration,
@@ -119,12 +125,12 @@ export function createMsgPeriodAllowance({
   })
 
   const msgBytes = Uint8Array.from(
-    feegrant.PeriodicAllowance.encode(periodAllowanceMsg).finish(),
+    PeriodicAllowance.encode(periodAllowanceMsg).finish(),
   )
 
   return {
-    message: msgBytes,
-    path: '/cosmos.feegrant.v1beta1.PeriodicAllowance',
+    value: msgBytes,
+    typeUrl: '/cosmos.feegrant.v1beta1.PeriodicAllowance',
   }
 }
 
@@ -136,7 +142,7 @@ export function createMsgPeriodAllowance({
  * @param {string} grantee grantee(the beneficiary account address) is an account address who is permitted by granter
  * @param {Allowance} allowance specifies the maximum amount of tokens that can be spent before the expiration.
  * @param {number} expiration specifies an optional time when this allowance expires. If the value is left empty, there is no expiry for the grant.
- * @returns {{message: Message, path: string}}
+ * @returns {{value: Message, typeUrl: string}}
  */
 export function createMsgGrantBasicAllowance(
   granter: string,
@@ -146,17 +152,22 @@ export function createMsgGrantBasicAllowance(
 ) {
   const basicAllowanceMsg = createBasicAllowance(allowance, expiration)
   const msgBytes = Uint8Array.from(
-    feegrant.BasicAllowance.encode(basicAllowanceMsg).finish(),
+    BasicAllowance.encode(basicAllowanceMsg).finish(),
   )
 
-  return feegrant.MessageComposer.fromPartial.grantAllowance({
+  const message = MsgGrantAllowance.fromPartial({
     granter,
     grantee,
     allowance: createAnyMessage({
-      message: msgBytes,
-      path: '/cosmos.feegrant.v1beta1.BasicAllowance',
+      value: msgBytes,
+      typeUrl: '/cosmos.feegrant.v1beta1.BasicAllowance',
     }),
   })
+
+  return {
+    value: MsgGrantAllowance.encode(message).finish(),
+    typeUrl: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
+  }
 }
 
 /**
@@ -172,7 +183,7 @@ export function createMsgGrantBasicAllowance(
  * @param {Allowance} createMstGrantPeriodAllowanceParam.periodAllowance specifies the maximum amount of tokens that can be spent before the expiration.
  * @param {Allowance} createMstGrantPeriodAllowanceParam.periodAlloanceBeforeReset is the maximum amount of coins left to be spent before the period_reset time.
  * @param {number} createMstGrantPeriodAllowanceParam.periodResetTimestamp keeps track of when a next period reset should happen.
- * @returns {{message: Message, path: string}}
+ * @returns {{value: Message, typeUrl: string}}
  */
 export function createMsgGrantPeriodAllowance({
   granter,
@@ -203,22 +214,32 @@ export function createMsgGrantPeriodAllowance({
   })
 
   const msgBytes = Uint8Array.from(
-    feegrant.PeriodicAllowance.encode(periodAllowanceMsg).finish(),
+    PeriodicAllowance.encode(periodAllowanceMsg).finish(),
   )
 
-  return feegrant.MessageComposer.fromPartial.grantAllowance({
+  const message = MsgGrantAllowance.fromPartial({
     granter,
     grantee,
     allowance: createAnyMessage({
-      message: msgBytes,
-      path: '/cosmos.feegrant.v1beta1.PeriodicAllowance',
+      value: msgBytes,
+      typeUrl: '/cosmos.feegrant.v1beta1.PeriodicAllowance',
     }),
   })
+
+  return {
+    value: MsgGrantAllowance.encode(message).finish(),
+    typeUrl: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
+  }
 }
 
 export function createMsgRevokeAllowance(granter: string, grantee: string) {
-  return feegrant.MessageComposer.fromPartial.revokeAllowance({
+  const message = MsgRevokeAllowance.fromPartial({
     granter,
     grantee,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.feegrant.v1beta1.MsgRevokeAllowance',
+  }
 }

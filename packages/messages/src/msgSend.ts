@@ -1,4 +1,4 @@
-import { cosmos } from '@gotabit/proto'
+import { MsgSend } from 'cosmjs-types/cosmos/bank/v1beta1/tx'
 
 export function createMsgSend(
   fromAddress: string,
@@ -6,7 +6,7 @@ export function createMsgSend(
   amount: string,
   denom: string,
 ) {
-  return cosmos.bank.v1beta1.MessageComposer.fromPartial.send({
+  const message = MsgSend.fromPartial({
     fromAddress,
     toAddress,
     amount: [
@@ -16,4 +16,8 @@ export function createMsgSend(
       },
     ],
   })
+  return {
+    value: message,
+    typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+  }
 }

@@ -11,8 +11,8 @@ function CreateMsgSend() {
   const [transactionHash, setTransactionHash] = useState<string>()
 
   useEffect(() => {
-    KeplrWallet.init('test').then((wallet) => {
-      GotabitClient.init(wallet, 'test').then(setGotabitInstance)
+    KeplrWallet.init('dev').then((wallet) => {
+      GotabitClient.init(wallet, 'dev').then(setGotabitInstance)
     })
   }, [])
 
@@ -37,6 +37,7 @@ function CreateMsgSend() {
 
     if (!account) throw new Error('Failed to get accounts')
 
+    console.log('to address', toAddress)
     const client = await gotabit.signStargateClient()
     const msg = createMsgGrantBasicAllowance(account, toAddress, [
       {
@@ -60,6 +61,7 @@ function CreateMsgSend() {
     if (!account) throw new Error('Failed to get accounts')
     const client = await gotabit?.signStargateClient()
 
+    console.log('to address', toAddress, account)
     const msgSendtoken = createMsgSend(account, toAddress, '3', 'ugtb')
     const result = await client.signAndBroadcast(
       account,

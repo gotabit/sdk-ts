@@ -1,8 +1,6 @@
-import { cosmos } from '@gotabit/proto'
+import { MsgSubmitProposal } from 'cosmjs-types/cosmos/gov/v1beta1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
 import { createAnyMessage } from './utils'
-
-const gov = cosmos.gov.v1beta1
 
 export function createMsgProposal(
   content: Record<string, any>,
@@ -12,12 +10,17 @@ export function createMsgProposal(
   }>,
   proposer: string,
 ) {
-  return gov.MessageComposer.encoded.submitProposal({
+  const message = MsgSubmitProposal.fromPartial({
     content: createAnyMessage({
-      message: toUtf8(JSON.stringify(content)),
-      path: '/cosmos.gov.v1beta1.submitProposal',
+      value: toUtf8(JSON.stringify(content)),
+      typeUrl: '/cosmos.gov.v1beta1.submitProposal',
     }),
     initialDeposit,
     proposer,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.gov.v1beta1.MsgSubmitProposal',
+  }
 }

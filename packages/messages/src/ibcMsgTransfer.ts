@@ -1,9 +1,6 @@
-import { cosmos, ibc } from '@gotabit/proto'
-import { Long } from '@osmonauts/helpers'
-
-const coin = cosmos.base.v1beta1.Coin
-const ibcMsg = ibc.applications.transfer.v1
-const ibcCore = ibc.core.client.v1
+import { Coin } from 'cosmjs-types/cosmos/base/v1beta1/coin'
+import { MsgTransfer } from 'cosmjs-types/ibc/applications/transfer/v1/tx'
+import { Height } from 'cosmjs-types/ibc/core/client/v1/client'
 
 export function createIBCMsgTransfer(
   // Channel
@@ -20,23 +17,28 @@ export function createIBCMsgTransfer(
   revisionHeight: number,
   timeoutTimestamp: string,
 ) {
-  const token = coin.fromPartial({
+  const token = Coin.fromPartial({
     denom,
     amount,
   })
 
-  const timeoutHeight = ibcCore.Height.fromPartial({
+  const timeoutHeight = Height.fromPartial({
     revisionNumber,
     revisionHeight,
   })
 
-  return ibcMsg.MessageComposer.fromPartial.transfer({
+  const message = MsgTransfer.fromPartial({
     sourcePort,
     sourceChannel,
     token,
     sender,
     receiver,
     timeoutHeight,
-    timeoutTimestamp: new Long(parseInt(timeoutTimestamp, 10)),
+    timeoutTimestamp: parseInt(timeoutTimestamp, 10),
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.ibc.applications.transfer.v1.MsgTransfer',
+  }
 }

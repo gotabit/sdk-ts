@@ -37,7 +37,6 @@
   "dependencies": {
     "@gotabit/client": "^1.1.19",
     "@gotabit/messages": "^1.1.17",
-    "@gotabit/proto": "^1.1.17",
     "@gotabit/wallet": "^1.1.19"
   },
   "devDependencies": {

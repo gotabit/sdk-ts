@@ -1,12 +1,11 @@
-import { cosmos } from '@gotabit/proto'
-
-const staking = cosmos.staking.v1beta1 as any
+import { MsgEditValidator } from 'cosmjs-types/cosmos/staking/v1beta1/tx'
+import staking from 'cosmjs-types/cosmos/staking/v1beta1/staking'
 
 const NOT_MODIFY = '[do-not-modify]'
 
 export interface MsgEditValidatorProtoInterface {
-  path: string
-  message: typeof staking.MsgEditValidator
+  typeUrl: string
+  message: MsgEditValidator
 }
 
 export function createMsgEditValidator(
@@ -19,7 +18,7 @@ export function createMsgEditValidator(
   commissionRate: string,
   minSelfDelegation: string,
 ) {
-  return staking.MessageComposer.encoded.editValidator({
+  const message = MsgEditValidator.fromPartial({
     description: staking.Description.fromPartial({
       moniker: moniker || NOT_MODIFY,
       identity: identity || NOT_MODIFY,
@@ -31,4 +30,9 @@ export function createMsgEditValidator(
     commissionRate,
     minSelfDelegation,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.staking.v1beta1.MsgEditValidator',
+  }
 }

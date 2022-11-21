@@ -11,12 +11,12 @@ function WalletGotabit() {
   const [account, setAccount] = useState<string>()
 
   useEffect(() => {
-    GotabitWallet.init('test').then((wallet) => {
-      GotabitClient.init(wallet, 'test').then(setGotabitInstance)
+    GotabitWallet.init('dev').then((wallet) => {
+      GotabitClient.init(wallet, 'dev').then(setGotabitInstance)
     })
   }, [])
   const handleConnect = async () => {
-    const wallet = await GotabitWallet.init('test')
+    const wallet = await GotabitWallet.init('dev')
 
     const accounts = await wallet.getAccounts()
 
