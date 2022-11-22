@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/messages",
   "description": "Messages generator for Gotabit",
-  "version": "1.1.12",
+  "version": "1.1.18",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -37,8 +37,7 @@
   },
   "dependencies": {
     "@cosmjs/encoding": "^0.29.3",
-    "@gotabit/proto": "^1.1.12",
-    "@osmonauts/helpers": "^0.7.0"
+    "cosmjs-types": "^0.5.2"
   },
   "devDependencies": {
     "link-module-alias": "^1.2.0",

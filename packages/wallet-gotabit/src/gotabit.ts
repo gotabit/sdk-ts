@@ -1,17 +1,8 @@
 /* eslint-disable no-dupe-class-members */
+import { StdSignDoc, AccountData, AminoSignResponse } from '@cosmjs/amino';
+import { DirectSignResponse } from '@cosmjs/proto-signing';
 import {
-  Window as GotabitWindow,
-  KeplrSignOptions as GotabitSignOptions,
-} from '@keplr-wallet/types';
-import {
-  OfflineAminoSigner,
-  StdSignDoc,
-  AccountData,
-  AminoSignResponse,
-} from '@cosmjs/amino';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { OfflineDirectSigner, DirectSignResponse } from '@cosmjs/proto-signing';
-import {
+  SignDoc,
   ICosmosWallet,
   WalletType,
   GotaBitConfig,
@@ -25,25 +16,53 @@ import {
 
 const ASSERT_GOTABIT_ERROR = 'Gotabit Wallet is not supported or installed!';
 
+interface Gotabit extends ICosmosWallet {
+  readonly version: string;
+  enable(chainIds: string | string[]): Promise<void>;
+  getOfflineSigner(chainIds: string | string[]): ICosmosWallet;
+  getSharedSecret: (
+    signerAddress: string,
+    pubkey: string,
+    method: 'basic' | 'ecies'
+  ) => {
+    tmpPubKey?: string;
+    pubEncrypt?: string;
+    encryptKey: string;
+  };
+}
+
+interface GotabitWindow {
+  gotabit?: Gotabit;
+}
+
 /**
  * Redeclare the window type, inheriting from the GotabitWindow type
  */
 declare global {
-  interface Window extends Omit<GotabitWindow, 'keplr'> {
-    gotabit?: GotabitWindow['keplr'];
-  }
+  interface Window extends GotabitWindow {}
 }
-
-type Signer = OfflineAminoSigner & OfflineDirectSigner;
 
 export class GotabitWallet implements ICosmosWallet {
   public type: WalletType;
 
   public chainConfig: ChainConfig;
 
-  private signer: Signer;
+  private signer: ICosmosWallet;
 
   private walletOptions: GotaBitWalletOptions;
+
+  public static async init(
+    chainConfig: ConfigType | GotaBitConfig,
+    option?: Partial<GotaBitInitWalletOptions> | null
+  ): Promise<GotabitWallet>;
+
+  public static async init(
+    chainConfig: ConfigType | GotaBitConfig,
+    option: Partial<GotaBitInitWalletOptions> | null,
+    settings: {
+      mobileLink: string;
+    }
+  ): Promise<undefined>;
 
   public static async init(
     chainConfig: ConfigType | GotaBitConfig,
@@ -51,7 +70,7 @@ export class GotabitWallet implements ICosmosWallet {
     settings?: {
       mobileLink?: string;
     }
-  ) {
+  ): Promise<GotabitWallet | undefined> {
     if (!window.gotabit) {
       if (settings?.mobileLink) {
         window.open(`gio://web?url=${settings.mobileLink}`);
@@ -75,7 +94,7 @@ export class GotabitWallet implements ICosmosWallet {
   }
 
   private constructor(
-    signer: Signer,
+    signer: ICosmosWallet,
     config: ChainConfig,
     walletOptions: GotaBitWalletOptions
   ) {
@@ -123,38 +142,42 @@ export class GotabitWallet implements ICosmosWallet {
     return this;
   }
 
-  public async signDirect(
-    address: string,
-    signDoc: SignDoc,
-    gotabitSignOptions?: GotabitSignOptions
-  ): Promise<DirectSignResponse> {
-    const sign = await window.gotabit?.signDirect(
-      this.chainConfig.chainId,
-      address,
-      signDoc,
-      gotabitSignOptions
+  // eslint-disable-next-line class-methods-use-this
+  public async getSharedSecret(
+    signerAddress: string,
+    pubkey: string,
+    method?: 'basic' | 'ecies'
+  ) {
+    const result = await (window.gotabit as any)?.getSharedSecret(
+      signerAddress,
+      pubkey,
+      method
     );
+
+    return result;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  public async signDirect(
+    signerAddress: string,
+    signDoc: SignDoc
+  ): Promise<DirectSignResponse> {
+    const sign = await window.gotabit?.signDirect(signerAddress, signDoc);
 
     return sign as DirectSignResponse;
   }
 
   public signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc,
-    gotabitSignOptions?: GotabitSignOptions
+    signDoc: StdSignDoc
   ): Promise<AminoSignResponse>;
 
+  // eslint-disable-next-line class-methods-use-this
   public async signAmino(
-    address: string,
-    signDoc: StdSignDoc,
-    gotabitSignOptions?: GotabitSignOptions
+    signerAddress: string,
+    signDoc: StdSignDoc
   ): Promise<AminoSignResponse> {
-    const sign = await window.gotabit?.signAmino(
-      this.chainConfig.chainId,
-      address,
-      signDoc,
-      gotabitSignOptions
-    );
+    const sign = await window.gotabit?.signAmino(signerAddress, signDoc);
 
     return sign as AminoSignResponse;
   }

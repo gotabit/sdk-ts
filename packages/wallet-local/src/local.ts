@@ -12,9 +12,9 @@ import {
   DirectSignResponse,
   DirectSecp256k1Wallet,
 } from '@cosmjs/proto-signing';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
 import {
+  SignDoc,
   ICosmosWallet,
   WalletType,
   ChainConfig,
@@ -193,8 +193,8 @@ export class LocalWallet implements ICosmosWallet {
 
   public async getPrivateKey(): Promise<string> {
     if (this.privateKey) return this.privateKey;
-    const { privkey } = await (
-      this.directSigner as any
+    const [{ privkey }] = await (
+      this.aminoSigner as any
     ).getAccountsWithPrivkeys();
 
     return toHex(privkey as Uint8Array);

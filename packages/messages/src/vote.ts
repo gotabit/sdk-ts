@@ -1,16 +1,18 @@
-import { cosmos } from '@gotabit/proto'
-import { Long } from '@osmonauts/helpers'
-
-const gov = cosmos.gov.v1beta1
+import { MsgVote } from 'cosmjs-types/cosmos/gov/v1beta1/tx'
 
 export function createMsgVote(
   proposalId: number,
   option: number,
   sender: string,
 ) {
-  return gov.MessageComposer.encoded.vote({
-    proposalId: new Long(proposalId),
+  const message = MsgVote.fromPartial({
+    proposalId,
     voter: sender,
     option,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.gov.v1beta1.MsgVote',
+  }
 }

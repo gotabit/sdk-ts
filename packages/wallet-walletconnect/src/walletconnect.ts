@@ -13,9 +13,9 @@ import {
   AccountData,
   AminoSignResponse,
 } from '@cosmjs/amino';
-import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { DirectSignResponse } from '@cosmjs/proto-signing';
 import {
+  SignDoc,
   ConfigType,
   ICosmosWallet,
   GotaBitConfig,
@@ -188,10 +188,15 @@ export class Walletconnect implements ICosmosWallet {
     };
   }
 
-  public async getSharedSecret(signerAddress: string, pubkey: string) {
+  public async getSharedSecret(
+    signerAddress: string,
+    pubkey: string,
+    method?: 'basic' | 'ecies'
+  ) {
     const result = await this.client.request<{
-      secret: string;
-      pubkey: string;
+      tmpPubKey?: string;
+      pubEncrypt?: string;
+      encryptKey: string;
     }>({
       topic: this.session.topic,
       chainId: this.chainIdWithNamespace,
@@ -200,14 +205,12 @@ export class Walletconnect implements ICosmosWallet {
         params: {
           signerAddress,
           pubkey,
+          method,
         },
       },
     });
 
-    return {
-      secret: result.secret,
-      pubkey: result.pubkey,
-    };
+    return result;
   }
 
   public static async init(

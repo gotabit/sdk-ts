@@ -40,7 +40,7 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
           client,
           disconnect: () => {
             if (wallet.type === 'walletconnect') {
-              ;(wallet as any).client.disconnect()
+              ;(wallet as any).disconnect()
             }
             gotabitStore.setState(DEFAULT_CONTEXT)
             selectedGotabitStore.setState(DEFAULT_CONTEXT)

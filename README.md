@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://github.com/gotabit/gotabitjs"><img alt="GotaBit" src="https://res.gotabit.io/svg/icon.svg" width="150"/></a>
+<a href="https://github.com/gotabit/sdk-ts"><img alt="GotaBit" src="https://res.gotabit.io/svg/icon.svg" width="150"/></a>
 
 ## GotaBit SDK
 
@@ -196,7 +196,7 @@ import { createMsgSend } from '@gotabit/messages'
 const account = 'gio1tseh0grt8j8klrdunpudflvy9lfn3rl50zdpu8'
 const toAddress = 'gio1qdgzfy4vta5p43l4urdtmawka3qv2ldh4h0jay'
 
-const msgSend = createMsgSend(account, toAddress, '3000000', 'ugtb')
+const msgSend = createMsgSend(account, toAddress, '3', 'ugtb')
 ```
 
 Create a MsgGrant message
@@ -209,7 +209,7 @@ const toAddress = 'gio1qdgzfy4vta5p43l4urdtmawka3qv2ldh4h0jay'
 
 const msgGrant = createMsgGrantBasicAllowance(account, toAddress, [
   {
-    amount: '3000000',
+    amount: '3',
     denom: 'ugtb',
   },
 ])
@@ -233,7 +233,7 @@ const account = accounts[0].address
 const client = await gotabit.signStargateClient()
 
 const toAddress = 'gio1qdgzfy4vta5p43l4urdtmawka3qv2ldh4h0jay'
-const msgSendtoken = createMsgSend(account, toAddress, '3000000', 'ugtb')
+const msgSendtoken = createMsgSend(account, toAddress, '3', 'ugtb')
 
 const result = await client.signAndBroadcast(account, [msgSendtoken], 'auto')
 ```

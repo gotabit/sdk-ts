@@ -1,8 +1,10 @@
-import { cosmos } from '@gotabit/proto'
-
-const staking = cosmos.staking.v1beta1
-const coin = cosmos.base.v1beta1.Coin
-const dist = cosmos.distribution.v1beta1 as any
+import {
+  MsgDelegate,
+  MsgBeginRedelegate,
+  MsgUndelegate,
+} from 'cosmjs-types/cosmos/staking/v1beta1/tx'
+import coin from 'cosmjs-types/cosmos/base/v1beta1/coin'
+import dist from 'cosmjs-types/cosmos/distribution/v1beta1/tx'
 
 export function createMsgDelegate(
   delegatorAddress: string,
@@ -10,16 +12,21 @@ export function createMsgDelegate(
   amount: string,
   denom: string,
 ) {
-  const value = coin.fromPartial({
+  const value = coin.Coin.fromPartial({
     denom,
     amount,
   })
 
-  return staking.MessageComposer.fromPartial.delegate({
+  const message = MsgDelegate.fromPartial({
     delegatorAddress,
     validatorAddress,
     amount: value,
   })
+
+  return {
+    value: MsgDelegate.encode(message).finish(),
+    typeUrl: '/cosmos.staking.v1beta1.MsgDelegate',
+  }
 }
 
 export function createMsgBeginRedelegate(
@@ -29,17 +36,22 @@ export function createMsgBeginRedelegate(
   amount: string,
   denom: string,
 ) {
-  const value = coin.fromPartial({
+  const value = coin.Coin.fromPartial({
     denom,
     amount,
   })
 
-  return staking.MessageComposer.fromPartial.beginRedelegate({
+  const message = MsgBeginRedelegate.fromPartial({
     delegatorAddress,
     validatorSrcAddress,
     validatorDstAddress,
     amount: value,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.staking.v1beta1.MsgBeginRedelegate',
+  }
 }
 
 export function createMsgUndelegate(
@@ -48,20 +60,25 @@ export function createMsgUndelegate(
   amount: string,
   denom: string,
 ) {
-  const value = coin.fromPartial({
+  const value = coin.Coin.fromPartial({
     denom,
     amount,
   })
 
-  return staking.MessageComposer.fromPartial.undelegate({
+  const message = MsgUndelegate.fromPartial({
     delegatorAddress,
     validatorAddress,
     amount: value,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.staking.v1beta1.MsgUndelegate',
+  }
 }
 
 export interface MsgWithdrawDelegatorRewardProtoInterface {
-  path: string
+  typeUrl: string
   message: Uint8Array
 }
 
@@ -69,19 +86,29 @@ export function createMsgWithdrawDelegatorReward(
   delegatorAddress: string,
   validatorAddress: string,
 ) {
-  return dist.MessageComposer.fromPartial.withdrawDelegatorReward({
+  const message = dist.MsgWithdrawDelegatorReward.fromPartial({
     delegatorAddress,
     validatorAddress,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.dist.v1beta1.MsgWithdrawDelegatorReward',
+  }
 }
 
 export interface MsgWithdrawValidatorCommissionProtoInterface {
-  path: string
+  typeUrl: string
   message: typeof dist.MsgWithdrawValidatorCommission
 }
 
 export function createMsgWithdrawValidatorCommission(validatorAddress: string) {
-  return dist.MessageComposer.fromPartial.withdrawValidatorCommission({
+  const message = dist.MsgWithdrawValidatorCommission.fromPartial({
     validatorAddress,
   })
+
+  return {
+    value: message,
+    typeUrl: '/cosmos.dist.v1beta1.MsgWithdrawValidatorCommission',
+  }
 }

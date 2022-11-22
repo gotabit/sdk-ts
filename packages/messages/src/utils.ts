@@ -1,11 +1,8 @@
-import { google } from '@gotabit/proto'
+import { Any } from 'cosmjs-types/google/protobuf/any'
 import { MessageGenerated } from './types'
 
 export function createAnyMessage(msg: MessageGenerated) {
-  return google.protobuf.Any.fromPartial({
-    typeUrl: msg.path,
-    value: msg.message,
-  })
+  return Any.fromPartial(msg)
 }
 
 export function encodeBase64(str: string) {

@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/wallet-core",
   "description": "Cosmos Wallet core",
-  "version": "1.1.12",
+  "version": "1.1.20",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "license": "MIT",
   "keywords": [
@@ -61,10 +61,9 @@
     "@cosmjs/amino": "0.29.3",
     "@cosmjs/crypto": "^0.29.3",
     "@cosmjs/encoding": "^0.29.3",
+    "@cosmjs/math": "^0.29.3",
     "@cosmjs/proto-signing": "^0.29.3",
-    "@cosmjs/stargate": "^0.29.3",
     "@noble/secp256k1": "^1.7.0",
-    "cosmjs-types": "0.5.2",
     "long": "^5.2.0"
   }
 }

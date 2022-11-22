@@ -1,4 +1,6 @@
-import { cosmos } from '@gotabit/proto'
+import { MsgGrant, MsgRevoke } from 'cosmjs-types/cosmos/authz/v1beta1/tx'
+import { Grant } from 'cosmjs-types/cosmos/authz/v1beta1/authz'
+import * as google from 'cosmjs-types/google/protobuf/timestamp'
 import { MessageGenerated } from '../types'
 
 import { createAnyMessage } from '../utils'
@@ -9,14 +11,21 @@ export function createMsgGrant(
   grantMessage: MessageGenerated,
   seconds: number,
 ) {
-  return cosmos.authz.v1beta1.MessageComposer.fromPartial.grant({
+  const msg = MsgGrant.fromPartial({
     granter,
     grantee,
-    grant: cosmos.authz.v1beta1.Grant.fromPartial({
+    grant: Grant.fromPartial({
       authorization: createAnyMessage(grantMessage),
-      expiration: new Date(seconds * 1000),
+      expiration: google.Timestamp.fromPartial({
+        seconds,
+        nanos: 0,
+      }),
     }),
   })
+  return {
+    value: msg,
+    typeUrl: '/cosmos.authz.v1beta1.MsgGrant',
+  }
 }
 
 export enum RevokeMessages {
@@ -29,9 +38,14 @@ export function createMsgRevoke(
   grantee: string,
   type: string | RevokeMessages,
 ) {
-  return cosmos.authz.v1beta1.MessageComposer.fromPartial.revoke({
+  const msg = MsgRevoke.fromPartial({
     granter,
     grantee,
     msgTypeUrl: type,
   })
+
+  return {
+    value: msg,
+    typeUrl: 'cosmos.authz.v1beta1.MsgRevoke',
+  }
 }
