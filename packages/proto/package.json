@@ -13,7 +13,7 @@
     "~proto": "dist"
   },
   "scripts": {
-    "build": "yarn build:ts",
+    "build": "yarn codegen && yarn build:ts",
     "format": "prettier --write --loglevel warn \"./src/**/*.ts\"",
     "codegen": "rm -rf ./src && ./scripts/codegen.js",
     "build:ts": "rm -rf ./dist && tsc",
@@ -39,7 +39,7 @@
     "@osmonauts/telescope": "^0.75.1",
     "@types/long": "^4.0.2",
     "@types/node": "^18.11.9",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "typescript": "~4.9"
   }
 }
