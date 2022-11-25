@@ -12,17 +12,29 @@ function WalletconnectPage() {
   const [transactionHash, setTransactionHash] = useState<string>()
 
   const handleConnect = async () => {
-    const wallet = await Walletconnect.init('dev', {
-      logger: 'error',
-      relayUrl: 'wss://relay.gotabit.dev',
-      metadata: {
-        name: 'Gotabit SDK WalletConnect test',
-        description: 'Gotabit SDK WalletConnect test',
-        url: 'https://sdk.gotabit.dev',
-        icons: [`https:\/\/res.gotabit.io\/svg\/icon.svg`],
+    const wallet = await Walletconnect.init(
+      'dev',
+      {
+        logger: 'error',
+        relayUrl: 'wss://relay.gotabit.dev',
+        metadata: {
+          name: 'Gotabit SDK WalletConnect test',
+          description: 'Gotabit SDK WalletConnect test',
+          url: 'https://sdk.gotabit.dev',
+          icons: [`https:\/\/res.gotabit.io\/svg\/icon.svg`],
+        },
       },
-    })
+      {
+        onConnected: (session) => {
+          console.log('=====connected', session)
+        },
+        onConnectionRefused: (e) => {
+          console.log('=====refused---', e)
+        },
+      },
+    ).catch(console.error)
 
+    if (!wallet) return
     console.log('---session', wallet.session)
 
     GotabitClient.init(wallet, 'dev').then(setGotabitInstance)
@@ -57,8 +69,8 @@ function WalletconnectPage() {
   }
 
   const handleDisconnect = () => {
-    console.log(gotabit?.wallet?.disconnect)
-    gotabit?.wallet?.disconnect()
+    console.log((gotabit?.wallet as any)?.disconnect)
+    ;(gotabit?.wallet as any)?.disconnect()
   }
 
   return (
