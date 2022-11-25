@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/react",
   "description": "React provider and hooks for Gotabit",
-  "version": "1.1.20",
+  "version": "1.1.21",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,8 +33,8 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@gotabit/client": "^1.1.20",
-    "@gotabit/wallet-core": "^1.1.20",
+    "@gotabit/client": "^1.1.21",
+    "@gotabit/wallet-core": "^1.1.21",
     "react": "18.2.0",
     "zustand": "^4.1.3"
   },

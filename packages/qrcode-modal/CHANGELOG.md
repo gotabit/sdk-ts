@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.19](https://github.com/hjcore/sdk-ts/compare/@gotabit/qrcode-modal@1.1.18...@gotabit/qrcode-modal@1.1.19) (2022-11-25)
+
+**Note:** Version bump only for package @gotabit/qrcode-modal
+
 ## [1.1.18](https://github.com/hjcore/sdk-ts/compare/@gotabit/qrcode-modal@1.1.17...@gotabit/qrcode-modal@1.1.18) (2022-11-21)
 
 **Note:** Version bump only for package @gotabit/qrcode-modal
