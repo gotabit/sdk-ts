@@ -1,13 +1,21 @@
 {
   "name": "@gotabit/proto",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "description": "Typescript Protobuf Messages for GotaBit",
   "author": "GotaBit DEV <dev@gotabit.org>",
   "homepage": "https://github.com/gotabit/sdk-ts",
   "license": "MIT",
-  "main": "dist/index.js",
   "files": [
-    "dist"
+    "confio/",
+    "cosmos/",
+    "cosmos_proto/",
+    "cosmwasm/",
+    "gogoproto/",
+    "google/",
+    "ibc/",
+    "tendermint/",
+    "gotabit/",
+    "helpers/"
   ],
   "_moduleAliases": {
     "~proto": "dist"
@@ -16,9 +24,10 @@
     "build": "yarn codegen && yarn build:ts",
     "format": "prettier --write --loglevel warn \"./src/**/*.ts\"",
     "codegen": "rm -rf ./src && ./scripts/codegen.js",
-    "build:ts": "rm -rf ./dist && tsc",
+    "build:ts": "rm -rf ./dist && tsc && link-module-alias",
     "clean:all": "rimraf ./types && rimraf ./src",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "prepare-publishing": "./scripts/prepare-publishing.sh"
   },
   "publishConfig": {
     "access": "public"

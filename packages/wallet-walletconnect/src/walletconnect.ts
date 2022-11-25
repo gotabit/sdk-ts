@@ -222,6 +222,7 @@ export class Walletconnect implements ICosmosWallet {
         onClosed?: (...args: any[]) => void;
       };
       onConnected?: (session: SessionTypes.Struct) => void;
+      onConnectionRefused?: (e: { message: string; code: number }) => void;
     }
   ) {
     const chainConfig = getChainConfig(chain);
@@ -248,11 +249,18 @@ export class Walletconnect implements ICosmosWallet {
         }
       );
 
-    const session = await approval();
+    const session = await approval().catch((e) => {
+      settings?.onConnectionRefused?.(e);
+      return null;
+    });
 
-    settings?.onConnected?.(session);
+    if (session) {
+      settings?.onConnected?.(session);
+    }
 
     QRCodeModal.close();
+
+    if (!session) throw new Error('wc connection is rejected by wallet!');
 
     return new Walletconnect(chainConfig, client, session as Session);
   }

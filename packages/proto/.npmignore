@@ -5,6 +5,11 @@ protobuf
 out
 *.proto
 
+proto
+src
+dist
+scripts
+
 # snapshots
 *.snap
 
@@ -32,9 +37,8 @@ __tests__
 .gitignore
 .travis.yml
 .vscode
-CHANGELOG.md
 examples
 jest.config.js
-package.json
+tsconfig.json
 test
 out

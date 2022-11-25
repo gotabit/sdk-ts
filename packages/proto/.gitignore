@@ -48,3 +48,14 @@ yarn.lock
 
 # others
 .DS_Store
+
+/gotabit/
+/confio/
+/cosmos/
+/cosmos_proto/
+/cosmwasm/
+/gogoproto/
+/google/
+/ibc/
+/tendermint/
+/helpers/
