@@ -1,0 +1,70 @@
+{
+  "name": "@gotabit/auth-client",
+  "description": "The client for Gotabit",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "unpkg": "dist/umd/index.min.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/gotabit/tree/main/packages/client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotabit/sdk-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gotabit/sdk-ts/issues"
+  },
+  "_moduleAliases": {
+    "~auth-client": "dist/cjs"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.build.json && link-module-alias",
+    "build:umd": "webpack",
+    "build": "yarn clean && yarn build:cjs && yarn build:umd",
+    "build:watch": "tsc --build -w tsconfig.build.json && link-module-alias",
+    "clean": "tsc --build tsconfig.build.json --clean  && shx rm -rf coverage *.log junit.xml dist && jest --clearCache",
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/unit",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --ci --reporters='jest-junit'",
+    "coverage": "jest --coverage",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@ethersproject/hash": "^5.7.0",
+    "@ethersproject/transactions": "^5.7.0",
+    "@gotabit/messages": "^1.1.19",
+    "@gotabit/wallet-core": "^1.1.21",
+    "@gotabit/wallet-keplr": "^1.1.21",
+    "@gotabit/wallet-walletconnect": "^1.1.21",
+    "@stablelib/random": "1.0.2",
+    "@walletconnect/core": "2.0.0",
+    "@walletconnect/events": "1.0.0",
+    "@walletconnect/heartbeat": "1.0.0",
+    "@walletconnect/jsonrpc-provider": "1.0.5",
+    "@walletconnect/jsonrpc-utils": "1.0.3",
+    "@walletconnect/logger": "1.0.1",
+    "@walletconnect/time": "1.0.1",
+    "@walletconnect/types": "^2.1.4",
+    "@walletconnect/utils": "2.0.0",
+    "events": "^3.3.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "pino": "6.7.0",
+    "pino-pretty": "4.3.0"
+  },
+  "devDependencies": {
+    "@ethersproject/wallet": "^5.7.0",
+    "@walletconnect/jsonrpc-ws-connection": "1.0.3",
+    "@walletconnect/relay-api": "1.0.6",
+    "@walletconnect/types": "2.0.0",
+    "aws-sdk": "^2.1169.0",
+    "link-module-alias": "^1.2.0",
+    "lokijs": "^1.5.12",
+    "shx": "^0.3.4"
+  }
+}

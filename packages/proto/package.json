@@ -21,7 +21,7 @@
     "~proto": "dist"
   },
   "scripts": {
-    "build": "yarn codegen && yarn build:ts",
+    "build": "yarn codegen && yarn build:ts && yarn prepare-publishing",
     "format": "prettier --write --loglevel warn \"./src/**/*.ts\"",
     "codegen": "rm -rf ./src && ./scripts/codegen.js",
     "build:ts": "rm -rf ./dist && tsc && link-module-alias",

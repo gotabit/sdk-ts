@@ -39,6 +39,9 @@ const Home: NextPage = () => {
         <br />
         <br />
         <Link href="/react-example">Connect with react.</Link>
+        <br />
+        <br />
+        <Link href="/auth-wallet">Sign in with wallet.</Link>
       </main>
     </div>
   )

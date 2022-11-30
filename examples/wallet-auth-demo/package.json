@@ -10,16 +10,17 @@
   },
   "dependencies": {
     "@gotabit/auth-client": "file:../../packages/auth-client/dist/cjs",
-    "@gotabit/client": "file:../../packages/client/dist/cjs",
     "@gotabit/messages": "file:../../packages/messages/dist/cjs",
-    "@gotabit/react": "file:../../packages/react/dist",
-    "@gotabit/wallet-gotabit": "file:../../packages/wallet-gotabit/dist/cjs",
-    "@gotabit/wallet-keplr": "file:../../packages/wallet-keplr/dist/cjs",
-    "@gotabit/wallet-walletconnect": "file:../../packages/wallet-walletconnect/dist/cjs",
-    "@walletconnect/auth-client": "^1.0.1",
-    "next": "12.2.5",
+    "@gotabit/wallet-local": "file:../../packages/wallet-local/dist/cjs",
+    "@json-rpc-tools/utils": "^1.7.6",
+    "@nextui-org/react": "^1.0.0-beta.10",
+    "framer-motion": "^7.6.2",
+    "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-code-blocks": "^0.0.9-0",
+    "react-dom": "18.2.0",
+    "react-qr-reader-es6": "^2.2.1-2",
+    "valtio": "^1.7.5"
   },
   "devDependencies": {
     "@types/node": "18.11.7",
