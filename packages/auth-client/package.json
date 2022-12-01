@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/auth-client",
   "description": "The client for Gotabit",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
