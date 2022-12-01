@@ -19,6 +19,7 @@ function AuthWalletPage() {
   const [client, setClient] = useState<WCAuthClient | null>()
   const [wcUri, setWcUri] = useState<string>()
   const [address, setAddress] = useState<string>('')
+  const [keplrAddress, setKeplrAddress] = useState<string>('')
   const handleSignInWalletconnect = async () => {
     const client = await WCAuthClient.init({
       relayUrl: 'wss://relay.gotabit.dev',
@@ -55,6 +56,7 @@ function AuthWalletPage() {
       }),
     )
 
+    setKeplrAddress(accounts[0].address)
     console.log(result, '====keplr result')
   }
 
@@ -63,9 +65,9 @@ function AuthWalletPage() {
     console.log('===res======')
     client.on('auth_response', (res) => {
       console.log(res, '===res')
-      // if (res.params.result.s) {
-      //   setAddress(res.params.result.p.signerAddress)
-      // }
+      if (res.params.result.s) {
+        setAddress(res.params.result.p.signerAddress)
+      }
     })
   }, [client])
   return (
@@ -81,6 +83,7 @@ function AuthWalletPage() {
       <Card>
         <p>Sign in with keplr</p>
         <button onClick={handleSignKepr}>sign in</button>
+        <p>address: {keplrAddress}</p>
       </Card>
     </div>
   )
