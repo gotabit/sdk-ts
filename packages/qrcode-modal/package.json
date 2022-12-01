@@ -1,6 +1,6 @@
 {
   "name": "@gotabit/qrcode-modal",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "The QRcode for GotaBit walletconnect",
   "license": "MIT",
   "source": "src/index.ts",
