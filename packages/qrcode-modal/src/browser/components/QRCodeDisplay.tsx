@@ -1,9 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as React from 'react'
 import QRCode from 'qrcode'
 import copy from 'copy-to-clipboard'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Notification from './Notification'
 
 import { WALLETCONNECT_CTA_TEXT_ID } from '../constants'
@@ -33,7 +31,7 @@ function QRCodeDisplay(props: QRCodeDisplayProps) {
 
   React.useEffect(() => {
     formatQRCodeImage(props.uri).then(setSvg)
-  }, [])
+  }, [props.uri])
 
   const copyToClipboard = () => {
     const success = copy(props.uri)
