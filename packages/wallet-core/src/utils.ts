@@ -1,5 +1,12 @@
 import * as secp from '@noble/secp256k1';
-import { pubkeyToAddress, serializeSignDoc, StdSignDoc } from '@cosmjs/amino';
+import {
+  AminoMsg,
+  pubkeyToAddress,
+  serializeSignDoc,
+  StdSignDoc,
+  StdSignature,
+  makeSignDoc as makeSignDocAmino,
+} from '@cosmjs/amino';
 import { Decimal } from '@cosmjs/math';
 import { stringToPath, sha256 } from '@cosmjs/crypto';
 import {
@@ -8,9 +15,11 @@ import {
   toBase64,
   toHex,
   fromBech32,
+  toAscii,
 } from '@cosmjs/encoding';
-import { makeSignBytes } from '@cosmjs/proto-signing';
+import { makeSignBytes, AccountData } from '@cosmjs/proto-signing';
 import Long from 'long';
+import equals from 'fast-deep-equal';
 
 import {
   SignDoc,
@@ -30,6 +39,7 @@ import {
   DEFAULT_ADDRESS_PREFIX,
   DEV_CONFIG,
 } from './constants';
+import { ICosmosWallet } from './core';
 
 /**
  * Denom checker for the Cosmos SDK 0.42 denom pattern
@@ -152,6 +162,48 @@ export function getGotabitOptions(
   return mainWalletOptions;
 }
 
+const DEFAULT_SIGN_DOC = {
+  chainId: '',
+  accountNumber: '0',
+  sequence: '0',
+  fee: {
+    gas: '0',
+    amount: [],
+  },
+  memo: '',
+};
+
+/**
+ * See ADR-036
+ */
+interface MsgSignData extends AminoMsg {
+  readonly type: 'sign/MsgSignData';
+  readonly value: {
+    /** Bech32 account address */
+    signer: string;
+    /** Base64 encoded data */
+    data: string;
+  };
+}
+
+function getADR36SignDocAnimo(signer: string, data: string): StdSignDoc {
+  const msg: MsgSignData = {
+    type: 'sign/MsgSignData',
+    value: {
+      signer,
+      data: toBase64(toAscii(data)),
+    },
+  };
+  return makeSignDocAmino(
+    [msg],
+    DEFAULT_SIGN_DOC.fee,
+    DEFAULT_SIGN_DOC.chainId,
+    DEFAULT_SIGN_DOC.memo,
+    DEFAULT_SIGN_DOC.accountNumber,
+    DEFAULT_SIGN_DOC.sequence
+  );
+}
+
 export function stringifySignDocValues(signDoc: any) {
   return {
     ...signDoc,
@@ -218,20 +270,53 @@ export function verifySignature(
   return false;
 }
 
-export const verifyDirectSignature = (
+export function verifyDirectSignature(
   address: string,
   signature: string,
   signDoc: SignDoc
-) => {
+) {
   const messageHash = sha256(makeSignBytes(signDoc));
   return verifySignature(address, signature, messageHash);
-};
+}
 
-export const verifyAminoSignature = (
+export function verifyAminoSignature(
   address: string,
   signature: string,
   signDoc: StdSignDoc
-) => {
+) {
   const messageHash = sha256(serializeSignDoc(signDoc));
   return verifySignature(address, signature, messageHash);
-};
+}
+
+export async function verifyArbitrary(
+  signer: string,
+  data: string,
+  signature: StdSignature
+) {
+  const signDoc = getADR36SignDocAnimo(signer, data);
+  const result = verifyAminoSignature(signer, signature.signature, signDoc);
+
+  return result;
+}
+
+export async function signArbitraryWithWallet(
+  wallet: ICosmosWallet,
+  signer: string,
+  data: string
+): Promise<StdSignature> {
+  const accountFromSigner = (await wallet.getAccounts()).find(
+    (account: AccountData) => account.address === signer
+  );
+  if (!accountFromSigner) {
+    throw new Error('Failed to retrieve account from signer');
+  }
+  const signDoc = getADR36SignDocAnimo(signer, data);
+  const { signature, signed } = await wallet.signAmino(signer, signDoc);
+  if (!equals(signDoc, signed)) {
+    throw new Error(
+      'The signed document differs from the signing instruction. This is not supported for ADR-036.'
+    );
+  }
+
+  return signature;
+}

@@ -2,6 +2,7 @@
 import { Window as KeplrWindow, KeplrSignOptions } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
+  StdSignature,
   StdSignDoc,
   AccountData,
   AminoSignResponse,
@@ -214,5 +215,33 @@ export class KeplrWallet implements ICosmosWallet {
     );
 
     return sign as AminoSignResponse;
+  }
+
+  public async signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature> {
+    const signature = await window.keplr?.signArbitrary(
+      this.chainConfig.chainId,
+      signer,
+      data
+    );
+
+    return signature as StdSignature;
+  }
+
+  public async verifyArbitrary(
+    signer: string,
+    data: string | Uint8Array,
+    signature: StdSignature
+  ): Promise<boolean> {
+    const result = await window?.keplr?.verifyArbitrary(
+      this.chainConfig.chainId,
+      signer,
+      data,
+      signature
+    );
+
+    return result as boolean;
   }
 }
