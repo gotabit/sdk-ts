@@ -3,7 +3,7 @@ import {
   DirectSignResponse,
   OfflineDirectSigner,
 } from '@cosmjs/proto-signing';
-import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
+import { StdSignDoc, AminoSignResponse, StdSignature } from '@cosmjs/amino';
 import { SignDoc } from './types';
 import { ChainConfig } from './utils';
 
@@ -31,4 +31,9 @@ export abstract class ICosmosWallet implements OfflineDirectSigner {
     signerAddress: string,
     signDoc: StdSignDoc
   ): Promise<AminoSignResponse>;
+
+  public abstract signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature>;
 }
