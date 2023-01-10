@@ -207,6 +207,12 @@ export class KeplrWallet implements ICosmosWallet {
     signDoc: StdSignDoc,
     keplrSignOptions?: KeplrSignOptions
   ): Promise<AminoSignResponse> {
+    const [currentAccount] = await this.getAccounts();
+    if (currentAccount.address !== address)
+      throw new Error(
+        'The transaction account is different to the current wallet account.'
+      );
+
     const sign = await window.keplr?.signAmino(
       this.chainConfig.chainId,
       address,
