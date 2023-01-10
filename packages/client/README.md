@@ -53,7 +53,7 @@ const response = await wasmClient.queryContractSmart(contractAddress, queryMsg)
 This is an experimental implementation of [ADR-36](https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-036-arbitrary-signature.md). Use this feature at your own risk.
 
 ```ts
-import { verifyArbitrary } from '@gotabit/wallet-vore'
+import { verifyArbitrary } from '@gotabit/wallet-core'
 import { KeplrWallet } from '@gotabit/wallet-keplr'
 const wallet = await KeplrWallet.init('test')
 
