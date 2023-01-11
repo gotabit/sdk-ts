@@ -1,6 +1,7 @@
 import { fromHex, toHex } from '@cosmjs/encoding';
 import {
   StdSignDoc,
+  StdSignature,
   Secp256k1HdWallet,
   AminoSignResponse,
   Secp256k1Wallet,
@@ -20,6 +21,7 @@ import {
   ChainConfig,
   getChainConfig,
   ConfigTypeEnum,
+  signArbitraryWithWallet,
   DEFAULT_ADDRESS_PREFIX,
   DEFAULT_HD_PATH,
 } from '@gotabit/wallet-core';
@@ -198,5 +200,12 @@ export class LocalWallet implements ICosmosWallet {
     ).getAccountsWithPrivkeys();
 
     return toHex(privkey as Uint8Array);
+  }
+
+  public async signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature> {
+    return signArbitraryWithWallet(this, signer, data);
   }
 }

@@ -2,6 +2,7 @@
 import { Window as KeplrWindow, KeplrSignOptions } from '@keplr-wallet/types';
 import {
   OfflineAminoSigner,
+  StdSignature,
   StdSignDoc,
   AccountData,
   AminoSignResponse,
@@ -23,6 +24,8 @@ import {
 const ASSERT_KEPLR_ERROR =
   'Keplr is not supported or installed on this browser!';
 
+const ASSERT_ACCOUNT_ERROR =
+  'The transaction account is different to the current wallet account.';
 async function keplrSuggest(
   config: GotaBitConfig,
   options: GotaBitWalletOptions
@@ -185,6 +188,10 @@ export class KeplrWallet implements ICosmosWallet {
     signDoc: SignDoc,
     keplrSignOptions?: KeplrSignOptions
   ): Promise<DirectSignResponse> {
+    const [currentAccount] = await this.getAccounts();
+    if (currentAccount.address !== address)
+      throw new Error(ASSERT_ACCOUNT_ERROR);
+
     const sign = await window.keplr?.signDirect(
       this.chainConfig.chainId,
       address,
@@ -206,6 +213,10 @@ export class KeplrWallet implements ICosmosWallet {
     signDoc: StdSignDoc,
     keplrSignOptions?: KeplrSignOptions
   ): Promise<AminoSignResponse> {
+    const [currentAccount] = await this.getAccounts();
+    if (currentAccount.address !== address)
+      throw new Error(ASSERT_ACCOUNT_ERROR);
+
     const sign = await window.keplr?.signAmino(
       this.chainConfig.chainId,
       address,
@@ -214,5 +225,33 @@ export class KeplrWallet implements ICosmosWallet {
     );
 
     return sign as AminoSignResponse;
+  }
+
+  public async signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature> {
+    const signature = await window.keplr?.signArbitrary(
+      this.chainConfig.chainId,
+      signer,
+      data
+    );
+
+    return signature as StdSignature;
+  }
+
+  public async verifyArbitrary(
+    signer: string,
+    data: string | Uint8Array,
+    signature: StdSignature
+  ): Promise<boolean> {
+    const result = await window?.keplr?.verifyArbitrary(
+      this.chainConfig.chainId,
+      signer,
+      data,
+      signature
+    );
+
+    return result as boolean;
   }
 }

@@ -25,6 +25,7 @@ import {
   stringifySignDocValues,
   verifyAminoSignature,
   verifyDirectSignature,
+  signArbitraryWithWallet,
 } from '@gotabit/wallet-core';
 import { NAMESPACE, COSMOS_METHODS, RELAY_URL } from './constants';
 
@@ -274,5 +275,12 @@ export class Walletconnect implements ICosmosWallet {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  public async signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature> {
+    return signArbitraryWithWallet(this, signer, data);
   }
 }

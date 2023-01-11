@@ -1,5 +1,10 @@
 /* eslint-disable no-dupe-class-members */
-import { StdSignDoc, AccountData, AminoSignResponse } from '@cosmjs/amino';
+import {
+  StdSignDoc,
+  StdSignature,
+  AccountData,
+  AminoSignResponse,
+} from '@cosmjs/amino';
 import { DirectSignResponse } from '@cosmjs/proto-signing';
 import {
   SignDoc,
@@ -12,6 +17,7 @@ import {
   ChainConfig,
   getChainConfig,
   GotaBitInitWalletOptions,
+  signArbitraryWithWallet,
 } from '@gotabit/wallet-core';
 
 const ASSERT_GOTABIT_ERROR = 'Gotabit Wallet is not supported or installed!';
@@ -180,5 +186,12 @@ export class GotabitWallet implements ICosmosWallet {
     const sign = await window.gotabit?.signAmino(signerAddress, signDoc);
 
     return sign as AminoSignResponse;
+  }
+
+  public async signArbitrary(
+    signer: string,
+    data: string
+  ): Promise<StdSignature> {
+    return signArbitraryWithWallet(this, signer, data);
   }
 }
