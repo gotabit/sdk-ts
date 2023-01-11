@@ -24,6 +24,8 @@ import {
 const ASSERT_KEPLR_ERROR =
   'Keplr is not supported or installed on this browser!';
 
+const ASSERT_ACCOUNT_ERROR =
+  'The transaction account is different to the current wallet account.';
 async function keplrSuggest(
   config: GotaBitConfig,
   options: GotaBitWalletOptions
@@ -186,6 +188,10 @@ export class KeplrWallet implements ICosmosWallet {
     signDoc: SignDoc,
     keplrSignOptions?: KeplrSignOptions
   ): Promise<DirectSignResponse> {
+    const [currentAccount] = await this.getAccounts();
+    if (currentAccount.address !== address)
+      throw new Error(ASSERT_ACCOUNT_ERROR);
+
     const sign = await window.keplr?.signDirect(
       this.chainConfig.chainId,
       address,
@@ -209,9 +215,7 @@ export class KeplrWallet implements ICosmosWallet {
   ): Promise<AminoSignResponse> {
     const [currentAccount] = await this.getAccounts();
     if (currentAccount.address !== address)
-      throw new Error(
-        'The transaction account is different to the current wallet account.'
-      );
+      throw new Error(ASSERT_ACCOUNT_ERROR);
 
     const sign = await window.keplr?.signAmino(
       this.chainConfig.chainId,
