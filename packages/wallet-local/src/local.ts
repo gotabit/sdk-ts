@@ -13,7 +13,7 @@ import {
   DirectSignResponse,
   DirectSecp256k1Wallet,
 } from '@cosmjs/proto-signing';
-
+import { getEncryptParams } from '@gotabit/crypto';
 import {
   SignDoc,
   ICosmosWallet,
@@ -164,15 +164,21 @@ export class LocalWallet implements ICosmosWallet {
   }
 
   public async getAccounts(): Promise<readonly AccountData[]> {
-    const account = await this.directSigner.getAccounts();
+    const accounts = await this.directSigner.getAccounts();
 
-    return account;
+    return accounts;
   }
 
   public async getAddress() {
-    const account = await this.directSigner.getAccounts();
+    const accounts = await this.directSigner.getAccounts();
 
-    return account[0].address;
+    return accounts[0].address;
+  }
+
+  public async getSharedKey(method?: 'basic' | 'ecies') {
+    const [account] = await this.getAccounts();
+    const privKey = await this.getPrivateKey();
+    return getEncryptParams(privKey, account.pubkey, method);
   }
 
   public async signDirect(
