@@ -113,6 +113,7 @@
       "import/extensions": "off",
       "import/no-unresolved": "error",
       "import/no-cycle": "off",
+      "max-classes-per-file": "off",
       "no-void": "off",
       "no-console": "off",
       "no-iterator": "off",
