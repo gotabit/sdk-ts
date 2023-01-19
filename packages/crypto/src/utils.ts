@@ -1,7 +1,7 @@
 import { sha256 } from '@cosmjs/crypto';
 import * as secp from '@noble/secp256k1';
 import { toBase64 } from '@cosmjs/encoding';
-import * as aes from 'micro-aes-gcm';
+import aes from './micro-aes-gcm';
 
 type PrivKey = Uint8Array | string | bigint | number;
 type PubKey = Uint8Array | string;
