@@ -32,7 +32,7 @@ export const getEncryptParams = async (
   const pubEncyprt = await aes.encrypt(tmpEncryptKey, sendPubKey);
   return {
     tmpPubKey: toBase64(tmpPubKey),
-    pubEncyprt: toBase64(pubEncyprt),
+    sourcePubkey: toBase64(pubEncyprt),
     encryptKey: toBase64(encryptKey),
   };
 };
