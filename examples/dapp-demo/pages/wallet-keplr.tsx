@@ -11,12 +11,12 @@ function WalletKeplr() {
   const [account, setAccount] = useState<string>()
 
   useEffect(() => {
-    KeplrWallet.init('dev').then((wallet) => {
-      GotabitClient.init(wallet, 'dev').then(setGotabitInstance)
+    KeplrWallet.init('test').then((wallet) => {
+      GotabitClient.init(wallet, 'test').then(setGotabitInstance)
     })
   }, [])
   const handleConnect = async () => {
-    const wallet = await KeplrWallet.init('dev')
+    const wallet = await KeplrWallet.init('test')
 
     const accounts = await wallet.getAccounts()
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gotabit/wallet-local": "file:../../packages/wallet-local/dist/cjs",
     "@gotabit/auth-client": "file:../../packages/auth-client/dist/cjs",
     "@gotabit/client": "file:../../packages/client/dist/cjs",
     "@gotabit/messages": "file:../../packages/messages/dist/cjs",
@@ -16,7 +17,6 @@
     "@gotabit/wallet-gotabit": "file:../../packages/wallet-gotabit/dist/cjs",
     "@gotabit/wallet-keplr": "file:../../packages/wallet-keplr/dist/cjs",
     "@gotabit/wallet-walletconnect": "file:../../packages/wallet-walletconnect/dist/cjs",
-    "@walletconnect/auth-client": "^1.0.1",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"

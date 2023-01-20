@@ -22,6 +22,9 @@ const Home: NextPage = () => {
         <Link href="/createMsgSend">Go to CreateMsgSend demo page.</Link>
         <br />
         <br />
+        <Link href="/wallet-local">Connect with wallet-local.</Link>
+        <br />
+        <br />
         <Link href="/wallet-keplr">Connect with wallet-keplr.</Link>
         <br />
         <br />
