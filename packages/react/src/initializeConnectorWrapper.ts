@@ -67,6 +67,13 @@ export function initializeConnectorWrapper<T extends ICosmosWallet>(
           )
         }
 
+        if (wallet.type === 'walletconnect') {
+          ;(wallet as any).client.on('session_delete', () => {
+            gotabitStore.setState(DEFAULT_CONTEXT)
+            selectedGotabitStore.setState(DEFAULT_CONTEXT)
+          })
+        }
+
         return state
       } catch (e) {
         const errorState = { error: e as Error }
