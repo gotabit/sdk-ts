@@ -1,7 +1,7 @@
 {
   "name": "@gotabit/react",
   "description": "React provider and hooks for Gotabit",
-  "version": "1.1.23",
+  "version": "1.1.24",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
