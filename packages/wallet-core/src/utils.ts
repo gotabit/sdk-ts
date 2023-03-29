@@ -98,7 +98,6 @@ export class GasPrice {
 }
 
 export interface ChainConfig extends GotaBitConfig {
-  chainType: ConfigType;
   gasPrices: GasPrice;
 }
 
@@ -131,7 +130,7 @@ export function getChainConfig(
         break;
     }
 
-    return { ...currentValue, chainType: type };
+    return { ...currentValue };
   };
 
   const customFormats =
@@ -140,7 +139,6 @@ export function getChainConfig(
       : {
           ...TEST_CONFIG,
           ...chainConfig,
-          chainType: ConfigTypeEnum.ConfigTest,
         };
 
   customFormats.gasPrices =
