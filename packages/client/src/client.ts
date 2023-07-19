@@ -8,7 +8,6 @@ import {
   getChainConfig,
   ConfigType,
   ChainConfig,
-  DEFAULT_ADDRESS_PREFIX,
 } from '@gotabit/wallet-core'
 
 import { GotabitStargateClient } from './stargateclient'
