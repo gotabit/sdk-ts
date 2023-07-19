@@ -47,7 +47,6 @@ export class GotabitClient {
       this.config.rpc,
       this.wallet,
       {
-        prefix: DEFAULT_ADDRESS_PREFIX,
         gasPrice: this.config.gasPrices,
       },
     )
@@ -68,7 +67,6 @@ export class GotabitClient {
       this.config.rpc,
       this.wallet,
       {
-        prefix: DEFAULT_ADDRESS_PREFIX,
         gasPrice: this.config.gasPrices,
       },
     )
