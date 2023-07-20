@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.28](https://github.com/gotabit/sdk-ts/compare/@gotabit/client@1.1.24...@gotabit/client@1.1.28) (2023-07-20)
+
+### Bug Fixes
+
+- fix tmClient version ([48d72d2](https://github.com/gotabit/sdk-ts/commit/48d72d22a775d0a4cef9319fe5935b75f78d3bef))
+
 ## [1.1.24](https://github.com/gotabit/sdk-ts/compare/@gotabit/client@1.1.23...@gotabit/client@1.1.24) (2023-03-30)
 
 **Note:** Version bump only for package @gotabit/client
