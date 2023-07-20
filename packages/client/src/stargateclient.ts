@@ -13,7 +13,12 @@ import {
   setupTxExtension,
   StargateClientOptions,
 } from '@cosmjs/stargate'
-import { HttpEndpoint, Tendermint34Client } from '@cosmjs/tendermint-rpc'
+import {
+  HttpEndpoint,
+  TendermintClient,
+  Tendermint37Client,
+  Tendermint34Client,
+} from '@cosmjs/tendermint-rpc'
 
 type QueryExtensionSetup<P> = (base: QueryClient) => P
 
@@ -22,7 +27,18 @@ export class GotabitStargateClient extends StargateClient {
     endpoint: string | HttpEndpoint,
     options: StargateClientOptions = {},
   ): Promise<GotabitStargateClient> {
-    const tmClient = await Tendermint34Client.connect(endpoint)
+    // Tendermint/CometBFT 0.34/0.37 auto-detection. Starting with 0.37 we seem to get reliable versions again 🎉
+    // Using 0.34 as the fallback.
+    let tmClient: TendermintClient
+    const tm37Client = await Tendermint37Client.connect(endpoint)
+    const { version } = (await tm37Client.status()).nodeInfo
+    if (version.startsWith('0.37.')) {
+      tmClient = tm37Client
+    } else {
+      tm37Client.disconnect()
+      tmClient = await Tendermint34Client.connect(endpoint)
+    }
+
     return new GotabitStargateClient(tmClient, options)
   }
 
@@ -731,7 +747,7 @@ export class GotabitStargateClient extends StargateClient {
     ]
 
     return (QueryClient as any).withExtensions(
-      (this as any).tmClient as Tendermint34Client,
+      (this as any).tmClient as TendermintClient,
       ...extensionSetupsWithBaseExtensions,
     )
   }
