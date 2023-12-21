@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.29](https://github.com/gotabit/sdk-ts/compare/@gotabit/sdk@1.1.26...@gotabit/sdk@1.1.29) (2023-12-21)
+
+**Note:** Version bump only for package @gotabit/sdk
+
 ## [1.1.28](https://github.com/gotabit/sdk-ts/compare/@gotabit/sdk@1.1.26...@gotabit/sdk@1.1.28) (2023-07-20)
 
 **Note:** Version bump only for package @gotabit/sdk

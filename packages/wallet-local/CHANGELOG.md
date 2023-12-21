@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.28](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet-local@1.1.26...@gotabit/wallet-local@1.1.28) (2023-12-21)
+
+### Bug Fixes
+
+- support prefix when init wallet with private key ([8dd3f08](https://github.com/gotabit/sdk-ts/commit/8dd3f08f2c7780ede4f136df2cfbf075dd419769))
+
 ## [1.1.26](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet-local@1.1.25...@gotabit/wallet-local@1.1.26) (2023-03-30)
 
 **Note:** Version bump only for package @gotabit/wallet-local

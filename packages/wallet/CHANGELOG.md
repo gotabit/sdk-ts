@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.28](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet@1.1.26...@gotabit/wallet@1.1.28) (2023-12-21)
+
+**Note:** Version bump only for package @gotabit/wallet
+
 ## [1.1.26](https://github.com/gotabit/sdk-ts/compare/@gotabit/wallet@1.1.25...@gotabit/wallet@1.1.26) (2023-03-30)
 
 **Note:** Version bump only for package @gotabit/wallet
