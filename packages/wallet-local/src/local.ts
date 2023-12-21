@@ -106,9 +106,11 @@ export class LocalWallet implements ICosmosWallet {
     const password = (args as PasswordArguments)?.password;
     const { serialization } = args as PasswordArguments;
     const { privateKey } = args as PrivateKeyArguments;
+    const prefixVal = prefix ?? DEFAULT_ADDRESS_PREFIX;
+
     const options = {
       hdPaths: [stringToPath(path ?? DEFAULT_HD_PATH)],
-      prefix: prefix ?? DEFAULT_ADDRESS_PREFIX,
+      prefix: prefixVal,
       bip39Password: password,
     };
 
@@ -141,8 +143,14 @@ export class LocalWallet implements ICosmosWallet {
         options
       );
     } else if (privateKey) {
-      directSigner = await DirectSecp256k1Wallet.fromKey(fromHex(privateKey));
-      aminoSigner = await Secp256k1Wallet.fromKey(fromHex(privateKey));
+      directSigner = await DirectSecp256k1Wallet.fromKey(
+        fromHex(privateKey),
+        prefixVal
+      );
+      aminoSigner = await Secp256k1Wallet.fromKey(
+        fromHex(privateKey),
+        prefixVal
+      );
     } else {
       directSigner = await DirectSecp256k1HdWallet.deserialize(
         serialization,
